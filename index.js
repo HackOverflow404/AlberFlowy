@@ -1,17 +1,17 @@
 /*
  * Feature List:
- * 1. ✅ Workflowy Authentication
- * 2. ✅ Create Workflowy Node
- * 3. Read Workflowy Node
- * 4. Update Workflowy Node
- * 5. Delete Workflowy Node
- * 6. Complete Workflowy Node
+ * 1. ✅ WorkFlowy Authentication
+ * 2. ✅ Create WorkFlowy Node
+ * 3. ✅ Read WorkFlowy Nodes
+ * 4. Update WorkFlowy Node
+ * 5. Delete WorkFlowy Node
+ * 6. Complete WorkFlowy Node
+ * 7. Upgrade to Sign in with Google instead of App Password
  */
-
-
-import fs from 'fs';
-import https from 'https';
 import dotenv from 'dotenv';
+import https from 'https';
+import fs from 'fs';
+
 dotenv.config();
 
 const CONFIG_PATH = './.wfconfig.json';
@@ -47,10 +47,10 @@ const createNode = (title) => {
     
     res.on('end', () => {
       if (res.statusCode === 200 || res.statusCode === 201) {
-        console.log("Workflowy bullet created");
+        console.log("WorkFlowy bullet created");
         console.log(responseData);
       } else {
-        console.log(`Workflowy Error: ${res.statusCode}`);
+        console.log(`WorkFlowy Error: ${res.statusCode}`);
         console.log(responseData);
       }
     });
@@ -64,7 +64,35 @@ const createNode = (title) => {
   req.end();
 };
 
+const getNodes = async () => {
+  const response = await fetch("https://workflowy.com/get_tree_data/", {
+    headers: {
+      cookie: `sessionid=${config.sessionid}`
+    },
+  });
 
+  const data = await response.json();
 
+  // Convert flat array to map for easy lookup
+  const itemMap = new Map();
+  for (const item of data.items) {
+    item.children = [];
+    itemMap.set(item.id, item);
+  }
 
-// createNode("Test without node header");
+  // Now build the tree
+  let rootItems = [];
+  for (const item of data.items) {
+    if (item.prnt && itemMap.has(item.prnt)) {
+      itemMap.get(item.prnt).children.push(item);
+    } else {
+      rootItems.push(item); // Root-level node (e.g., no parent found)
+    }
+  }
+
+  return rootItems;
+};
+
+getNodes().then(tree => {
+  console.log(JSON.stringify(tree, null, 2));
+});
