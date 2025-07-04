@@ -21,7 +21,7 @@
     "path": "^0.12.7",
     "prompt": "^1.3.0",
     "puppeteer": "^24.11.2",
-    "zod": "^3.25.72"
+    "zod": "^3.25.73"
   },
   "devDependencies": {
     "typescript": "^5.8.3"
