@@ -7,6 +7,7 @@
  * 5. Delete WorkFlowy Node
  * 6. Complete WorkFlowy Node
  * 7. Upgrade to Sign in with Google instead of App Password
+ * 8. Add caching
  */
 import dotenv from 'dotenv';
 import https from 'https';
