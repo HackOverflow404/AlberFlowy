@@ -2,15 +2,10 @@ import { simpleParser } from "mailparser";
 import { authenticator } from "otplib";
 import { ImapFlow } from "imapflow";
 import puppeteer from "puppeteer";
-import readline from "readline";
 import dotenv from "dotenv";
 import fs from "fs";
 
 dotenv.config();
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 
 const login_url = "https://workflowy.com/login/";
 const CONFIG_PATH = "./.wfconfig.json";
@@ -36,8 +31,8 @@ async function sleep(ms) {
 }
 
 async function fetchLoginCode() {
-  console.log("Waiting 10 seconds before checking email...");
-  await sleep(10000);
+  console.log("Waiting 5 seconds before checking email...");
+  await sleep(5000);
   
   const ONE_MINUTE = 60 * 1000;
   const searchStartTime = Date.now();
@@ -48,26 +43,34 @@ async function fetchLoginCode() {
     await client.connect();
     await client.mailboxOpen("INBOX");
 
-    // Get the last 10 emails only (most recent first)
     const mailbox = await client.mailboxOpen("INBOX");
     const totalMessages = mailbox.exists;
-    const startSeq = Math.max(1, totalMessages - 9); // Get last 10 messages
+    const startSeq = Math.max(1, totalMessages - 9);
 
     for await (let msg of client.fetch(`${startSeq}:*`, { envelope: true, source: true, internalDate: true })) {
       const receivedTime = new Date(msg.internalDate).getTime();
 
-      // Only check emails received within the last 1 minute from when we started searching
-      if (searchStartTime - receivedTime > ONE_MINUTE) {
-        continue; // Skip messages older than 1 minute
-      }
-      
-      const parsed = simpleParser(msg.source);
-      
-      if (parsed.subject?.includes("Login code for Workflowy") && parsed.text) {
-        const match = parsed.text.match(/\b\d{4}-\d{4}-\d{4}\b/);
-        if (match) {
-          console.log("Code found:", match[0]);
-          return match[0];
+      if (searchStartTime - receivedTime > ONE_MINUTE) continue;
+
+      const subject = msg.envelope?.subject;
+      console.log("Email subject:", subject);
+
+      if (subject && subject.includes("Login code for Workflowy")) {
+        const raw = msg.source.toString('utf-8');
+
+        const codeMatch = raw.match(/\b\d{4}-\d{4}-\d{4}\b/);
+        if (codeMatch) {
+          console.log("Code found:", codeMatch[0]);
+          return codeMatch[0];
+        } else {
+          console.log("Login code not found in message:", raw.slice(0, 1000));
+        }
+
+        if (codeMatch) {
+          console.log("Code found:", codeMatch[0]);
+          return codeMatch[0];
+        } else {
+          console.log("No code found in body:", bodyText);
         }
       }
     }
@@ -78,30 +81,26 @@ async function fetchLoginCode() {
     console.error("Email search error:", error);
     throw error;
   } finally {
-    // Always try to close the connection
     try {
       console.log("Closing email connection...");
-      
-      // Force close instead of logout (more reliable)
-      client.close();
-      
-    } catch (closeError) {
-      console.warn("Warning: Could not properly close email connection:", closeError.message);
-      // Force terminate if close fails
-      try {
-        client.destroy();
-      } catch (destroyError) {
-        console.warn("Could not destroy connection:", destroyError.message);
+      if (client && client.state !== 'LOGOUT') {
+        await Promise.race([
+          client.close(),
+          new Promise((_, reject) => setTimeout(() => reject(new Error("Close timed out")), 3000))
+        ]);
       }
+    } catch (err) {
+      console.warn("Failed to close connection gracefully:", err.message);
     }
   }
 }
+
 
 async function loginWorkFlowy() {
   const email = process.env.CLIENT_EMAIL;
   
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   
@@ -112,38 +111,44 @@ async function loginWorkFlowy() {
 
   await page.type('input[name="email"]', email);
   await page.click("button[type='submit']");
-  await page.waitForSelector("input[name='code']", { visible: true });
 
-  console.log("Login code request sent!");
+  await page.waitForSelector('input[name="code"]', { visible: true });
+  console.log("Login code request sent...");
 
-  const code = await fetchLoginCode();
+  const loginCode = await fetchLoginCode();
 
-  await page.type('input[name="code"]', code);
+  await page.type('input[name="code"]', loginCode, { delay: 100 });
   await page.click("button[type='submit']");
 
+  let mfaAppeared = false;
   try {
-    await page.waitForSelector("input[name='code']", { visible: true, timeout: 5000 });
-
-    const mfaCode = authenticator.generate(process.env.WORKFLOWY_TOTP_SECRET);
-    console.log("Auto-generated MFA code:", mfaCode);
-
-    await page.type('input[name="code"]', mfaCode);
-    await page.click("input[type='submit']");
-  } catch (_) {
-    // No 2FA needed
+    await page.waitForFunction(() => {
+      const inputs = Array.from(document.querySelectorAll('input[name="code"]'));
+      return inputs.length === 1 && document.activeElement === inputs[0];
+    }, { timeout: 7000 });
+    mfaAppeared = true;
+  } catch {
+    console.log("No MFA step detected — continuing.");
   }
-  
+
+  if (mfaAppeared) {
+    const mfaCode = authenticator.generate(process.env.WORKFLOWY_TOTP_SECRET);
+    console.log("MFA code generated:", mfaCode);
+
+    await sleep(1000);
+    await page.focus('input[name="code"]');
+    await page.$eval('input[name="code"]', el => el.value = '');
+    await page.type('input[name="code"]', mfaCode, { delay: 100 });
+    await page.click("input[type='submit']");
+  }
+
   await page.waitForNavigation({ waitUntil: "networkidle2" });
   const cookies = await context.cookies("https://workflowy.com");
-  const sessionid = cookies.find((c) => c.name === "sessionid")?.value;
+  const sessionid = cookies.find(c => c.name === "sessionid")?.value;
 
   await browser.close();
-  rl.close();
 
-  if (!sessionid) {
-    throw new Error("Failed to get sessionid. Login might have failed.");
-  }
-
+  if (!sessionid) throw new Error("Failed to retrieve sessionid.");
   return sessionid;
 }
 
