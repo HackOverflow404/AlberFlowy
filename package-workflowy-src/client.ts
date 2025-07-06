@@ -145,7 +145,7 @@ export class Client {
    * call this method if the user is not yet authenticated.
    *
    * Queries `workflowy.com/ajax_login` endpoint
-   * @returns `{ success: true }` if the autentication was successful
+   * @returns `{ success: true }` if the authentication was successful
    * @throws Error if the authentication failed
    */
   public async login(): Promise<LoginResult> {
@@ -296,10 +296,7 @@ export class Client {
     formData.append("client_version", CLIENT_VERSION);
     formData.append("push_poll_id", push_poll_id);
     formData.append("push_poll_data", push_poll_data);
-    formData.append(
-      "crosscheck_user_id",
-      initializationData.mainProjectTreeInfo.ownerId.toString(),
-    );
+    formData.append("crosscheck_user_id", initializationData.mainProjectTreeInfo.ownerId.toString());
 
     const json = await this.#authenticatedFetch(PUSH_AND_POLL_URL, {
       method: "POST",
