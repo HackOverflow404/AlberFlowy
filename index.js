@@ -26,6 +26,7 @@ import { WorkFlowyClient } from './api/workflowy.js';
 
   // Create a custom node
   const newNode = await client.createNodeCustom("New Node!");
+  console.log(newNode);
   
   // Edit a node
   // const updated = await client.editNode("be0325bb-a014-94af-45ad-00365e23757c", "Updated Name!");

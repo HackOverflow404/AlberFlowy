@@ -157,9 +157,9 @@ export class WorkFlowyClient {
             {
               "nm": name,
               "metadata": {},
-              "id": id,
+              "id": crypto.randomUUID().toString(),
               "ct": userData.timestamp,
-              "cb": userID
+              "cb": userData.userID
             }
           ]
         ),

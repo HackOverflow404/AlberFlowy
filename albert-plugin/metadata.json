@@ -1,0 +1,9 @@
+{
+  "authors" : [ "@Medhansh-Garg" ],
+  "description" : "Manage WorkFlowy Lists with Albert",
+  "id" : "AlberFlowy",
+  "license" : "MIT",
+  "name" : "AlberFlowy",
+  "url" : "",
+  "version" : "1.0"
+}
