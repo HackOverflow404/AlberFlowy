@@ -484,4 +484,5 @@ CMakeFiles/AlberFlowy.dir/src/plugin.cpp.o: \
  /usr/include/c++/14/fstream \
  /usr/include/x86_64-linux-gnu/c++/14/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/14/bits/c++io.h \
- /usr/include/c++/14/bits/fstream.tcc /usr/include/c++/14/iostream
+ /usr/include/c++/14/bits/fstream.tcc /usr/include/c++/14/iostream \
+ /usr/include/gumbo.h /usr/include/tag_enum.h
