@@ -20,23 +20,62 @@
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include <iostream>
+#include <string>
+#include <gumbo.h>
 
 using namespace albert;
 using namespace std;
 using json = nlohmann::json;
 
-void removeNode(json& node) {
+static const QStringList kIconUrls {QStringLiteral("/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/src/icon.png")};
+
+inline std::string html_to_text(const std::string& in) {
+    if (in.find('<') == std::string::npos) {
+        return in;
+    }
+
+    GumboOutput* g = gumbo_parse(in.c_str());
+    std::string out;
+
+    std::function<void(GumboNode*)> walk = [&](GumboNode* n) {
+        switch (n->type) {
+        case GUMBO_NODE_TEXT:
+        case GUMBO_NODE_WHITESPACE:
+            out.append(n->v.text.text);
+            break;
+        case GUMBO_NODE_ELEMENT:
+            for (size_t i = 0; i < n->v.element.children.length; ++i)
+                walk(static_cast<GumboNode*>(n->v.element.children.data[i]));
+            break;
+        default:
+            break;
+        }
+    };
+    walk(g->root);
+    gumbo_destroy_output(&kGumboDefaultOptions, g);
+    return out;
+}
+
+void removeNode(json &node) {
     cout << "Would remove: " << node["nm"] << endl;
 }
 
-json getNodes(json nodes, QStringList route) {
-    if (nodes[route.at(0).toStdString()]) {
-        json children = nodes[route[0].toStdString()];
-        route.removeFirst();
-        return getNodes(children, route);
+json getNodes(const json &nodes, const QStringList &route) {
+    if (route.isEmpty()) {
+        return nodes;
     }
-    
-    return json(); // Create Node
+
+    QString currentName = route[0];
+    QStringList remaining = route.mid(1);
+
+    for (const auto &node : nodes) {
+        QString nodeName = QString::fromStdString(html_to_text(node["nm"].get<std::string>()));
+        if (nodeName == currentName && node.contains("children")) {
+            return getNodes(node["children"], remaining);
+        }
+    }
+
+    return json();  // Not found
 }
 
 vector<shared_ptr<Item>> listNodes(QStringList route) {
@@ -47,49 +86,45 @@ vector<shared_ptr<Item>> listNodes(QStringList route) {
     json root_nodes = json::parse(file);
 
     vector<shared_ptr<Item>> items;
-    QStringList icon_urls = {QStringLiteral("/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/src/icon.png")};
 
-    if (route.isEmpty()) {
-        for (auto &node : root_nodes) {
+    auto makeStrings = [] (const QStringList &segments) {
+        const QString joined = segments.join(u'>');
+        return array<QString, 3>{joined, joined, joined};
+    };
+
+    json current_nodes = route.isEmpty() ? root_nodes : getNodes(root_nodes, route);
+
+    if (!current_nodes.is_null()) {
+        for (auto &node : current_nodes) {
+            const auto plain = html_to_text(node["nm"].get<std::string>());
+            const QString name = QString::fromStdString(plain);
+
+            QStringList newRoute = route;
+            newRoute.append(name);
+            auto str = makeStrings(newRoute);
+
             auto item = make_shared<StandardItem>(
-                QStringLiteral("Root"),
-                QString::fromStdString(node["nm"]),
-                QStringLiteral("Root"),
-                icon_urls,
+                std::move(str[0]),
+                QString(name),
+                std::move(str[1]),
+                kIconUrls,
                 vector<Action>{
-                    Action(QStringLiteral("remove"), QStringLiteral("Remove"), [node]() mutable { removeNode(node); })
-                }
+                    Action(QStringLiteral("remove"),
+                           QStringLiteral("Remove"),
+                           [node]() mutable { removeNode(node); })
+                },
+                std::move(str[2])
             );
+
             items.push_back(item);
         }
-        return items;
     }
 
-    json nodes = getNodes(root_nodes, route);
-
-    if (route.isEmpty()) {
-        for (auto &node : root_nodes) {
-            route.append(QString::fromStdString(" " + node["nm"]));
-            auto item = make_shared<StandardItem>(
-                QStringLiteral("Root"),
-                route,
-                QStringLiteral("Root"),
-                icon_urls,
-                vector<Action>{
-                    Action(QStringLiteral("remove"), QStringLiteral("Remove"), [node]() mutable { removeNode(node); })
-                }
-            );
-            items.push_back(item);
-        }
-        return items;
-    }
+    return items;
 }
 
-void Plugin::handleTriggerQuery(Query &query) {
-    QStringList parts = query.string().split(' ', Qt::SkipEmptyParts);
-    if (!parts.isEmpty()) {
-        parts.removeFirst();
-    }
 
+void Plugin::handleTriggerQuery(Query &query) {
+    QStringList parts = query.string().split(QLatin1Char('>'), Qt::SkipEmptyParts);
     query.add(listNodes(parts));
 }

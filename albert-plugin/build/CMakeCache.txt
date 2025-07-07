@@ -65,32 +65,6 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 //Flags used by the CXX compiler during RELWITHDEBINFO builds.
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
-//C compiler
-CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc
-
-//A wrapper around 'ar' adding the appropriate '--plugin' option
-// for the GCC compiler
-CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-14
-
-//A wrapper around 'ranlib' adding the appropriate '--plugin' option
-// for the GCC compiler
-CMAKE_C_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-14
-
-//Flags used by the C compiler during all build types.
-CMAKE_C_FLAGS:STRING=
-
-//Flags used by the C compiler during DEBUG builds.
-CMAKE_C_FLAGS_DEBUG:STRING=-g
-
-//Flags used by the C compiler during MINSIZEREL builds.
-CMAKE_C_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
-
-//Flags used by the C compiler during RELEASE builds.
-CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
-
-//Flags used by the C compiler during RELWITHDEBINFO builds.
-CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
-
 //Path to a program.
 CMAKE_DLLTOOL:FILEPATH=CMAKE_DLLTOOL-NOTFOUND
 
@@ -290,6 +264,12 @@ CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Arguments to supply to pkg-config
+PKG_CONFIG_ARGN:STRING=
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
+
 //Additional directories where find(Qt6 ...) host Qt components
 // are searched
 QT_ADDITIONAL_HOST_PACKAGES_PREFIX_PATH:STRING=
@@ -311,6 +291,9 @@ Qt6_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt6
 
 //The directory containing a CMake configuration file for nlohmann_json.
 nlohmann_json_DIR:PATH=/usr/share/cmake/nlohmann_json
+
+//Path to a library.
+pkgcfg_lib_GUMBO_gumbo:FILEPATH=/usr/lib/x86_64-linux-gnu/libgumbo.so
 
 
 ########################
@@ -353,22 +336,6 @@ CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_RELWITHDEBINFO
 CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_C_COMPILER
-CMAKE_C_COMPILER-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_C_COMPILER_AR
-CMAKE_C_COMPILER_AR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_C_COMPILER_RANLIB
-CMAKE_C_COMPILER_RANLIB-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_C_FLAGS
-CMAKE_C_FLAGS-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_C_FLAGS_DEBUG
-CMAKE_C_FLAGS_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_C_FLAGS_MINSIZEREL
-CMAKE_C_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_C_FLAGS_RELEASE
-CMAKE_C_FLAGS_RELEASE-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_C_FLAGS_RELWITHDEBINFO
-CMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_DLLTOOL
 CMAKE_DLLTOOL-ADVANCED:INTERNAL=1
 //Executable file format
@@ -496,14 +463,55 @@ CMAKE_TAPI-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v1.8.1()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //Details about finding WrapAtomic
 FIND_PACKAGE_MESSAGE_DETAILS_WrapAtomic:INTERNAL=[1][v()]
 //Details about finding nlohmann_json
 FIND_PACKAGE_MESSAGE_DETAILS_nlohmann_json:INTERNAL=[/usr/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake][v3.11.3()]
+GUMBO_CFLAGS:INTERNAL=-I/usr/include
+GUMBO_CFLAGS_I:INTERNAL=
+GUMBO_CFLAGS_OTHER:INTERNAL=
+GUMBO_FOUND:INTERNAL=1
+GUMBO_INCLUDEDIR:INTERNAL=/usr/include
+GUMBO_INCLUDE_DIRS:INTERNAL=/usr/include
+GUMBO_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lgumbo
+GUMBO_LDFLAGS_OTHER:INTERNAL=
+GUMBO_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+GUMBO_LIBRARIES:INTERNAL=gumbo
+GUMBO_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+GUMBO_LIBS:INTERNAL=
+GUMBO_LIBS_L:INTERNAL=
+GUMBO_LIBS_OTHER:INTERNAL=
+GUMBO_LIBS_PATHS:INTERNAL=
+GUMBO_MODULE_NAME:INTERNAL=gumbo
+GUMBO_PREFIX:INTERNAL=/usr
+GUMBO_STATIC_CFLAGS:INTERNAL=-I/usr/include
+GUMBO_STATIC_CFLAGS_I:INTERNAL=
+GUMBO_STATIC_CFLAGS_OTHER:INTERNAL=
+GUMBO_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include
+GUMBO_STATIC_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lgumbo
+GUMBO_STATIC_LDFLAGS_OTHER:INTERNAL=
+GUMBO_STATIC_LIBDIR:INTERNAL=
+GUMBO_STATIC_LIBRARIES:INTERNAL=gumbo
+GUMBO_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+GUMBO_STATIC_LIBS:INTERNAL=
+GUMBO_STATIC_LIBS_L:INTERNAL=
+GUMBO_STATIC_LIBS_OTHER:INTERNAL=
+GUMBO_STATIC_LIBS_PATHS:INTERNAL=
+GUMBO_VERSION:INTERNAL=0.13.0
+GUMBO_gumbo_INCLUDEDIR:INTERNAL=
+GUMBO_gumbo_LIBDIR:INTERNAL=
+GUMBO_gumbo_PREFIX:INTERNAL=
+GUMBO_gumbo_VERSION:INTERNAL=
 //Test HAVE_STDATOMIC
 HAVE_STDATOMIC:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_ARGN
+PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //Qt feature: aesni (from target Qt6::Core)
 QT_FEATURE_aesni:INTERNAL=ON
 //Qt feature: alloca (from target Qt6::Core)
@@ -875,10 +883,13 @@ QT_FEATURE_zstd:INTERNAL=ON
 //linker supports push/pop state
 _CMAKE_CXX_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 //linker supports push/pop state
-_CMAKE_C_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
-//linker supports push/pop state
 _CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/usr/local
 _Qt6_LINGUIST_TOOLS_DIR:INTERNAL=/usr/lib/x86_64-linux-gnu/cmake/Qt6LinguistTools
+__pkg_config_arguments_GUMBO:INTERNAL=REQUIRED;gumbo
+__pkg_config_checked_GUMBO:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GUMBO_gumbo
+pkgcfg_lib_GUMBO_gumbo-ADVANCED:INTERNAL=1
+prefix_result:INTERNAL=/usr/lib/x86_64-linux-gnu
 
