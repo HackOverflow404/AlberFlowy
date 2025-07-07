@@ -1,0 +1,8 @@
+{
+    "authors": ["@manuelschneid3r"],
+    "description": "Hash strings",
+    "description[de]": "Zeichenfolgen hashen",
+    "license": "MIT",
+    "name": "Hash Generator",
+    "url": "https://github.com/albertlauncher/plugins/tree/main/hash",
+}
