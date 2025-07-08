@@ -8,11 +8,11 @@
 
 #pragma once
 #include <albert/extensionplugin.h>
-#include <albert/triggerqueryhandler.h>
+#include <albert/indexqueryhandler.h>
 
 class Plugin : public albert::util::ExtensionPlugin, public albert::TriggerQueryHandler {
     ALBERT_PLUGIN
-    
-    public:
-        void handleTriggerQuery(albert::Query &query) override;
+
+public:
+    void handleTriggerQuery(albert::Query &query) override;
 };
