@@ -12,5 +12,4 @@ This is a custom [Albert Launcher](https://albertlauncher.github.io/) plugin tha
 - Remove any node with a single keystroke (Meta + Enter)
 - Automatically suggest creation of new nodes if input doesn't match
 - Easily authenticate via `wf auth`
-- Fully supports fuzzy matching using Albert’s `IndexQueryHandler`
 - Uses HTML-to-text parsing for node names
