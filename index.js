@@ -12,6 +12,7 @@
  */
 
 import { WorkFlowyClient } from './api/workflowy.js';
+import fs from 'fs/promises';
 
 (async () => {
   const client = new WorkFlowyClient();
@@ -21,12 +22,13 @@ import { WorkFlowyClient } from './api/workflowy.js';
   // console.log(response);
 
   // Get tree
-  // const tree = await client.getTree();
-  // console.dir(tree, { depth: null });
+  const tree = await client.getTree();
+  console.dir(tree, { depth: null });
+  await fs.writeFile('tree_data.json', JSON.stringify(tree, null, 2));
 
   // Create a custom node
-  const newNode = await client.createNodeCustom("New Node!");
-  console.log(newNode);
+  // const newNode = await client.createNodeCustom("New Node!");
+  // console.log(newNode);
   
   // Edit a node
   // const updated = await client.editNode("be0325bb-a014-94af-45ad-00365e23757c", "Updated Name!");
