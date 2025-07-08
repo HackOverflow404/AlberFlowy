@@ -3,8 +3,8 @@
  * - ✅ `wf` will list all nodes at root level
  * - `wf <node route>` meta + "Remove" will delete that node route and all it's child nodes.
  * - `wf auth` will run the auth script
- * - Pressing tab will autocomplete the selected node into the input box and then display the child nodes
- * - Pressing enter will complete the selected node
+ * - ✅ Pressing tab will autocomplete the selected node into the input box and then display the child nodes
+ * - Pressing enter will check off the selected node
  * - If the input is not an existing node, pressing enter will create a new node with that name
  */
 
