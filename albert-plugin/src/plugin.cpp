@@ -27,7 +27,7 @@ using namespace albert;
 using namespace std;
 using json = nlohmann::json;
 
-static const QStringList kIconUrls {QStringLiteral("/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/src/icon.png")};
+static const QStringList IconUrls {QStringLiteral("/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/src/icon.png")};
 
 inline std::string html_to_text(const std::string& in) {
     if (in.find('<') == std::string::npos) {
@@ -56,8 +56,12 @@ inline std::string html_to_text(const std::string& in) {
     return out;
 }
 
-void removeNode(json &node) {
-    cout << "Would remove: " << node["nm"] << endl;
+void removeNode(json &node, QStringList route) {
+    cout << "Remove: " << node["nm"] << " at "  << route.join(u'>').toStdString() << endl;
+}
+
+void createNode(QStringList route) {
+    cout << "Creating a node at " << route.join(u'>').toStdString() << endl;
 }
 
 json getNodes(const json &nodes, const QStringList &route) {
@@ -75,7 +79,8 @@ json getNodes(const json &nodes, const QStringList &route) {
         }
     }
 
-    return json();  // Not found
+    return json::object({{"err", "Not Found"}});
+
 }
 
 vector<shared_ptr<Item>> listNodes(QStringList route) {
@@ -87,33 +92,56 @@ vector<shared_ptr<Item>> listNodes(QStringList route) {
 
     vector<shared_ptr<Item>> items;
 
-    auto makeStrings = [] (const QStringList &segments) {
-        const QString joined = segments.join(u'>');
-        return array<QString, 3>{joined, joined, joined};
-    };
-
     json current_nodes = route.isEmpty() ? root_nodes : getNodes(root_nodes, route);
-
+    auto makePath = [] (const QStringList &segments) {
+        const QString joined = segments.join(u'>');
+        return joined;
+    };
+    
     if (!current_nodes.is_null()) {
-        for (auto &node : current_nodes) {
-            const auto plain = html_to_text(node["nm"].get<std::string>());
-            const QString name = QString::fromStdString(plain);
+        if (current_nodes.is_array()) {
 
-            QStringList newRoute = route;
-            newRoute.append(name);
-            auto str = makeStrings(newRoute);
+            for (auto &node : current_nodes) {
+                const string plain = html_to_text(node["nm"].get<std::string>());
+                const QString name = QString::fromStdString(plain);
+
+                QStringList newRoute = route;
+                newRoute.append(name);
+                QString path = makePath(newRoute);
+
+                auto item = make_shared<StandardItem>(
+                    path,                   // id
+                    QString(name),          // text
+                    path,                   // subtext
+                    IconUrls,               // icons
+                    vector<Action> {        // actions
+                        Action(
+                            QStringLiteral("remove"),
+                            QStringLiteral("Remove"),
+                            [node, newRoute]() mutable { qInfo("Removing node..."); removeNode(node, newRoute); }
+                        )
+                    },
+                    path                    // action text
+                );
+
+                items.push_back(item);
+            }
+        } else if (current_nodes.is_object() && html_to_text(current_nodes["err"].get<std::string>()) == "Not Found") {
+            auto path = makePath(route);
 
             auto item = make_shared<StandardItem>(
-                std::move(str[0]),
-                QString(name),
-                std::move(str[1]),
-                kIconUrls,
-                vector<Action>{
-                    Action(QStringLiteral("remove"),
-                           QStringLiteral("Remove"),
-                           [node]() mutable { removeNode(node); })
+                path,
+                QStringLiteral("Create New Node"),
+                QStringLiteral("New node at ").append(path),
+                IconUrls,
+                vector<Action> {
+                    Action(
+                        QStringLiteral("create"),
+                        QStringLiteral("Create Node"),
+                        [route]() { qInfo("Creating new node..."); createNode(route); }
+                    )
                 },
-                std::move(str[2])
+                path
             );
 
             items.push_back(item);
@@ -122,7 +150,6 @@ vector<shared_ptr<Item>> listNodes(QStringList route) {
 
     return items;
 }
-
 
 void Plugin::handleTriggerQuery(Query &query) {
     QStringList parts = query.string().split(QLatin1Char('>'), Qt::SkipEmptyParts);
