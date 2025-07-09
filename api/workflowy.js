@@ -1,13 +1,17 @@
-import https from "https";
+import { fileURLToPath } from 'url';
 import dotenv from "dotenv";
-import fs from "fs";
 import crypto from "crypto";
-import { createClientId } from "../utils/clientId.js";
+import https from "https";
+import path from 'path';
+import fs from "fs";
 
 dotenv.config();
 
-const CONFIG_PATH = "./.wfconfig.json";
-const config = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"));
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const configPath = path.join(__dirname, '.wfconfig.json');
+const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
 const API_BASE = "https://workflowy.com";
 
@@ -17,7 +21,16 @@ export class WorkFlowyClient {
     this.apiKey = apiKey;
   }
 
-  async getTree() {
+  createClientId = () => {
+    const date = new Date();
+
+    const pad = (n, width = 2) => String(n).padStart(width, '0');
+
+    const id = `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())} ${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}:${pad(date.getUTCSeconds())}.${pad(date.getUTCMilliseconds(), 3)}`;
+    return id;
+  };
+  
+  getTree = async () => {
     const res = await fetch(`${API_BASE}/get_tree_data/`, {
       headers: { cookie: `sessionid=${this.sessionId}` },
     });
@@ -42,7 +55,7 @@ export class WorkFlowyClient {
     return rootItems;
   }
 
-  async getUserData(treeID = "Root") {
+  getUserData = async (treeID = "Root") => {
     const res = await fetch(`${API_BASE}/get_initialization_data?client_version=21&client_version_v2=28&no_root_children=1`, {
       headers: { cookie: `sessionid=${this.sessionId}` },
     });
@@ -63,7 +76,7 @@ export class WorkFlowyClient {
     };
   }
 
-  async createNode(title) {
+  createNode = async (title) => {
     const data = JSON.stringify({ new_bullet_title: title });
 
     const options = {
@@ -97,14 +110,14 @@ export class WorkFlowyClient {
     });
   }
 
-  async pushAndPoll(operation) {
+  pushAndPoll = async (operation) => {
     const userData = await this.getUserData();
     const payload = [{
       most_recent_operation_transaction_id: userData.recentID,
       operations: [operation],
     }];
 
-    const clientId = createClientId();
+    const clientId = this.createClientId();
     const pushPollId = crypto.randomUUID().substring(0, 8);
     const formData = new FormData();
     formData.append("client_id", clientId);
@@ -122,7 +135,7 @@ export class WorkFlowyClient {
     return res.json();
   }
 
-  async editNode(newName, projectId) {
+  editNode = async (newName, projectId) => {
     const userData = await this.getUserData();
     const operation = {
       type: "edit",
@@ -144,13 +157,13 @@ export class WorkFlowyClient {
     return this.pushAndPoll(operation);
   }
   
-  async createNodeCustom(name, parentId = "None") {
+  createNodeCustom = async (name, parentId = "None") => {
     const userData = await this.getUserData();
     const operation = {
-      type: "bulk_create", // bulk_create
+      type: "bulk_create",
       data: {
         parentid: parentId,
-        starting_priority: 1,
+        starting_priority: 0,
         isForSearch: false,
         project_trees: JSON.stringify(
           [
@@ -166,6 +179,60 @@ export class WorkFlowyClient {
       },
       client_timestamp: userData.timestamp
     }
+
+    return this.pushAndPoll(operation);
+  }
+
+  deleteNode = async (projectId) => {
+    const userData = await this.getUserData();
+    const operation = {
+      type: "delete",
+      data: {
+        projectid: projectId,
+      },
+      undo_data: {
+        previous_last_modified: 0,
+        previous_last_modified_by: null,
+        previous_name: "",
+      },
+      client_timestamp: userData.timestamp
+    };
+
+    return this.pushAndPoll(operation);
+  }
+  
+  completeNode = async (projectId) => {
+    const userData = await this.getUserData();
+    const operation = {
+      type: "complete",
+      data: {
+        projectid: projectId,
+      },
+      undo_data: {
+        previous_last_modified: 0,
+        previous_last_modified_by: null,
+        previous_name: "",
+      },
+      client_timestamp: userData.timestamp
+    };
+
+    return this.pushAndPoll(operation);
+  }
+  
+  uncompleteNode = async (projectId) => {
+    const userData = await this.getUserData();
+    const operation = {
+      type: "uncomplete",
+      data: {
+        projectid: projectId,
+      },
+      undo_data: {
+        previous_last_modified: 0,
+        previous_last_modified_by: null,
+        previous_name: "",
+      },
+      client_timestamp: userData.timestamp
+    };
 
     return this.pushAndPoll(operation);
   }
