@@ -12,7 +12,17 @@
 
 #include "plugin.h"
 
-inline string Plugin::html_to_text(const string& in) {
+QString Plugin::applyStrikethrough(const QString &text) {
+    static const QChar kStrikethroughChar(0x0336);
+    QString result;
+    for (QChar c : text) {
+        result += c;
+        result += kStrikethroughChar;
+    }
+    return result;
+}
+
+string Plugin::html_to_text(const string& in) {
     if (in.find('<') == string::npos) {
         return in;
     }
@@ -170,7 +180,16 @@ void Plugin::createNode(QStringList route, const json &nodes) {
     );
 }
 
-void Plugin::editNode(const json &node, const QString newName, const QStringList route) {
+void Plugin::editNode(const json &node, const QStringList route) {
+    QString currentName = QString::fromStdString(node["nm"].get<string>());
+    bool complete;
+    QString newName = QInputDialog::getText(nullptr, QStringLiteral("Edit Node"), QStringLiteral("New name:"), QLineEdit::Normal, currentName, &complete);
+
+    if (!complete || newName == currentName) {
+        qInfo("Edit cancelled or no change.");
+        return;
+    }
+
     qDebug() << "Edit: " << QString::fromStdString(node["nm"].get<string>()) << " at "  << route.join(u'>') << " to " << newName;
     
     runWorkflowyCommand({QStringLiteral("editNode"), newName, QString::fromStdString(node["id"].get<string>())},
@@ -186,10 +205,12 @@ void Plugin::editNode(const json &node, const QString newName, const QStringList
     );
 }
 
-void Plugin::completeNode(const json &node, const QStringList route) {
+void Plugin::toggleCompleteNode(const json &node, const QStringList route) {
     qDebug() << "Complete: " << QString::fromStdString(node["nm"].get<string>()) << " at "  << route.join(u'>');
 
-    runWorkflowyCommand({QStringLiteral("completeNode"), QString::fromStdString(node["id"].get<string>())},
+    QString command = node.contains("cp") ? QStringLiteral("uncompleteNode") : QStringLiteral("completeNode");
+
+    runWorkflowyCommand({command, QString::fromStdString(node["id"].get<string>())},
         [this](bool success, const json &output) {
             if (!success) {
                 qWarning() << "CLI failed to execute.";
@@ -288,7 +309,14 @@ vector<shared_ptr<Item>> Plugin::listNodes(QStringList route, const json &root_n
 
             for (auto &node : current_nodes) {
                 const string plain = html_to_text(node["nm"].get<string>());
-                const QString name = QString::fromStdString(plain);
+                QString name = QString::fromStdString(plain);
+                QString completeLabel = QStringLiteral("Check");
+
+                if (node.contains("cp")) {
+                    name = applyStrikethrough(name);
+                    // name = QStringLiteral("<del>%1</del>").arg(name); // Tags don't work for some reason
+                    completeLabel = QStringLiteral("Uncheck");
+                }
 
                 QStringList newRoute = route;
                 newRoute.append(name);
@@ -301,14 +329,14 @@ vector<shared_ptr<Item>> Plugin::listNodes(QStringList route, const json &root_n
                     IconUrls,               // icons
                     vector<Action> {        // actions
                         Action(
-                            QStringLiteral("complete"),
-                            QStringLiteral("Complete"),
-                            [this, node, newRoute]() mutable { qInfo("Complete node..."); completeNode(node, newRoute); }
+                            QStringLiteral("tcomplete"),
+                            completeLabel,
+                            [this, node, newRoute]() mutable { qInfo("Complete node..."); toggleCompleteNode(node, newRoute); }
                         ),
                         Action(
                             QStringLiteral("edit"),
                             QStringLiteral("Edit"),
-                            [this, node, newRoute]() mutable { qInfo("Editing node..."); editNode(node, QStringLiteral(""), newRoute); }
+                            [this, node, newRoute]() mutable { qInfo("Editing node..."); editNode(node, newRoute); }
                         ),
                         Action(
                             QStringLiteral("remove"),
