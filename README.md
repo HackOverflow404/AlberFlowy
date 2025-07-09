@@ -1,6 +1,6 @@
 # Albert Workflowy Plugin
 
-This is a custom [Albert Launcher](https://albertlauncher.github.io/) plugin that integrates with your [Workflowy](https://workflowy.com/) account. It allows you to browse, view, and manage Workflowy nodes directly from Albert using a fast easy to use interface.
+This is a custom [Albert Launcher](https://albertlauncher.github.io/) plugin that integrates with your [WorkFlowy](https://workflowy.com/) account. It allows you to browse, view, and manage WorkFlowy nodes directly from Albert using a fast easy to use interface.
 
 ---
 
