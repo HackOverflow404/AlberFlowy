@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { WorkFlowyClient } from './workflowy.js';
+import { loginWorkFlowy, updateWfConfig } from './workflowy-auth.js';
 import process from 'process';
 
 const client = new WorkFlowyClient();
@@ -107,6 +108,15 @@ async function main() {
         const [projectId] = args;
         const result = await client.uncompleteNode(projectId);
         console.log(JSON.stringify(result, null, 2));
+        break;
+      }
+      
+      case 'auth': {
+        loginWorkFlowy().then(updateWfConfig).catch(err => {
+            console.error("Login failed:", err);
+            process.exit(1);
+          }
+        );
         break;
       }
 

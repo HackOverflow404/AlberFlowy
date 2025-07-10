@@ -5,8 +5,7 @@ import https from "https";
 import path from 'path';
 import fs from "fs";
 
-dotenv.config();
-
+dotenv.config({ quiet: true });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

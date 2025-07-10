@@ -1,0 +1,1081 @@
+[
+  {
+    "id": "77274a99-337a-4491-abb5-75f3f9849651",
+    "nm": "New Node",
+    "ct": 76044739,
+    "pr": 50,
+    "prnt": null,
+    "metadata": {},
+    "cp": 76044745,
+    "lm": 76044745,
+    "children": []
+  },
+  {
+    "id": "be0325bb-a014-94af-45ad-00365e23757c",
+    "nm": "Sigpwny",
+    "ct": 65137267,
+    "pr": 400,
+    "prnt": null,
+    "metadata": {},
+    "lm": 75794460,
+    "children": [
+      {
+        "id": "e86aa54e-2372-f656-ee93-4be50becc392",
+        "nm": "<a href=\"https://docs.google.com/document/d/1IIotEuaDTfJ4qbosY63g-vZovibmh53xHoWD4ZJGUJ8/edit?tab=t.0\">Work on UI</a> <time startYear=\"2025\" startMonth=\"3\" startDay=\"7\">Fri, Mar 7, 2025</time>,",
+        "ct": 65137271,
+        "pr": 100,
+        "prnt": "be0325bb-a014-94af-45ad-00365e23757c",
+        "metadata": {},
+        "lm": 75969932,
+        "children": []
+      },
+      {
+        "id": "95b4d2dd-3a80-40c8-b376-9cfe0d4432a2",
+        "nm": "Create",
+        "ct": 75970904,
+        "pr": 50,
+        "prnt": "be0325bb-a014-94af-45ad-00365e23757c",
+        "metadata": {},
+        "lm": 75970904,
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "ccc746f9-3544-6eb6-a1f1-ebe02b0a0360",
+    "nm": "Cyber Security Course",
+    "ct": 65137594,
+    "pr": 800,
+    "prnt": null,
+    "metadata": {},
+    "lm": 65140007,
+    "children": []
+  },
+  {
+    "id": "fd359d6e-f000-b077-da51-2add461fe28b",
+    "nm": "Projects",
+    "ct": 65137300,
+    "pr": 700,
+    "prnt": null,
+    "metadata": {},
+    "lm": 66437199,
+    "children": [
+      {
+        "id": "7b87b375-cc45-783d-b206-d298989d6027",
+        "nm": "<a href=\"https://drive.google.com/file/d/1CJ2_p1KULbrHoSOeby0CWWlB5TNK1tWZ/view\">Computer Repurpose</a>",
+        "ct": 65137305,
+        "pr": 100,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 66437199,
+        "children": [
+          {
+            "id": "0a198e01-480d-27de-4eb3-6b87db9544eb",
+            "nm": "<a href=\"file:///home/d4rkc10ud/Downloads/510832249-B140XW01-V-0.pdf\">LCD Screen</a>",
+            "ct": 65137314,
+            "pr": 100,
+            "prnt": "7b87b375-cc45-783d-b206-d298989d6027",
+            "metadata": {},
+            "lm": 65137368,
+            "children": [
+              {
+                "id": "ff930bb4-f63f-736a-7e6e-6ecd827c477d",
+                "nm": "Look into LVDS",
+                "ct": 65137319,
+                "pr": 100,
+                "prnt": "0a198e01-480d-27de-4eb3-6b87db9544eb",
+                "metadata": {},
+                "lm": 65137330,
+                "children": []
+              },
+              {
+                "id": "b8bedbf7-810c-1df7-40c9-db2bb8e85978",
+                "nm": "<a href=\"https://www.aliexpress.us/item/3256807531551258.html\">Controller Board</a>",
+                "ct": 65137330,
+                "pr": 200,
+                "prnt": "0a198e01-480d-27de-4eb3-6b87db9544eb",
+                "metadata": {},
+                "lm": 65141578,
+                "children": [
+                  {
+                    "id": "bf6e686a-aaa8-aaf8-b07c-1834242c1ee5",
+                    "nm": "",
+                    "ct": 65141825,
+                    "pr": 100,
+                    "prnt": "b8bedbf7-810c-1df7-40c9-db2bb8e85978",
+                    "metadata": {
+                      "layoutMode": "cmnt-c"
+                    },
+                    "lm": 65141825,
+                    "children": [
+                      {
+                        "id": "638dacc0-ca1a-0279-fdcd-ef79f3f5d8b7",
+                        "nm": "@",
+                        "ct": 65141825,
+                        "pr": 100,
+                        "prnt": "bf6e686a-aaa8-aaf8-b07c-1834242c1ee5",
+                        "metadata": {
+                          "draft": "1_3525750",
+                          "layoutMode": "cmnt"
+                        },
+                        "lm": 65141825,
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+            "nm": "<a href=\"https://www.pchub.com/acer-aspire-4935g-series-sub-various-board-ls-4494p-fingerprint-bd-p82395\">Fingerprint Reader</a>",
+            "ct": 65137344,
+            "pr": 200,
+            "prnt": "7b87b375-cc45-783d-b206-d298989d6027",
+            "metadata": {
+              "s3File": {
+                "objectFolder": "gAAAAABnx6rZ2EX_1lTyRMBkMFcn4_WhTj1Zs8BwOfiW31NH1BAb5jzPCIHm-aM-bwTKSZHMbpljIciLZRkmWq0_ceblJpgV_-vEOQTFLKJU_9pWIyoxWLn77MEou1_Mfw7wvx9cCmdD5i1zk9GJ_ZeuZedPXvAqeTWbKCdQMeY7iCOe3oMGhKtrdBpo6cbvU-LxQNdUIzS8OjaoPuR2kC6-sbAMycsEJXPtFW9tBfS5SDaNBgCfLdI="
+              }
+            },
+            "lm": 65138141,
+            "children": [
+              {
+                "id": "1cde3a51-3f7e-28c1-fbfc-e3930fdb8328",
+                "nm": "",
+                "ct": 65137414,
+                "pr": 6,
+                "prnt": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+                "metadata": {
+                  "s3File": {
+                    "isFile": true,
+                    "fileName": "image.png",
+                    "fileType": "image/png",
+                    "objectFolder": "gAAAAABnx6rajW4yCkzB5sHQ3X0vz4St1OTIaSzz0sSo9wqnojVBOtmvv1tzgVA6GIL3ShTBAVZqBVuPlhisv121OF7yRKYTjjtU6gI9BKx6YV-7BKAGe9Vu_rSoarr267AHlXBZ38ZG3y6_ttOkFzI4IteMjwcY3wepeSQ-ssdmooVQY5LQiumH3BWGsm2efazS8vI2e447pGk_p_9Ce9A0SCNPNdsBNTMbTSXhR_GH4uPF-tqJuQw=",
+                    "isAnimatedGIF": false,
+                    "imageOriginalWidth": 1265,
+                    "imageOriginalHeight": 551,
+                    "imageOriginalPixels": 1
+                  },
+                  "layoutMode": "p"
+                },
+                "lm": 65137554,
+                "children": []
+              },
+              {
+                "id": "ce94ba23-1a74-224c-82e4-645eb0170332",
+                "nm": "Ideas",
+                "ct": 65137548,
+                "pr": 12,
+                "prnt": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+                "metadata": {},
+                "lm": 65137572,
+                "children": [
+                  {
+                    "id": "0caeaef7-79cb-142d-82d0-f3c5658959e6",
+                    "nm": "Use with Arduino Nano to provide 3.3 V power and somehow interface with USB signals",
+                    "ct": 65137572,
+                    "pr": 100,
+                    "prnt": "ce94ba23-1a74-224c-82e4-645eb0170332",
+                    "metadata": {},
+                    "lm": 65137594,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "472acc88-804e-44ed-8952-c8e0c8c66293",
+                "nm": "<a href=\"https://chatgpt.com/c/67c7690c-eef8-8011-9e71-f442c581f20a\">ChatGPT Thread</a>",
+                "ct": 65138141,
+                "pr": 200,
+                "prnt": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+                "metadata": {},
+                "lm": 65138147,
+                "children": []
+              },
+              {
+                "id": "20f7900d-aaac-e971-6575-d0d9e26d8107",
+                "nm": "<a href=\"https://openlab.ece.illinois.edu/\">UIUC OpenLab</a>",
+                "ct": 65197833,
+                "pr": 300,
+                "prnt": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+                "metadata": {},
+                "lm": 65197847,
+                "children": []
+              },
+              {
+                "id": "acf78f03-9859-d4bc-0026-2cc3a0257cee",
+                "nm": "<a href=\"https://cucfablab.web.illinois.edu/programs-and-services/open-hours-appointments/\">UIUC FabLab</a>",
+                "ct": 65197837,
+                "pr": 400,
+                "prnt": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+                "metadata": {},
+                "lm": 65197852,
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "73218e9c-1bfc-9d05-6e37-d5e4e0cbce82",
+            "nm": "Keyboard",
+            "ct": 65369520,
+            "pr": 300,
+            "prnt": "7b87b375-cc45-783d-b206-d298989d6027",
+            "metadata": {},
+            "lm": 65369529,
+            "children": [
+              {
+                "id": "93c1727b-37b2-7972-9e9d-a02849863597",
+                "nm": "FFC",
+                "ct": 66437208,
+                "pr": 100,
+                "prnt": "73218e9c-1bfc-9d05-6e37-d5e4e0cbce82",
+                "metadata": {},
+                "lm": 66437231,
+                "children": []
+              },
+              {
+                "id": "4f0ec7fa-ed01-4e5b-b08d-e65b78b2b8b2",
+                "nm": "<a href=\"https://www.google.com/search?q=FFC+Breakout+Board&oq=FFC+Breakout+Board&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEHNDg1ajBqMagCALACAA&sourceid=chrome&ie=UTF-8\">FFC Breakout Board</a>",
+                "ct": 66437217,
+                "pr": 200,
+                "prnt": "73218e9c-1bfc-9d05-6e37-d5e4e0cbce82",
+                "metadata": {},
+                "lm": 66437233,
+                "children": []
+              },
+              {
+                "id": "da2d960e-9fc9-77ad-3a27-a351cfcd297b",
+                "nm": "<a href=\"https://oshwlab.com/amirgonnen/ztl_01\">https://oshwlab.com/amirgonnen/ztl_01</a>",
+                "ct": 66437233,
+                "pr": 300,
+                "prnt": "73218e9c-1bfc-9d05-6e37-d5e4e0cbce82",
+                "metadata": {},
+                "lm": 66437273,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "7d0a05f5-2ca9-4640-3ac1-6da221938373",
+        "nm": "Make ESP32 into a matter device",
+        "ct": 65137750,
+        "pr": 300,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 65137769,
+        "children": []
+      },
+      {
+        "id": "aebf888a-091f-a412-be82-683dd5165764",
+        "nm": "Integrate the speakers from the laptop into the Pi",
+        "ct": 65137796,
+        "pr": 600,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 66064293,
+        "children": []
+      },
+      {
+        "id": "9d22881b-3892-6b39-2cca-9775c1a55c06",
+        "nm": "Make Raspberry Pi into a matter hub",
+        "ct": 65137769,
+        "pr": 400,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 65137779,
+        "children": []
+      },
+      {
+        "id": "3d3d966e-d9f9-2c7a-f06a-505760237465",
+        "nm": "Learn Yocto Project and make a Linux Distro for Raspberry Pi",
+        "ct": 65137734,
+        "pr": 200,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 65138490,
+        "children": [
+          {
+            "id": "b86cf7e4-527c-27e6-fd78-7f413f477056",
+            "nm": "<a href=\"https://www.youtube.com/playlist?list=PLEBQazB0HUyTpoJoZecRK6PpDG31Y7RPB\">https://www.youtube.com/playlist?list=PLEBQazB0HUyTpoJoZecRK6PpDG31Y7RPB</a>",
+            "ct": 65138490,
+            "pr": 100,
+            "prnt": "3d3d966e-d9f9-2c7a-f06a-505760237465",
+            "metadata": {},
+            "lm": 65138499,
+            "children": []
+          },
+          {
+            "id": "bb98bfec-5402-e0f6-5276-4a7f21871e2a",
+            "nm": "Playlist",
+            "ct": 65138493,
+            "pr": 200,
+            "prnt": "3d3d966e-d9f9-2c7a-f06a-505760237465",
+            "metadata": {},
+            "lm": 65138538,
+            "children": [
+              {
+                "id": "419287e6-d169-fd15-8a44-dbba7e0be0b4",
+                "nm": "<a href=\"https://www.youtube.com/watch?v=yuE7my3KOpo&t=10s\">https://www.youtube.com/watch?v=yuE7my3KOpo&amp;t=10s</a>",
+                "ct": 65138545,
+                "pr": 200,
+                "prnt": "bb98bfec-5402-e0f6-5276-4a7f21871e2a",
+                "metadata": {},
+                "lm": 65138550,
+                "children": []
+              },
+              {
+                "id": "92ab6d5e-2438-a237-d2a0-0fc55ebc0283",
+                "nm": "<a href=\"https://www.youtube.com/watch?v=zNLYanJAQ3s&t=1s\">https://www.youtube.com/watch?v=zNLYanJAQ3s&amp;t=1s</a>",
+                "ct": 65138538,
+                "pr": 100,
+                "prnt": "bb98bfec-5402-e0f6-5276-4a7f21871e2a",
+                "metadata": {},
+                "lm": 65138539,
+                "children": []
+              },
+              {
+                "id": "80504bdc-971d-5e80-60d8-843afd5bfded",
+                "nm": "<a href=\"https://www.youtube.com/watch?v=R__wCdZ2VXY&t=4s\">https://www.youtube.com/watch?v=R__wCdZ2VXY&amp;t=4s</a>",
+                "ct": 65138551,
+                "pr": 300,
+                "prnt": "bb98bfec-5402-e0f6-5276-4a7f21871e2a",
+                "metadata": {},
+                "lm": 65139832,
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "e5f5ce4b-a7ff-f3fa-e347-efe0f76952d7",
+            "nm": "<a href=\"https://medium.com/@hungryspider/building-custom-linux-for-raspberry-pi-using-buildroot-f81efc7aa817\">Buildroot</a>",
+            "ct": 65369551,
+            "pr": 300,
+            "prnt": "3d3d966e-d9f9-2c7a-f06a-505760237465",
+            "metadata": {},
+            "lm": 65369562,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "8adf93a8-e38a-5756-9686-6edef9401c58",
+        "nm": "Make an AI system for Raspberry Pi",
+        "ct": 65137779,
+        "pr": 500,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 65139839,
+        "children": [
+          {
+            "id": "8d94755d-7696-9697-1eb8-3d62dcbf342f",
+            "nm": "Use DeepSeek or something for the main AI",
+            "ct": 65139849,
+            "pr": 200,
+            "prnt": "8adf93a8-e38a-5756-9686-6edef9401c58",
+            "metadata": {},
+            "lm": 65139880,
+            "children": []
+          },
+          {
+            "id": "efcca369-68c2-a09a-58c2-31d878080ede",
+            "nm": "Make a wake word model",
+            "ct": 65139839,
+            "pr": 100,
+            "prnt": "8adf93a8-e38a-5756-9686-6edef9401c58",
+            "metadata": {},
+            "lm": 65139849,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "d86a1c81-7ef8-18bf-aa97-fe933c406540",
+        "nm": "Design 3D printed housing case for Raspberry Pi for fan inclusion",
+        "ct": 65138189,
+        "pr": 700,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 66064295,
+        "children": []
+      },
+      {
+        "id": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+        "nm": "<a href=\"https://chatgpt.com/c/67d882d9-4064-8011-b9eb-2a60f7cfb0b8\">Goals for Raspberry Pi</a>",
+        "ct": 66241031,
+        "pr": 800,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 66250322,
+        "children": [
+          {
+            "id": "27a5c656-1d5a-8dba-3a7b-95c064f4ee2b",
+            "nm": "Run a Matter controller",
+            "ct": 66241061,
+            "pr": 300,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66241066,
+            "children": []
+          },
+          {
+            "id": "2faeb7e3-855f-8d84-32c1-36a4e6d9c41b",
+            "nm": "Consider getting an Orange Pi",
+            "ct": 66241130,
+            "pr": 700,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66244065,
+            "children": []
+          },
+          {
+            "id": "2d9d1725-bba6-e111-8a7e-bb093853bf01",
+            "nm": "Connect via SSH and later Twingate",
+            "ct": 66241036,
+            "pr": 100,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66241052,
+            "children": []
+          },
+          {
+            "id": "bc72d3c1-c8ca-bd6f-f620-60cc4ab97b74",
+            "nm": "Connect to an LCD screen and a 2TB hard drive for storage and running programs off of",
+            "ct": 66241066,
+            "pr": 400,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66241080,
+            "children": []
+          },
+          {
+            "id": "2215365e-1340-9f95-b3f9-600036b6f88e",
+            "nm": "Connect over the internet to act as a NAS to store data into the 2TB hard drive",
+            "ct": 66241080,
+            "pr": 500,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66241086,
+            "children": []
+          },
+          {
+            "id": "c3db2d97-c2fc-e78b-25bd-834f5cdbb244",
+            "nm": "Use as router",
+            "ct": 66241086,
+            "pr": 600,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66241094,
+            "children": []
+          },
+          {
+            "id": "aaee7edc-2753-cb0a-7800-406adc481e75",
+            "nm": "Run AI models, specifically Browser-use and a locally running llm as a voice assistant",
+            "ct": 66241052,
+            "pr": 200,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66241328,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "744b9249-b570-1630-6273-a3fe3e4ff644",
+    "nm": "<a href=\"https://github.com/practical-tutorials/project-based-learning?tab=readme-ov-file#cc\">Other Projects</a>",
+    "ct": 65140080,
+    "pr": 900,
+    "prnt": null,
+    "metadata": {},
+    "lm": 75786569,
+    "children": [
+      {
+        "id": "c52e22f3-6aff-58ef-586b-eb2c7ac10b57",
+        "nm": "<a href=\"https://arjunsreedharan.org/post/148675821737/memory-allocators-101-write-a-simple-memory\">Memory Allocator</a>",
+        "ct": 65140090,
+        "pr": 100,
+        "prnt": "744b9249-b570-1630-6273-a3fe3e4ff644",
+        "metadata": {},
+        "lm": 65140098,
+        "children": []
+      },
+      {
+        "id": "a669432e-779f-5061-dfde-3887fb574d31",
+        "nm": "<a href=\"https://www.craftinginterpreters.com/introduction.html\">Interpreter</a>",
+        "ct": 65140098,
+        "pr": 200,
+        "prnt": "744b9249-b570-1630-6273-a3fe3e4ff644",
+        "metadata": {},
+        "lm": 65140107,
+        "children": []
+      },
+      {
+        "id": "c66770fb-8297-0789-696e-a0694287ee59",
+        "nm": "<a href=\"https://github.com/tuhdo/os01/blob/master/Operating_Systems_From_0_to_1.pdf\">Operating System</a>",
+        "ct": 65140104,
+        "pr": 300,
+        "prnt": "744b9249-b570-1630-6273-a3fe3e4ff644",
+        "metadata": {},
+        "lm": 65140114,
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+    "nm": "To Do",
+    "ct": 75550229,
+    "pr": 100,
+    "prnt": null,
+    "metadata": {},
+    "lm": 75620929,
+    "children": [
+      {
+        "id": "e8113c40-83db-af69-1ca6-9c60a92ac909",
+        "nm": "Create Node",
+        "ct": 75698490,
+        "pr": 900,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75729354,
+        "children": []
+      },
+      {
+        "id": "46b1cc58-c1cd-f590-51fd-6e5dc5622994",
+        "nm": "OSCP",
+        "ct": 72950334,
+        "pr": 788,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75624976,
+        "children": []
+      },
+      {
+        "id": "ee8ee5ad-e39d-8624-4bb1-c57e966bf8e3",
+        "nm": "Start applying for internships",
+        "ct": 66793900,
+        "pr": 350,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75624976,
+        "children": []
+      },
+      {
+        "id": "662f675b-ad5e-ae71-41e9-e2d6a1e9552c",
+        "nm": "Fix backyard lights",
+        "ct": 72402891,
+        "pr": 375,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75624976,
+        "children": []
+      },
+      {
+        "id": "8c4ee4ac-2366-0a82-74b5-50f89f865ede",
+        "nm": "Golf course",
+        "ct": 72454312,
+        "pr": 388,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75624976,
+        "children": []
+      },
+      {
+        "id": "2ee9e3f0-5095-1f2f-e4ea-0ba530f7c00a",
+        "nm": "Telescope repair contact",
+        "ct": 72454214,
+        "pr": 575,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75624976,
+        "children": [
+          {
+            "id": "b95f9d22-e81d-24af-eef7-d637aeabcbb9",
+            "nm": "Celestron repair center",
+            "ct": 72454229,
+            "pr": 100,
+            "prnt": "2ee9e3f0-5095-1f2f-e4ea-0ba530f7c00a",
+            "metadata": {},
+            "lm": 75624976,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "473386b2-6d0e-e643-032b-71f28bd72d7e",
+        "nm": "Change addresses",
+        "ct": 72596278,
+        "pr": 775,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75624976,
+        "children": [
+          {
+            "id": "a7e16dca-ed1b-dda7-6443-79b3e3374e6c",
+            "nm": "PNC Bank",
+            "ct": 72596281,
+            "pr": 100,
+            "prnt": "473386b2-6d0e-e643-032b-71f28bd72d7e",
+            "metadata": {},
+            "lm": 75624976,
+            "children": []
+          },
+          {
+            "id": "fa5aad9b-f9b2-ab4d-bd18-4e3fb9cf227a",
+            "nm": "Amazon",
+            "ct": 72596289,
+            "pr": 200,
+            "prnt": "473386b2-6d0e-e643-032b-71f28bd72d7e",
+            "metadata": {},
+            "lm": 75624976,
+            "children": []
+          },
+          {
+            "id": "db7c1f1b-5e22-50ba-f3f2-50e8388b3900",
+            "nm": "Phone number",
+            "ct": 72596290,
+            "pr": 300,
+            "prnt": "473386b2-6d0e-e643-032b-71f28bd72d7e",
+            "metadata": {},
+            "lm": 75624976,
+            "children": []
+          },
+          {
+            "id": "29aa861e-c0ce-99fa-19a2-38ddbb056f6e",
+            "nm": "UIUC Health plan",
+            "ct": 72596295,
+            "pr": 400,
+            "prnt": "473386b2-6d0e-e643-032b-71f28bd72d7e",
+            "metadata": {},
+            "lm": 75624976,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "85d0184d-1b8c-9ac2-d24e-77aca021ad45",
+        "nm": "Work",
+        "ct": 75625676,
+        "pr": 250,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75625678,
+        "children": [
+          {
+            "id": "a08c6ec4-7c41-808a-8ec9-d7301947954b",
+            "nm": "Frida",
+            "ct": 75625679,
+            "pr": 100,
+            "prnt": "85d0184d-1b8c-9ac2-d24e-77aca021ad45",
+            "metadata": {},
+            "lm": 75625681,
+            "children": [
+              {
+                "id": "cb36342e-2fad-9d3a-2fde-b53f4f77537f",
+                "nm": "SSL pinning bypass",
+                "ct": 75625681,
+                "pr": 100,
+                "prnt": "a08c6ec4-7c41-808a-8ec9-d7301947954b",
+                "metadata": {},
+                "lm": 75625681,
+                "children": []
+              },
+              {
+                "id": "71706fc5-0878-5dd7-7850-6ae017dc775b",
+                "nm": "Root detection mobile app",
+                "ct": 75625681,
+                "pr": 200,
+                "prnt": "a08c6ec4-7c41-808a-8ec9-d7301947954b",
+                "metadata": {},
+                "lm": 75625681,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "7ba2c296-48e6-476e-8ac9-a4e53966b628",
+        "nm": "Optiver Interview",
+        "ct": 75555093,
+        "pr": 50,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {
+          "layoutMode": "bullets"
+        },
+        "lm": 75970389,
+        "children": [
+          {
+            "id": "72e8f97d-f587-81ab-8612-68dae8cc0e5c",
+            "nm": "Study for it",
+            "ct": 75623897,
+            "pr": 100,
+            "prnt": "7ba2c296-48e6-476e-8ac9-a4e53966b628",
+            "metadata": {},
+            "lm": 75623899,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "f6d80b6b-2bbb-c973-821c-802d06a26fe7",
+        "nm": "WebRTC Project",
+        "ct": 75554948,
+        "pr": 100,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75623972,
+        "children": [
+          {
+            "id": "90c87b37-3b8a-c1b0-4321-33d58f3acb08",
+            "nm": "Figure out issue with WebRTC",
+            "ct": 75624001,
+            "pr": 100,
+            "prnt": "f6d80b6b-2bbb-c973-821c-802d06a26fe7",
+            "metadata": {},
+            "lm": 75624007,
+            "children": []
+          },
+          {
+            "id": "b1d92783-bfd1-9123-ddc3-b3543af768ec",
+            "nm": "Look at forum and course",
+            "ct": 75624007,
+            "pr": 200,
+            "prnt": "f6d80b6b-2bbb-c973-821c-802d06a26fe7",
+            "metadata": {},
+            "lm": 75624012,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "a5122fad-f280-d3aa-5d2e-29d0b17566e0",
+        "nm": "Albert WorkFlowy Plugin",
+        "ct": 75623890,
+        "pr": 25,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75623963,
+        "children": [
+          {
+            "id": "d599dc6d-6af0-6664-325a-4662f6a840ee",
+            "nm": "WorkFlowy Authentication",
+            "ct": 75623927,
+            "pr": 100,
+            "prnt": "a5122fad-f280-d3aa-5d2e-29d0b17566e0",
+            "metadata": {},
+            "cp": 75623956,
+            "lm": 75623956,
+            "children": []
+          },
+          {
+            "id": "1d2e3cb0-ae8e-97d3-0c39-51263b649969",
+            "nm": "Create WorkFlowy Node",
+            "ct": 75623927,
+            "pr": 200,
+            "prnt": "a5122fad-f280-d3aa-5d2e-29d0b17566e0",
+            "metadata": {},
+            "cp": 75623958,
+            "lm": 75623958,
+            "children": []
+          },
+          {
+            "id": "d6337e11-b58f-0187-95b8-dc6fa01f9a1c",
+            "nm": "Delete WorkFlowy Node",
+            "ct": 75623927,
+            "pr": 500,
+            "prnt": "a5122fad-f280-d3aa-5d2e-29d0b17566e0",
+            "metadata": {},
+            "lm": 75623947,
+            "children": []
+          },
+          {
+            "id": "de25d51a-b169-d1cd-65b8-89fa55e3571b",
+            "nm": "Upgrade to Sign in with Google instead of App Password",
+            "ct": 75623927,
+            "pr": 700,
+            "prnt": "a5122fad-f280-d3aa-5d2e-29d0b17566e0",
+            "metadata": {},
+            "lm": 75623950,
+            "children": []
+          },
+          {
+            "id": "256b556d-f574-1b3c-d8a3-7173ffbbdfe1",
+            "nm": "Update WorkFlowy Node",
+            "ct": 75623927,
+            "pr": 400,
+            "prnt": "a5122fad-f280-d3aa-5d2e-29d0b17566e0",
+            "metadata": {},
+            "lm": 75623945,
+            "children": []
+          },
+          {
+            "id": "ceae61d0-a8a5-ba72-17c4-7a77077b0a44",
+            "nm": "Read WorkFlowy Nodes",
+            "ct": 75623927,
+            "pr": 300,
+            "prnt": "a5122fad-f280-d3aa-5d2e-29d0b17566e0",
+            "metadata": {},
+            "cp": 75623958,
+            "lm": 75623958,
+            "children": []
+          },
+          {
+            "id": "bb8cfecf-ebf2-23bc-105a-1a4ff7a0dbca",
+            "nm": "Complete WorkFlowy Node",
+            "ct": 75623927,
+            "pr": 600,
+            "prnt": "a5122fad-f280-d3aa-5d2e-29d0b17566e0",
+            "metadata": {},
+            "lm": 75623949,
+            "children": []
+          },
+          {
+            "id": "d7d5a3c2-b7a8-d47b-ac62-1bc0c6f3b0d6",
+            "nm": "Add caching",
+            "ct": 75624049,
+            "pr": 800,
+            "prnt": "a5122fad-f280-d3aa-5d2e-29d0b17566e0",
+            "metadata": {},
+            "lm": 75624052,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "1ea92ac4-bb50-26fb-32ce-f9afd0697928",
+        "nm": "Fetch Resume",
+        "ct": 75623972,
+        "pr": 200,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75623987,
+        "children": [
+          {
+            "id": "7e90f32f-a29b-22fb-b4d8-17313d071de5",
+            "nm": "Add feature to auto push to phone",
+            "ct": 75623989,
+            "pr": 100,
+            "prnt": "1ea92ac4-bb50-26fb-32ce-f9afd0697928",
+            "metadata": {},
+            "lm": 75623995,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "690b2db1-cec2-ba7a-59eb-25eca11e5302",
+        "nm": "Physics",
+        "ct": 75624013,
+        "pr": 300,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75624015,
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "d2074c2b-c302-536a-a30e-cc2f5b227e98",
+    "nm": "Classes",
+    "ct": 65138249,
+    "pr": 200,
+    "prnt": null,
+    "metadata": {},
+    "lm": 75885582,
+    "children": [
+      {
+        "id": "44b4186e-73c8-47b9-714b-1f41b49cbd41",
+        "nm": "<a href=\"https://illinois.zoom.us/my/gomesece110?pwd=EMNhJvI40APubD2lttWnihrgPZyUEz.1\">ECE 110</a>",
+        "ct": 65137276,
+        "pr": 200,
+        "prnt": "d2074c2b-c302-536a-a30e-cc2f5b227e98",
+        "metadata": {},
+        "lm": 65207440,
+        "children": [
+          {
+            "id": "1295d82e-269d-8861-8cd9-37a4daf47381",
+            "nm": "Submit Prelab",
+            "ct": 65137293,
+            "pr": 200,
+            "prnt": "44b4186e-73c8-47b9-714b-1f41b49cbd41",
+            "metadata": {},
+            "cp": 65819796,
+            "lm": 65819796,
+            "children": []
+          },
+          {
+            "id": "1d19cc8c-dd97-5f13-355d-b7ce83cb20ed",
+            "nm": "Check if can get extension on HW <time startYear=\"2025\" startMonth=\"3\" startDay=\"13\">Thu, Mar 13, 2025</time>",
+            "ct": 65137287,
+            "pr": 100,
+            "prnt": "44b4186e-73c8-47b9-714b-1f41b49cbd41",
+            "metadata": {},
+            "lm": 65971125,
+            "children": []
+          },
+          {
+            "id": "6f99a4bb-d222-fcb5-a29a-b8e7f3919f6f",
+            "nm": "Learn Thevenin and Norton Circuits",
+            "ct": 65971160,
+            "pr": 500,
+            "prnt": "44b4186e-73c8-47b9-714b-1f41b49cbd41",
+            "metadata": {},
+            "lm": 65971166,
+            "children": []
+          },
+          {
+            "id": "24695d08-76c8-c53d-55a9-c8cac8ecde67",
+            "nm": "Study for quiz <time startYear=\"2025\" startMonth=\"3\" startDay=\"31\">Mon, Mar 31, 2025</time>",
+            "ct": 65972040,
+            "pr": 600,
+            "prnt": "44b4186e-73c8-47b9-714b-1f41b49cbd41",
+            "metadata": {},
+            "lm": 65972066,
+            "children": []
+          },
+          {
+            "id": "cdec4d4b-f20f-17c7-dd9e-9773841d84e1",
+            "nm": "Post Lab Team Report + Submit pdf !!<time startYear=\"2025\" startMonth=\"3\" startDay=\"14\">Fri, Mar 14, 2025</time>",
+            "ct": 65222541,
+            "pr": 300,
+            "prnt": "44b4186e-73c8-47b9-714b-1f41b49cbd41",
+            "metadata": {},
+            "lm": 66169653,
+            "children": [
+              {
+                "id": "214676a7-8ee6-896b-a85f-2e4bc94b7d80",
+                "nm": "Try and crank out a ton of HWs <time startYear=\"2025\" startMonth=\"3\" startDay=\"15\">Sat, Mar 15, 2025</time>",
+                "ct": 65971132,
+                "pr": 100,
+                "prnt": "cdec4d4b-f20f-17c7-dd9e-9773841d84e1",
+                "metadata": {},
+                "lm": 66169653,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "edd2cdd6-12fb-efa9-e93d-41a3236a58ad",
+        "nm": "ECE 313",
+        "ct": 65143384,
+        "pr": 400,
+        "prnt": "d2074c2b-c302-536a-a30e-cc2f5b227e98",
+        "metadata": {},
+        "lm": 65820088,
+        "children": [
+          {
+            "id": "9ec3b0f7-b67a-8bf9-aa13-3f92df25dcfb",
+            "nm": "HW",
+            "ct": 65820087,
+            "pr": 100,
+            "prnt": "edd2cdd6-12fb-efa9-e93d-41a3236a58ad",
+            "metadata": {},
+            "cp": 65820089,
+            "lm": 65820089,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "3d48f075-227e-f264-f43d-6834cf576572",
+        "nm": "CS 225",
+        "ct": 65137204,
+        "pr": 300,
+        "prnt": "d2074c2b-c302-536a-a30e-cc2f5b227e98",
+        "metadata": {},
+        "lm": 65635841,
+        "children": [
+          {
+            "id": "2fcf18db-57bb-2845-0443-9421a356ade9",
+            "nm": "<a href=\"https://courses.grainger.illinois.edu/cs225/sp2025/labs/btree/\">Lab</a> <time startYear=\"2025\" startMonth=\"3\" startDay=\"23\">Sun, Mar 23, 2025</time>",
+            "ct": 65137265,
+            "pr": 300,
+            "prnt": "3d48f075-227e-f264-f43d-6834cf576572",
+            "metadata": {},
+            "lm": 65971988,
+            "children": []
+          },
+          {
+            "id": "a4a4cc43-c1f2-065d-bf83-6515065a5782",
+            "nm": "POTD",
+            "ct": 65137257,
+            "pr": 100,
+            "prnt": "3d48f075-227e-f264-f43d-6834cf576572",
+            "metadata": {},
+            "lm": 65635842,
+            "children": []
+          },
+          {
+            "id": "66790c4e-ecdc-b7c5-18cc-718814276b3c",
+            "nm": "<a href=\"https://courses.grainger.illinois.edu/cs225/sp2025/mps/traversals/\">MP</a> <time startYear=\"2025\" startMonth=\"3\" startDay=\"24\">Mon, Mar 24, 2025</time>",
+            "ct": 65137264,
+            "pr": 200,
+            "prnt": "3d48f075-227e-f264-f43d-6834cf576572",
+            "metadata": {},
+            "lm": 66499389,
+            "children": []
+          },
+          {
+            "id": "a0631ba1-d0fe-8c10-e9ea-72df2fa8a4a8",
+            "nm": "<a href=\"https://courses.grainger.illinois.edu/cs225/sp2025/exams/exam3/\">Exam 3</a> <time startYear=\"2025\" startMonth=\"3\" startDay=\"24\">Mon, Mar 24, 2025</time>",
+            "ct": 65972075,
+            "pr": 400,
+            "prnt": "3d48f075-227e-f264-f43d-6834cf576572",
+            "metadata": {},
+            "lm": 65972104,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "a2e5ae07-d075-de7d-093a-0b41d0f8bc57",
+        "nm": "Phys 211",
+        "ct": 65137296,
+        "pr": 100,
+        "prnt": "d2074c2b-c302-536a-a30e-cc2f5b227e98",
+        "metadata": {},
+        "lm": 65138255,
+        "children": [
+          {
+            "id": "7ae5bd9c-c53f-c0b1-b913-90735f607ec0",
+            "nm": "Lab <time startYear=\"2025\" startMonth=\"3\" startDay=\"7\">Fri, Mar 7, 2025</time>",
+            "ct": 65370839,
+            "pr": 200,
+            "prnt": "a2e5ae07-d075-de7d-093a-0b41d0f8bc57",
+            "metadata": {},
+            "cp": 66146408,
+            "lm": 66146408,
+            "children": []
+          },
+          {
+            "id": "720df9a7-a7ec-7581-4ab0-963be192ac19",
+            "nm": "Study for Exam <time startYear=\"2025\" startMonth=\"3\" startDay=\"25\">Tue, Mar 25, 2025</time>",
+            "ct": 65971169,
+            "pr": 300,
+            "prnt": "a2e5ae07-d075-de7d-093a-0b41d0f8bc57",
+            "metadata": {},
+            "lm": 65971197,
+            "children": []
+          },
+          {
+            "id": "2ffaa78e-2654-9d49-8fe1-3020bb946101",
+            "nm": "Do HW for 80% <time startYear=\"2025\" startMonth=\"3\" startDay=\"15\">Sat, Mar 15, 2025</time>",
+            "ct": 65971197,
+            "pr": 400,
+            "prnt": "a2e5ae07-d075-de7d-093a-0b41d0f8bc57",
+            "metadata": {},
+            "lm": 65971207,
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+]
