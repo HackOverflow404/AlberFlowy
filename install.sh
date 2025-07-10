@@ -58,6 +58,8 @@ sudo apt install -y \
   nlohmann-json3-dev \
   pkg-config
 
+cd api && npm i && cd ..
+
 if ! command -v albert &> /dev/null; then
   echo "[!] Albert is not installed."
   echo "    Please install Albert from: https://albertlauncher.github.io/docs/installing/"
