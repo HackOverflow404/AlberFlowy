@@ -11,8 +11,7 @@
  * - Add caching
  */
 
-import { WorkFlowyClient } from './api/workflowy.js';
-import fs from 'fs/promises';
+import { WorkFlowyClient } from './workflowy.js';
 
 (async () => {
   const client = new WorkFlowyClient();
