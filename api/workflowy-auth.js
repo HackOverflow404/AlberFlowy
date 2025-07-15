@@ -161,3 +161,9 @@ export async function updateWfConfig(sessionid) {
   fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
   console.log(`Session ID updated successfully in ${CONFIG_PATH}`);
 }
+
+// loginWorkFlowy().then(updateWfConfig).catch(err => {
+//     console.error("Login failed:", err);
+//     process.exit(1);
+//   }
+// );
