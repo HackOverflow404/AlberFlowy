@@ -18,6 +18,9 @@
 
 #include <nlohmann/json.hpp>
 #include <gumbo.h>
+#include <sys/stat.h>
+#include <pwd.h>
+#include <unistd.h>
 
 #include <QString>
 #include <QStringList>
@@ -27,6 +30,8 @@
 #include <QMetaObject>
 #include <QInputDialog>
 #include <QLineEdit>
+#include <QDir>
+#include <QSettings>
 
 using namespace albert;
 using namespace std;
