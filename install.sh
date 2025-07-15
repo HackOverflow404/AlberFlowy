@@ -58,7 +58,7 @@ sudo apt install -y \
   nlohmann-json3-dev \
   pkg-config
 
-cd api && npm i && cd ..
+cd api && sudo npm i && cd ..
 
 if ! command -v albert &> /dev/null; then
   echo "[!] Albert is not installed."
@@ -69,4 +69,4 @@ fi
 
 echo "[✓] All dependencies installed and files created."
 
-. build.sh
+./build.sh
