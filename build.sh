@@ -6,7 +6,7 @@ PLUGIN_NAME="AlberFlowy"
 
 BUILD_DIR="build"
 ASSET_DIR="assets"
-API_DIR="api/workflowy-cli.js"
+API_DIR="api/"
 
 DEST_DIR="/usr/lib/x86_64-linux-gnu/albert"
 DEST_DEPENDENCIES_DIR="${DEST_DIR}/${PLUGIN_NAME}"

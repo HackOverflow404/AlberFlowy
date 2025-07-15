@@ -2,24 +2,25 @@
   "name": "alberflowy",
   "version": "1.0.0",
   "description": "Workflowy CLI helper used by the Albert plug-in",
-  "author": "Medhansh Garg",
   "license": "ISC",
+  "author": "Medhansh Garg",
   "type": "module",
+  "main": "index.js",
   "bin": {
-    "workflowy": "./workflowy-cli.js"
-  },
-  "dependencies": {
-    "dotenv": "^17.1.0",
-    "imapflow": "^1.0.189",
-    "otplib": "^12.0.1",
-    "puppeteer": "^24.12.1"
-  },
-  "devDependencies": {
-    "pkg": "^5.8.1"
+    "workflowy": "workflowy-cli.js"
   },
   "scripts": {
     "build:albert": "pkg workflowy-cli.js --targets node18-linux-x64 --compress GZip --output build/workflowy",
     "prepublishOnly": "npm run build:albert",
     "test": "echo \"(no tests)\""
+  },
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "imapflow": "^1.0.191",
+    "otplib": "^12.0.1",
+    "puppeteer": "^24.13.0"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
   }
 }
