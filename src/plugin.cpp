@@ -135,7 +135,6 @@ vector<shared_ptr<Item>> Plugin::listNodes(QStringList route, const json &root_n
 
                 if (node.contains("cp")) {
                     name = applyStrikethrough(name);
-                    // name = QStringLiteral("<del>%1</del>").arg(name); // Tags don't work for some reason
                     completeLabel = QStringLiteral("Uncheck");
                 }
 
@@ -404,20 +403,150 @@ void Plugin::updateCachedTree() {
 
 
 string Plugin::findCLI() {
-    char buffer[256];
-    FILE* pipe = popen("which workflowy 2>/dev/null", "r");
-    if (!pipe) return "";
+    auto isExecutable = [](const string& path) {
+        QFileInfo fileInfo(QString::fromStdString(path));
+        return fileInfo.exists() && fileInfo.isExecutable();
+    };
+
+    auto getHomeDir = []() {
+        return QDir::homePath().toStdString();
+    };
+
+    string homeDir = getHomeDir();
+    if (homeDir.empty()) {
+        qWarning("Could not determine home directory");
+        return "";
+    }
+
+    vector<string> nodePaths;
     
-    if (fgets(buffer, sizeof(buffer), pipe)) {
-        string result = buffer;
-        if (!result.empty() && result.back() == '\n') {
-            result.pop_back();
+    string nvmDir = homeDir + "/.nvm";
+    if (QDir(QString::fromStdString(nvmDir)).exists()) {
+        string currentPath = nvmDir + "/current/bin";
+        if (QDir(QString::fromStdString(currentPath)).exists()) {
+            nodePaths.push_back(currentPath);
         }
-        pclose(pipe);
-        return result;
+        
+        QDir versionsDir(QString::fromStdString(nvmDir + "/versions/node"));
+        if (versionsDir.exists()) {
+            QStringList versions = versionsDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+            for (const QString& version : versions) {
+                string versionPath = nvmDir + "/versions/node/" + version.toStdString() + "/bin";
+                nodePaths.push_back(versionPath);
+            }
+        }
+    }
+
+    string nPrefix = homeDir + "/.local/share/n";
+    if (QDir(QString::fromStdString(nPrefix)).exists()) {
+        QDir nDir(QString::fromStdString(nPrefix));
+        QStringList versions = nDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+        for (const QString& version : versions) {
+            string versionPath = nPrefix + "/" + version.toStdString() + "/bin";
+            nodePaths.push_back(versionPath);
+        }
+    }
+
+    string voltaHome = homeDir + "/.volta";
+    if (QDir(QString::fromStdString(voltaHome)).exists()) {
+        nodePaths.push_back(voltaHome + "/bin");
+    }
+
+    string fnmDir = homeDir + "/.local/share/fnm";
+    if (QDir(QString::fromStdString(fnmDir)).exists()) {
+        QDir fnmNodeDir(QString::fromStdString(fnmDir + "/node-versions"));
+        if (fnmNodeDir.exists()) {
+            QStringList versions = fnmNodeDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+            for (const QString& version : versions) {
+                string versionPath = fnmDir + "/node-versions/" + version.toStdString() + "/installation/bin";
+                nodePaths.push_back(versionPath);
+            }
+        }
+    }
+
+    nodePaths.push_back("/usr/local/bin");
+    nodePaths.push_back("/usr/bin");
+    nodePaths.push_back("/bin");
+    nodePaths.push_back("/opt/node/bin");
+
+    for (const string& path : nodePaths) {
+        string workflowyPath = path + "/workflowy";
+        if (isExecutable(workflowyPath)) {
+            qDebug() << "Found workflowy at:" << QString::fromStdString(workflowyPath);
+            return workflowyPath;
+        }
+    }
+
+    vector<string> npmCommands = {
+        "npm root -g",
+        "npm config get prefix"
+    };
+
+    for (const string& cmd : npmCommands) {
+        char buffer[512];
+        FILE* pipe = popen(cmd.c_str(), "r");
+        if (pipe) {
+            if (fgets(buffer, sizeof(buffer), pipe)) {
+                string result = buffer;
+                if (!result.empty() && result.back() == '\n') {
+                    result.pop_back();
+                }
+                
+                // Try both the npm root and npm prefix/bin
+                vector<string> testPaths = {
+                    result + "/workflowy/bin/workflowy",
+                    result + "/bin/workflowy"
+                };
+                
+                for (const string& testPath : testPaths) {
+                    if (isExecutable(testPath)) {
+                        qDebug() << "Found workflowy via npm at:" << QString::fromStdString(testPath);
+                        pclose(pipe);
+                        return testPath;
+                    }
+                }
+            }
+            pclose(pipe);
+        }
+    }
+
+    string expandedPath = "/usr/local/bin:/usr/bin:/bin";
+    
+    for (const string& path : nodePaths) {
+        expandedPath += ":" + path;
     }
     
-    pclose(pipe);
+    string command = "PATH=\"" + expandedPath + "\" which workflowy 2>/dev/null";
+    char buffer[256];
+    FILE* pipe = popen(command.c_str(), "r");
+    if (pipe) {
+        if (fgets(buffer, sizeof(buffer), pipe)) {
+            string result = buffer;
+            if (!result.empty() && result.back() == '\n') {
+                result.pop_back();
+            }
+            pclose(pipe);
+                if (isExecutable(result)) {
+                    pclose(pipe);
+                    qDebug() << "Found workflowy via which at:" << QString::fromStdString(result);
+                    return result;
+                }
+        }
+        pclose(pipe);
+    }
+
+    for (const string& path : nodePaths) {
+        string nodePath = path + "/node";
+        string npxPath = path + "/npx";
+        
+        if (isExecutable(nodePath) && isExecutable(npxPath)) {
+            qDebug() << "Found Node.js at:" << QString::fromStdString(nodePath);
+            qDebug() << "Will use npx to run workflowy";
+            return npxPath;
+        }
+    }
+
+    qWarning("Could not find workflowy CLI tool anywhere");
     return "";
 }
 
@@ -459,8 +588,55 @@ QString Plugin::applyStrikethrough(const QString &text) {
 }
 
 void Plugin::runWorkflowyCommand(const QStringList &args, function<void(bool, const json &)> callback) {
-    QProcess *process = new QProcess(this);  // Let Qt manage deletion
-    QStringList fullArgs = QStringList{CLIPath} + args;
+    QProcess *process = new QProcess(this);
+    
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    QString homeDir = QDir::homePath();
+    
+    QStringList additionalPaths = {
+        homeDir + QStringLiteral("/.nvm/current/bin"),
+        homeDir + QStringLiteral("/.volta/bin"),
+        homeDir + QStringLiteral("/.local/share/n/versions/node/latest/bin"),
+        QStringLiteral("/usr/local/bin"),
+        QStringLiteral("/opt/node/bin")
+    };
+    
+    QDir nvmVersionsDir(homeDir + QStringLiteral("/.nvm/versions/node"));
+    if (nvmVersionsDir.exists()) {
+        QStringList versions = nvmVersionsDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+        for (const QString& version : versions) {
+            additionalPaths.append(homeDir + QStringLiteral("/.nvm/versions/node/") + version + QStringLiteral("/bin"));
+        }
+    }
+    
+    QString currentPath = env.value(QStringLiteral("PATH"), QStringLiteral(""));
+    for (const QString& path : additionalPaths) {
+        if (!currentPath.contains(path)) {
+            currentPath = path + QStringLiteral(":") + currentPath;
+        }
+    }
+    env.insert(QStringLiteral("PATH"), currentPath);
+    
+    process->setProcessEnvironment(env);
+    
+    QString executable;
+    QStringList processArgs;
+    
+    if (CLIPath.endsWith(QStringLiteral("/npx"))) {
+        executable = CLIPath;
+        processArgs = QStringList{QStringLiteral("workflowy")} + args;
+    } else if (CLIPath.endsWith(QStringLiteral("/workflowy"))) {
+        executable = QStringLiteral("node");
+        processArgs = QStringList{CLIPath} + args;
+    } else if (!CLIPath.isEmpty()) {
+        executable = QStringLiteral("node");
+        processArgs = QStringList{CLIPath} + args;
+    } else {
+        qWarning("No workflowy CLI path found, cannot execute command");
+        callback(false, json::object({{"error", "No CLI path found"}}));
+        process->deleteLater();
+        return;
+    }
 
     QObject::connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, [=](int exitCode, QProcess::ExitStatus exitStatus) {
         (void) exitCode;
@@ -496,5 +672,6 @@ void Plugin::runWorkflowyCommand(const QStringList &args, function<void(bool, co
         isJSON ? callback(success, jsonOutput) : callback(success, output);
     });
 
-    process->start(QStringLiteral("node"), fullArgs);
+    qDebug() << "Running command:" << executable << processArgs.join(QStringLiteral(" "));
+    process->start(executable, processArgs);
 }
