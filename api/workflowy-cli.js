@@ -46,9 +46,9 @@ async function main() {
     try {
       const sessionID = await loginWorkFlowy();
       await updateWfConfig(sessionID);
-      console.log('✅ Authentication successful.');
+      console.log('Authentication successful.');
     } catch (err) {
-      console.error('❌ Login failed:', err);
+      console.error('Login failed:', err);
       process.exit(1);
     }
   }
@@ -101,10 +101,9 @@ async function main() {
       case 'auth': {
         try {
           const sessionID = await loginWorkFlowy();
-          await updateWfConfig(sessionID);
-          console.log('✅ Authentication successful.');
+          console.log('Authentication successful.');
         } catch (err) {
-          console.error("❌ Login failed:", err);
+          console.error("Login failed:", err);
           process.exit(1);
         }
         break;

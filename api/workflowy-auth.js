@@ -1,43 +1,95 @@
+import http from 'http';
+import { URL } from 'url';
 import { authenticator } from "otplib";
 import { ImapFlow } from "imapflow";
 import puppeteer from "puppeteer";
 import dotenv from "dotenv";
+import open from 'open';
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
+import { google } from 'googleapis'; 
 
-// Get the directory where this script is located
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Configure dotenv to look for .env in the script's directory
 dotenv.config({ path: join(__dirname, '.env'), quiet: true });
 
 const login_url = "https://workflowy.com/login/";
-// Use absolute path for config file
 const CONFIG_PATH = join(__dirname, ".wfconfig.json");
-
-const client = new ImapFlow({
-  host: "imap.gmail.com",
-  port: 993,
-  secure: true,
-  auth: {
-    user: process.env.CLIENT_EMAIL,
-    pass: process.env.GMAIL_APP_PASSWORD
-  },
-  logger: {
-    debug: () => {},
-    info: () => {},
-    warn: () => {},
-    error: () => {}
-  },
-});
 
 async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function fetchLoginCode() {
+async function initClient() {
+  const PORT = 3000;
+  const redirectUri = `http://localhost:${PORT}/oauth2callback`;
+
+  const oAuth2Client = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    redirectUri
+  );
+
+  // 1) load existing config
+  const config = loadConfig();
+
+  // 2) if no refresh_token, run the OAuth flow once
+  if (!config.refresh_token) {
+    const authUrl = oAuth2Client.generateAuthUrl({
+      access_type: 'offline',
+      prompt: 'consent',
+      scope: ['https://mail.google.com/']
+    });
+
+    const codePromise = new Promise((resolve, reject) => {
+      // start local server to receive the OAuth callback
+      const server = http.createServer((req, res) => {
+        if (req.url.startsWith('/oauth2callback')) {
+          const qs = new URL(req.url, redirectUri).searchParams;
+          const code = qs.get('code');
+          res.writeHead(200, {'Content-Type':'text/html'});
+          res.end('<h1>Auth successful!</h1>You may now close this tab.');
+          server.close();
+          return resolve(code);
+        }
+      }).listen(PORT, async () => {
+        // open user’s browser once the server is listening
+        console.log('Opening the following link in your browser to authorize…\n', authUrl, "\n");
+        await open(authUrl);
+      });
+    });
+
+    const code = await codePromise;
+    if (!code) throw new Error('No code received in callback.');
+
+    const { tokens } = await oAuth2Client.getToken(code);
+    if (!tokens.refresh_token) throw new Error('No refresh_token returned.');
+
+    config.refresh_token = tokens.refresh_token;
+    saveConfig(config);
+    console.log('Stored refresh token in', CONFIG_PATH);
+  }
+
+  // 3) set up client with the stored refresh token
+  oAuth2Client.setCredentials({ refresh_token: config.refresh_token });
+  const { token: accessToken } = await oAuth2Client.getAccessToken();
+
+  // 4) return your IMAP client
+  return new ImapFlow({
+    host: 'imap.gmail.com',
+    port: 993,
+    secure: true,
+    auth: {
+      user: process.env.CLIENT_EMAIL,
+      accessToken,
+    },
+    logger: { debug:()=>{}, info:()=>{}, warn:()=>{}, error:()=>{} }
+  });
+}
+
+async function fetchLoginCode(client) {
   console.log("Waiting 5 seconds before checking email...");
   await sleep(5000);
   
@@ -92,6 +144,7 @@ async function fetchLoginCode() {
 }
 
 export async function loginWorkFlowy() {
+  const client = await initClient();
   const email = process.env.CLIENT_EMAIL;
   
   // Add validation to ensure email is loaded
@@ -111,7 +164,7 @@ export async function loginWorkFlowy() {
   await page.click("button[type='submit']");
   await page.waitForSelector('input[name="code"]', { visible: true });
   console.log("Login code request sent...");
-  const loginCode = await fetchLoginCode();
+  const loginCode = await fetchLoginCode(client);
   await page.type('input[name="code"]', loginCode, { delay: 100 });
   await page.click("button[type='submit']");
   let mfaAppeared = false;
@@ -124,20 +177,40 @@ export async function loginWorkFlowy() {
   } catch {
     console.log("No MFA step detected — continuing.");
   }
+  
   if (mfaAppeared) {
-    const mfaCode = authenticator.generate(process.env.WORKFLOWY_TOTP_SECRET);
-    console.log("MFA code generated:", mfaCode);
-    await sleep(1000);
-    await page.focus('input[name="code"]');
-    await page.$eval('input[name="code"]', el => el.value = '');
-    await page.type('input[name="code"]', mfaCode, { delay: 100 });
-    await Promise.all([
-      page.click("input[type='submit']"),
-      page.waitForFunction(
-        () => location.origin === "https://workflowy.com" && location.pathname === "/",
-        { timeout: 15_000 }
-      )
-    ]);
+    let attempts = 0;
+    while (true) {
+      const mfaCode = authenticator.generate(process.env.WORKFLOWY_TOTP_SECRET);
+      console.log(`Attempt ${attempts+1}: trying MFA code ${mfaCode}`);
+
+      // Clear & type the new code
+      await page.$eval('input[name="code"]', el => el.value = '');
+      const codeStr = String(mfaCode);
+      await page.type('input[name="code"]', codeStr, { delay: 100 });
+      await page.click("input[type='submit']");
+
+      // Give the UI a moment to either show an error or navigate
+      await sleep(1000);
+
+      // Check for the specific error text in any <li>
+      const wrong = await page.evaluate(() => {
+        return Array.from(document.querySelectorAll('li'))
+          .some(el => el.textContent.includes('Wrong code.'));
+      });
+
+      if (wrong) {
+        console.log("Wrong code detected, retrying...\n");
+        attempts++;
+        if (attempts >= 5) {
+          throw new Error("Too many wrong‐code attempts; aborting.");
+        }
+        continue;   // back to top of the loop
+      }
+
+      // No “Wrong code.” message => assume success
+      break;
+    }
   }
   
   const cookies = await context.cookies("https://workflowy.com");
@@ -145,20 +218,31 @@ export async function loginWorkFlowy() {
   console.log(`Found sessionid: ${sessionid}`);
   await browser.close();
   if (!sessionid) throw new Error("Failed to retrieve sessionid.");
-  return sessionid;
+  
+  await updateWfConfig(sessionid);
+}
+
+function loadConfig() {
+  if (fs.existsSync(CONFIG_PATH)) {
+    try {
+      return JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"));
+    } catch {}
+  }
+  return {};
+}
+
+function saveConfig(config) {
+  fs.writeFileSync(
+    CONFIG_PATH,
+    JSON.stringify(config, null, 2),
+    { mode: 0o600 }
+  );
 }
 
 export async function updateWfConfig(sessionid) {
-  let config = {};
-  try {
-    if (fs.existsSync(CONFIG_PATH)) {
-      config = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"));
-    }
-  } catch (err) {
-    console.error("Error reading existing config:", err);
-  }
+  const config = loadConfig();
   config.sessionid = sessionid;
-  fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+  saveConfig(config);
   console.log(`Session ID updated successfully in ${CONFIG_PATH}`);
 }
 
