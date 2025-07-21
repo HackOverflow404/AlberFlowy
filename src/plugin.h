@@ -48,6 +48,12 @@ class Plugin : public util::ExtensionPlugin, public TriggerQueryHandler {
 
     private:
         inline static const QStringList IconUrls = {QStringLiteral("/usr/lib/x86_64-linux-gnu/albert/AlberFlowy/icon.png")};
+        enum class NodeAction {
+            Create,
+            Edit,
+            Remove,
+            Complete
+        };
         
         vector<shared_ptr<Item>> listNodes(QStringList route, const json &root_nodes);
         
@@ -57,16 +63,18 @@ class Plugin : public util::ExtensionPlugin, public TriggerQueryHandler {
         void toggleCompleteNode(const json &node, const QStringList route);
 
         json findNode(const json &nodes, const QStringList &route);
+        void findPath(const json &nodes, const json &node);
         json getChildNodes(const json &nodes, const QStringList &route);
 
         QTimer *refreshTimer;
         json cachedTree;
         std::chrono::steady_clock::time_point lastFetched;
-        void updateCachedTree();
+        void refreshCachedTree();
+        void updateCachedTree(NodeAction action, const json &NodeInfo, function<void(bool)> callback);
         
         QString CLIPath;
         string findCLI();
         string html_to_text(const string& in);
         QString applyStrikethrough(const QString &text);
-        void runWorkflowyCommand(const QStringList &args, std::function<void(bool success, const json &result)> callback);
+        void runWorkflowyCommand(const QStringList &args, function<void(bool success, const json &result)> callback);
 };
