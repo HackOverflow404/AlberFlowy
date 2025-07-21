@@ -12,18 +12,24 @@
 
 #include "plugin.h"
 
+// Constructor
 Plugin::Plugin() {
+    // Initialize plugin and timers
     setFuzzyMatching(false);
     refreshTimer = new QTimer(this);
-    connect(refreshTimer, &QTimer::timeout, this, &Plugin::updateCachedTree);
+    connect(refreshTimer, &QTimer::timeout, this, &Plugin::refreshCachedTree);
     refreshTimer->start(10000);
 
+    // Initialize the CLI interface path
     CLIPath = QString::fromStdString(findCLI());
 
-    updateCachedTree();
+    // Get the tree initially and store in cache
+    refreshCachedTree();
 }
 
+// Query handler logic
 void Plugin::handleTriggerQuery(Query &query) {
+    // If the tree is null, wait for it to refresh
     if (cachedTree.is_null()) {
         qWarning("Workflowy cache is empty, cannot handle query.");
         auto item = make_shared<StandardItem>(
@@ -37,6 +43,7 @@ void Plugin::handleTriggerQuery(Query &query) {
         return;
     }
 
+    // If the query is auth, initialize the auth process
     if (query == QStringLiteral("auth")) {
         qWarning("Press enter to reauthenticate");
         auto item = make_shared<StandardItem>(
@@ -52,10 +59,11 @@ void Plugin::handleTriggerQuery(Query &query) {
                         runWorkflowyCommand({QStringLiteral("auth")}, [this](bool success, const string &output) {
                             if (!success) {
                                 qWarning() << "CLI failed to execute.";
-                                updateCachedTree();
+                                refreshCachedTree();
                                 return;
                             }
                             
+                            // Debug purposes
                             qDebug() << "reauth output:\n" << QString::fromStdString(output);
                             
                             const string prefix = "Found sessionid: ";
@@ -89,45 +97,53 @@ void Plugin::handleTriggerQuery(Query &query) {
         return;
     }
 
+    // List nodes in Albert Items
     QStringList parts = query.string().split(QLatin1Char('>'), Qt::SkipEmptyParts);
     query.add(listNodes(parts, cachedTree));
 }
 
-
+// List the nodes as Items
 vector<shared_ptr<Item>> Plugin::listNodes(QStringList route, const json &root_nodes) {
     vector<shared_ptr<Item>> items;
 
+    // Get child nodes or display root based on the route
     json current_nodes = route.isEmpty() ? root_nodes : getChildNodes(root_nodes, route);
+    // Lambda function to create QString representation of route
     auto makePath = [] (const QStringList &segments) {
-        const QString joined = segments.join(u'>');
-        return joined;
+        return segments.join(u'>');
     };
     
+    // Check if nodes exist
     if (!current_nodes.is_null()) {
+        // If it is an array of nodes
         if (current_nodes.is_array()) {
+            // Stable sorts the nodes based on priority (Decided by WorkFlowy) (Complete nodes sync to the bottom)
             stable_sort(current_nodes.begin(), current_nodes.end(), [](const json &a, const json &b) {
                 const bool a_cp = a.contains("cp");
                 const bool b_cp = b.contains("cp");
 
-                if (a_cp && !b_cp) {
+                if (a_cp && !b_cp) { // If a is checked and b is unchecked, b comes before a
                     return false;
                 }
 
-                if (!a_cp && b_cp) {
+                if (!a_cp && b_cp) { // If a is unchecked and b is checked, a comes before b
                     return true;
                 }
 
-                if (a_cp && b_cp) {
+                if (a_cp && b_cp) { // If a is checked and b is checked, preserve order
                     return false;
                 }
 
+                // Sort by priority if both contain priority attributes
                 if (a.contains("pr") && b.contains("pr") && a["pr"].is_number() && b["pr"].is_number()) {
                     return a["pr"].get<int>() < b["pr"].get<int>();
                 }
 
+                // Else preserve order
                 return false;
             });
 
+            // Append the items to the list
             for (auto &node : current_nodes) {
                 const string plain = html_to_text(node["nm"].get<string>());
                 QString name = QString::fromStdString(plain);
@@ -169,7 +185,8 @@ vector<shared_ptr<Item>> Plugin::listNodes(QStringList route, const json &root_n
 
                 items.push_back(item);
             }
-        } else if (current_nodes.is_object() && html_to_text(current_nodes["err"].get<string>()) == "Not Found") {
+        } else if (current_nodes.is_object() && html_to_text(current_nodes["err"].get<string>()) == "Not Found") { // If the node doesn't exist
+            // Create node option
             auto path = makePath(route);
 
             auto item = make_shared<StandardItem>(
@@ -194,25 +211,33 @@ vector<shared_ptr<Item>> Plugin::listNodes(QStringList route, const json &root_n
     return items;
 }
 
-
+// Create node handler
 void Plugin::createNode(QStringList route, const json &nodes) {
     if (route.isEmpty()) {
         qWarning("Route is empty. Cannot create node.");
         return;
     }
 
-    QString name = route.takeLast();
-    json parentNode = findNode(nodes, route);
+    QString name = route.takeLast(); // Retrieve new node name
+    json parentNode = findNode(nodes, route); // get the parent node object from the json nodes
 
-    QString parentID = (parentNode.is_object() && parentNode.contains("id") && !parentNode["id"].is_null()) ? QString::fromStdString(parentNode["id"].get<string>()) : QStringLiteral("None");
+    QString parentID = (parentNode.is_object() && parentNode.contains("id") && !parentNode["id"].is_null()) ? QString::fromStdString(parentNode["id"].get<string>()) : QStringLiteral("None"); // Get the parent ID if the parent exists, otherwise place it at root
 
     qDebug() << "Create:" << name << " at route:" << route.join(u'>') << " with parentID:" << parentID;
+    
+    json tempNode = json::object(
+        {
+            {"nm", name.toStdString()},
+            {"parentID", parentID.toStdString()},
+        }
+    );
+    updateCachedTree(NodeAction::Create, tempNode, [](bool success){});
 
     runWorkflowyCommand({QStringLiteral("createNodeCustom"), name, parentID},
         [this](const bool success, const json &output) {
             if (!success) {
                 qWarning() << "CLI failed to execute.";
-                updateCachedTree();
+                refreshCachedTree();
                 return;
             }
 
@@ -220,14 +245,14 @@ void Plugin::createNode(QStringList route, const json &nodes) {
 
             if (!output.contains("results") || !output["results"].is_array() || output["results"].empty()) {
                 qWarning() << "Missing or malformed 'results' in CLI output.";
-                updateCachedTree();
+                refreshCachedTree();
                 return;
             }
 
             const json &result = output["results"][0];
             if (!result.contains("server_run_operation_transaction_json")) {
                 qWarning() << "Missing 'server_run_operation_transaction_json' in result.";
-                updateCachedTree();
+                refreshCachedTree();
                 return;
             }
 
@@ -244,7 +269,7 @@ void Plugin::createNode(QStringList route, const json &nodes) {
                 qWarning() << "Error parsing creation result:" << e.what();
             }
 
-            updateCachedTree();
+            refreshCachedTree();
         }
     );
 }
@@ -260,6 +285,14 @@ void Plugin::editNode(const json &node, const QStringList route) {
     }
 
     qDebug() << "Edit: " << QString::fromStdString(node["nm"].get<string>()) << " at "  << route.join(u'>') << " to " << newName;
+
+    json tempNode = json::object(
+        {
+            {"id", node["id"].get<string>()},
+            {"nm", newName.toStdString()}
+        }
+    );
+    updateCachedTree(NodeAction::Edit, tempNode, [](bool success){});
     
     runWorkflowyCommand({QStringLiteral("editNode"), newName, QString::fromStdString(node["id"].get<string>())},
         [this](bool success, const json &output) {
@@ -269,7 +302,7 @@ void Plugin::editNode(const json &node, const QStringList route) {
                 qWarning() << "CLI returned unexpected response or error:" << QString::fromStdString(output.dump(2));
             }
 
-            updateCachedTree();
+            refreshCachedTree();
         }
     );
 }
@@ -277,11 +310,13 @@ void Plugin::editNode(const json &node, const QStringList route) {
 void Plugin::removeNode(const json &node, const QStringList route) {
     qDebug() << "Remove: " << QString::fromStdString(node["nm"].get<string>()) << " at "  << route.join(u'>');
 
+    updateCachedTree(NodeAction::Remove, node, [](bool success){});
+
     runWorkflowyCommand({QStringLiteral("deleteNode"), QString::fromStdString(node["id"].get<string>())},
         [this](bool success, const json &output) {
             if (!success) {
                 qWarning() << "CLI failed to execute.";
-                updateCachedTree();
+                refreshCachedTree();
                 return;
             }
 
@@ -289,7 +324,7 @@ void Plugin::removeNode(const json &node, const QStringList route) {
 
             if (!output.contains("server_run_operation_transaction_json")) {
                 qWarning() << "Missing 'server_run_operation_transaction_json' in output.";
-                updateCachedTree();
+                refreshCachedTree();
                 return;
             }
 
@@ -302,7 +337,7 @@ void Plugin::removeNode(const json &node, const QStringList route) {
                 qWarning() << "Error parsing deletion result:" << e.what();
             }
 
-            updateCachedTree();
+            refreshCachedTree();
         }
     );
 }
@@ -312,11 +347,13 @@ void Plugin::toggleCompleteNode(const json &node, const QStringList route) {
 
     QString command = node.contains("cp") ? QStringLiteral("uncompleteNode") : QStringLiteral("completeNode");
 
+    updateCachedTree(NodeAction::Complete, node, [](bool success){});
+
     runWorkflowyCommand({command, QString::fromStdString(node["id"].get<string>())},
         [this](bool success, const json &output) {
             if (!success) {
                 qWarning() << "CLI failed to execute.";
-                updateCachedTree();
+                refreshCachedTree();
                 return;
             }
 
@@ -324,7 +361,7 @@ void Plugin::toggleCompleteNode(const json &node, const QStringList route) {
 
             if (!output.contains("server_run_operation_transaction_json")) {
                 qWarning() << "Missing 'server_run_operation_transaction_json' in output.";
-                updateCachedTree();
+                refreshCachedTree();
                 return;
             }
 
@@ -337,11 +374,10 @@ void Plugin::toggleCompleteNode(const json &node, const QStringList route) {
                 qWarning() << "Error parsing deletion result:" << e.what();
             }
 
-            updateCachedTree();
+            refreshCachedTree();
         }
     );
 }
-
 
 json Plugin::findNode(const json &nodes, const QStringList &route) {
     if (route.isEmpty()) {
@@ -368,6 +404,10 @@ json Plugin::findNode(const json &nodes, const QStringList &route) {
     return json::object({{"err", "Not Found"}});
 }
 
+void Plugin::findPath(const json &nodes, const json &node) {
+    
+}
+
 json Plugin::getChildNodes(const json &nodes, const QStringList &route) {
     if (route.isEmpty()) {
         return nodes;
@@ -387,7 +427,7 @@ json Plugin::getChildNodes(const json &nodes, const QStringList &route) {
 }
 
 
-void Plugin::updateCachedTree() {
+void Plugin::refreshCachedTree() {
     runWorkflowyCommand({QStringLiteral("getTree")},
         [this](bool success, const json &result) {
             if (success) {
@@ -492,7 +532,6 @@ string Plugin::findCLI() {
                     result.pop_back();
                 }
                 
-                // Try both the npm root and npm prefix/bin
                 vector<string> testPaths = {
                     result + "/workflowy/bin/workflowy",
                     result + "/bin/workflowy"
@@ -674,4 +713,128 @@ void Plugin::runWorkflowyCommand(const QStringList &args, function<void(bool, co
 
     qDebug() << "Running command:" << executable << processArgs.join(QStringLiteral(" "));
     process->start(executable, processArgs);
+}
+
+void Plugin::updateCachedTree(NodeAction action, const json &NodeInfo, function<void(bool)> callback) {
+    // Helper to find a node by ID and return a pointer to it
+    function<json*(json&, const string&)> findNodeById = [&](json &nodes, const string &id) -> json* {
+        if (!nodes.is_array()) return nullptr;
+        for (auto &node : nodes) {
+            if (node.contains("id") && node["id"].get<string>() == id) {
+                return &node;
+            }
+            if (node.contains("children")) {
+                if (auto ptr = findNodeById(node["children"], id)) {
+                    return ptr;
+                }
+            }
+        }
+        return nullptr;
+    };
+
+    switch (action) {
+        case NodeAction::Create: {
+            // NodeInfo must include "nm" and optional "parentId"
+            string name     = NodeInfo.value("nm", "");
+            string parentId = NodeInfo.value("parentID", "");
+            json *targetArr = &cachedTree;
+
+            if (parentId != "None") {
+                if (auto parentNode = findNodeById(cachedTree, parentId)) {
+                    if (!parentNode->contains("children") || !(*parentNode)["children"].is_array()) {
+                        (*parentNode)["children"] = json::array();
+                    }
+                    targetArr = &(*parentNode)["children"];
+                }
+            }
+
+            // Create temporary placeholder
+            string tempId = "temp-" + to_string(
+                chrono::steady_clock::now().time_since_epoch().count()
+            );
+            json newNode;
+            newNode["nm"] = name;
+            newNode["id"] = tempId;
+            newNode["children"] = json::array();
+            newNode["pr"] = 0;
+            targetArr->push_back(newNode);
+
+            cout << "Create node in cache named " << NodeInfo["nm"].get<string>() << " with status " << true << endl;
+            
+            callback(true);
+            break;
+        }
+        case NodeAction::Remove: {
+            // NodeInfo includes full "id"
+            string targetId = NodeInfo.value("id", "");
+            function<bool(json&)> removeRec = [&](json &nodes) {
+                if (!nodes.is_array()) return false;
+                for (auto it = nodes.begin(); it != nodes.end(); ++it) {
+                    if ((*it).contains("id") && (*it)["id"].get<string>() == targetId) {
+                        nodes.erase(it);
+                        return true;
+                    }
+                }
+                for (auto &node : nodes) {
+                    if (node.contains("children") && removeRec(node["children"])) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+            bool status = removeRec(cachedTree);
+            cout << "Remote node in cache named " << NodeInfo["nm"].get<string>() << " with status " << status << endl;
+            callback(status);
+            break;
+        }
+        case NodeAction::Complete: {
+            // NodeInfo includes full "id"
+            string targetId = NodeInfo.value("id", "");
+            function<bool(json&)> toggleRec = [&](json &nodes) {
+                if (!nodes.is_array()) return false;
+                for (auto &node : nodes) {
+                    if (node.contains("id") && node["id"].get<string>() == targetId) {
+                        if (node.contains("cp")) node.erase("cp");
+                        else node["cp"] = true;
+                        return true;
+                    }
+                    if (node.contains("children") && toggleRec(node["children"])) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+            bool status = toggleRec(cachedTree);
+            cout << "Complete node in cache named " << NodeInfo["nm"].get<string>() << " with status " << status << endl;
+            callback(status);
+            break;
+        }
+        case NodeAction::Edit: {
+            // NodeInfo includes full "id" and new "nm"
+            string targetId = NodeInfo.value("id", "");
+            string newName = NodeInfo.value("nm", "");
+            function<bool(json&)> editNode = [&](json &nodes) {
+                if (!nodes.is_array()) return false;
+                for (auto &node : nodes) {
+                    if (node.contains("id") && node["id"].get<string>() == targetId) {
+                        node["nm"] = newName;
+                        return true;
+                    }
+                    if (node.contains("children") && editNode(node["children"])) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+            bool status = editNode(cachedTree);
+
+            cout << "Edit node in cache named " << NodeInfo["nm"].get<string>() << " with status " << status << endl;
+
+            callback(status);
+            break;
+        }
+        default:
+            callback(false);
+            break;
+    }
 }
