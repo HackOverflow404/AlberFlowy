@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -Wl,--dependency-file=CMakeFiles/AlberFlowy.dir/link.d -shared -Wl,-soname,AlberFlowy.so -o AlberFlowy.so CMakeFiles/AlberFlowy.dir/AlberFlowy_autogen/mocs_compilation.cpp.o CMakeFiles/AlberFlowy.dir/src/plugin.cpp.o  /usr/lib/x86_64-linux-gnu/libalbert.so.0.30.0

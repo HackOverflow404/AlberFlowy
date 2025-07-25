@@ -1,9 +1,0 @@
-/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/CMakeFiles/AlberFlowy.dir
-/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/CMakeFiles/edit_cache.dir
-/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/CMakeFiles/rebuild_cache.dir
-/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/CMakeFiles/list_install_components.dir
-/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/CMakeFiles/install.dir
-/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/CMakeFiles/install/local.dir
-/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/CMakeFiles/install/strip.dir
-/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/CMakeFiles/AlberFlowy_autogen_timestamp_deps.dir
-/home/d4rkc10ud/Documents/Projects/albert-workflowy-plugin/albert-plugin/CMakeFiles/AlberFlowy_autogen.dir
