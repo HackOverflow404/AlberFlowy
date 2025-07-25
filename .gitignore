@@ -3,6 +3,7 @@
 .vscode
 build
 api/node_modules
+CMakeFiles/
 
 # Secrets
 api/.env
