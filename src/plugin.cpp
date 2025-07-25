@@ -180,7 +180,7 @@ vector<shared_ptr<Item>> Plugin::listNodes(QStringList route, const json &root_n
                             [this, node, newRoute, root_nodes]() mutable { qInfo("Removing node..."); removeNode(node, newRoute); }
                         ),
                     },
-                    path                    // action text
+                    path + QLatin1Char('>') // action text
                 );
 
                 items.push_back(item);
