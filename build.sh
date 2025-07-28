@@ -37,5 +37,8 @@ sudo cp "${BUILD_DIR}/${TARGET_FILE}" "${TARGET_PATH}"
 
 echo "[✓] Plugin installed to ${TARGET_PATH}"
 
+touch api/.wfconfig.json
+workflowy auth
+
 echo "[*] Launching Albert with QML debugger…"
 albert --qmljsdebugger port:5555,block
