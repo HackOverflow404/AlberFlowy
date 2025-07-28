@@ -42,7 +42,7 @@ async function main() {
 
   // Auto‑authenticate if needed
   if (command !== 'auth' && !fs.existsSync(configPath)) {
-    console.log(`🛡  No config file (${configPath}) found; running authentication...`);
+    console.log(`🛡 No config file (${configPath}) found; running authentication...`);
     try {
       const sessionID = await loginWorkFlowy();
       await updateWfConfig(sessionID);
