@@ -61,7 +61,4 @@ chmod +x build.sh
 echo "[*] Running build.sh…"
 bash build.sh
 
-touch api/.wfconfig.json
-workflowy auth
-
 echo "[✓] Setup complete."
