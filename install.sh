@@ -28,9 +28,9 @@ prompt_secret() {
   done
 }
 
-prompt_secret WORKFLOWY_API_KEY     "WORKFLOWY_API_KEY"
-prompt_secret CLIENT_EMAIL          "CLIENT_EMAIL"
-prompt_secret WORKFLOWY_TOTP_SECRET "WORKFLOWY_TOTP_SECRET"
+prompt_secret WORKFLOWY_API_KEY     "WORKFLOWY_API_KEY (can be created at https://workflowy.com/api-key/)"
+prompt_secret CLIENT_EMAIL          "CLIENT_EMAIL (your WorkFlowy account email)"
+prompt_secret WORKFLOWY_TOTP_SECRET "WORKFLOWY_TOTP_SECRET (the secret key entered into TOTP apps)"
 GOOGLE_CLIENT_ID="1003865632555-qjjj6evqckvssv8ba3mnokgsbi34e3ll.apps.googleusercontent.com"
 GOOGLE_CLIENT_SECRET="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"
 
