@@ -15,3 +15,4 @@ This is a custom [Albert Launcher](https://albertlauncher.github.io/) plugin tha
 - Uses Sign in with Google for secure email access
 - Uses HTML-to-text parsing for node names
 - Uses optimistic cache refreshing for seamless UX
+- Comes with complete global CLI interface to control and manage WorkFlowy
