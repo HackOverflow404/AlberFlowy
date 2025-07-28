@@ -13,11 +13,9 @@ if ! command -v node >/dev/null; then
   sudo apt-get install -y nodejs
 fi
 
+echo
+
 ENV_FILE="api/.env"
-if [[ -e $ENV_FILE ]]; then
-  echo "Error: $ENV_FILE already exists. Remove it before running." >&2
-  exit 1
-fi
 
 prompt_secret() {
   local var="$1" prompt="$2"
@@ -62,5 +60,8 @@ fi
 chmod +x build.sh
 echo "[*] Running build.sh…"
 bash build.sh
+
+touch api/.wfconfig.json
+workflowy auth
 
 echo "[✓] Setup complete."

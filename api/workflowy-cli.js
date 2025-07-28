@@ -39,19 +39,6 @@ Examples:
 async function main() {
   const [,, command, ...args] = process.argv;
   if (!command) usage();
-
-  // Auto‑authenticate if needed
-  if (command !== 'auth' && !fs.existsSync(configPath)) {
-    console.log(`🛡 No config file (${configPath}) found; running authentication...`);
-    try {
-      const sessionID = await loginWorkFlowy();
-      await updateWfConfig(sessionID);
-      console.log('Authentication successful.');
-    } catch (err) {
-      console.error('Login failed:', err);
-      process.exit(1);
-    }
-  }
   
   const client = new WorkFlowyClient();
 
