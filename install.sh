@@ -1,72 +1,66 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+# echo "[*] Updating package list…"
+# sudo apt-get update
 
-# echo "[*] Updating package list..."
-# sudo apt update
+echo "[*] Installing system packages…"
+sudo apt-get install -y curl build-essential cmake qtbase5-dev qt6-base-dev \
+  libgumbo-dev nlohmann-json3-dev pkg-config
+
+if ! command -v node >/dev/null; then
+  curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+  sudo apt-get install -y nodejs
+fi
 
 ENV_FILE="api/.env"
-
 if [[ -e $ENV_FILE ]]; then
-  echo "Error: $ENV_FILE already exists. Move or remove it first." >&2
+  echo "Error: $ENV_FILE already exists. Remove it before running." >&2
   exit 1
 fi
 
-echo "[*] Creating $ENV_FILE with your Workflowy credentials."
-echo "[-] Input is hidden for all secret fields."
-echo
-
 prompt_secret() {
   local var="$1" prompt="$2"
-  local value
+  local val
   while :; do
-    read -r -s -p "$prompt: " value
+    read -srp "$prompt: " val
     echo
-    if [[ -n $value ]]; then
-      printf -v "$var" '%s' "$value"
-      break
-    fi
-    echo "Value cannot be empty. Please try again." >&2
+    [[ -n $val ]] && { printf -v "$var" '%s' "$val"; break; }
+    echo "Cannot be empty." >&2
   done
 }
 
-prompt_secret WORKFLOWY_API_KEY   "WORKFLOWY_API_KEY"
-prompt_secret CLIENT_EMAIL        "CLIENT_EMAIL (your Gmail address)"
-prompt_secret GMAIL_APP_PASSWORD  "GMAIL_APP_PASSWORD (16-char app password - issued by google)"
-prompt_secret WORKFLOWY_TOTP_SECRET "WORKFLOWY_TOTP_SECRET (Base32 - MFA code entered in 2FA apps)"
+prompt_secret WORKFLOWY_API_KEY     "WORKFLOWY_API_KEY"
+prompt_secret CLIENT_EMAIL          "CLIENT_EMAIL"
+prompt_secret WORKFLOWY_TOTP_SECRET "WORKFLOWY_TOTP_SECRET"
+GOOGLE_CLIENT_ID="1003865632555-qjjj6evqckvssv8ba3mnokgsbi34e3ll.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="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"
 
 umask 177
-tmp=$(mktemp "${ENV_FILE}.XXXX")
-
+tmp=$(mktemp "${ENV_FILE}".XXXX)
 {
   printf 'WORKFLOWY_API_KEY=%s\n'   "$WORKFLOWY_API_KEY"
   printf 'CLIENT_EMAIL=%s\n'        "$CLIENT_EMAIL"
-  printf 'GMAIL_APP_PASSWORD=%s\n'  "$GMAIL_APP_PASSWORD"
   printf 'WORKFLOWY_TOTP_SECRET=%s\n' "$WORKFLOWY_TOTP_SECRET"
+  printf 'GOOGLE_CLIENT_ID=%s\n'    "$GOOGLE_CLIENT_ID"
+  printf 'GOOGLE_CLIENT_SECRET=%s\n' "$GOOGLE_CLIENT_SECRET"
 } > "$tmp"
-
 mv "$tmp" "$ENV_FILE"
-echo "$ENV_FILE created with permissions 600."
+echo "[✓] Created $ENV_FILE with 600 perms."
 
-echo "[*] Installing required packages..."
-sudo apt install -y \
-  build-essential \
-  cmake \
-  qtbase5-dev \
-  qt6-base-dev \
-  libgumbo-dev \
-  nlohmann-json3-dev \
-  pkg-config
+# echo "[*] Installing npm dependencies…"
+# cd api
+# npm ci
+# cd ..
 
-cd api && sudo npm i && cd ..
-
-if ! command -v albert &> /dev/null; then
-  echo "[!] Albert is not installed."
-  echo "    Please install Albert from: https://albertlauncher.github.io/docs/installing/"
+if ! command -v albert >/dev/null; then
+  echo "[!] Albert not found; install from https://albertlauncher.github.io/"
 else
-  echo "[*] Albert is already installed."
+  echo "[✓] Albert detected."
 fi
 
-echo "[✓] All dependencies installed and files created."
+chmod +x build.sh
+echo "[*] Running build.sh…"
+bash build.sh
 
-./build.sh
+echo "[✓] Setup complete."

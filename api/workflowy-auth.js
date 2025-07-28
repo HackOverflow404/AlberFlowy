@@ -32,10 +32,8 @@ async function initClient() {
     redirectUri
   );
 
-  // 1) load existing config
   const config = loadConfig();
 
-  // 2) if no refresh_token, run the OAuth flow once
   if (!config.refresh_token) {
     const authUrl = oAuth2Client.generateAuthUrl({
       access_type: 'offline',
@@ -44,18 +42,16 @@ async function initClient() {
     });
 
     const codePromise = new Promise((resolve, reject) => {
-      // start local server to receive the OAuth callback
       const server = http.createServer((req, res) => {
         if (req.url.startsWith('/oauth2callback')) {
           const qs = new URL(req.url, redirectUri).searchParams;
           const code = qs.get('code');
           res.writeHead(200, {'Content-Type':'text/html'});
-          res.end('<h1>Auth successful!</h1>You may now close this tab.');
+          res.end('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Authorization Successful</title><style>body {margin: 0;padding: 0;background: #f0f4f8;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;color: #333;display: flex;align-items: center;justify-content: center;height: 100vh;}.card {background: #fff;padding: 2rem 3rem;border-radius: 8px;box-shadow: 0 4px 12px rgba(0,0,0,0.1);text-align: center;max-width: 400px;}.card h1 {margin: 0 0 1rem;font-size: 1.75rem;color: #2e7d32;}.card p {margin: 0;font-size: 1rem;line-height: 1.5;}.emoji {font-size: 2.5rem;margin-bottom: 0.5rem;}</style></head><body><div class="card"><h1>Authorization Successful</h1><p>You may now close this tab and return to the application.</p></div></body></html>');
           server.close();
           return resolve(code);
         }
       }).listen(PORT, async () => {
-        // open user’s browser once the server is listening
         console.log('Opening the following link in your browser to authorize…\n', authUrl, "\n");
         await open(authUrl);
       });
@@ -72,11 +68,9 @@ async function initClient() {
     console.log('Stored refresh token in', CONFIG_PATH);
   }
 
-  // 3) set up client with the stored refresh token
   oAuth2Client.setCredentials({ refresh_token: config.refresh_token });
   const { token: accessToken } = await oAuth2Client.getAccessToken();
 
-  // 4) return your IMAP client
   return new ImapFlow({
     host: 'imap.gmail.com',
     port: 993,
@@ -147,7 +141,6 @@ export async function loginWorkFlowy() {
   const client = await initClient();
   const email = process.env.CLIENT_EMAIL;
   
-  // Add validation to ensure email is loaded
   if (!email) {
     throw new Error("CLIENT_EMAIL not found in environment variables. Make sure .env file exists in the project directory.");
   }
@@ -184,16 +177,13 @@ export async function loginWorkFlowy() {
       const mfaCode = authenticator.generate(process.env.WORKFLOWY_TOTP_SECRET);
       console.log(`Attempt ${attempts+1}: trying MFA code ${mfaCode}`);
 
-      // Clear & type the new code
       await page.$eval('input[name="code"]', el => el.value = '');
       const codeStr = String(mfaCode);
       await page.type('input[name="code"]', codeStr, { delay: 100 });
       await page.click("input[type='submit']");
 
-      // Give the UI a moment to either show an error or navigate
       await sleep(1000);
 
-      // Check for the specific error text in any <li>
       const wrong = await page.evaluate(() => {
         return Array.from(document.querySelectorAll('li'))
           .some(el => el.textContent.includes('Wrong code.'));
@@ -205,10 +195,9 @@ export async function loginWorkFlowy() {
         if (attempts >= 5) {
           throw new Error("Too many wrong‐code attempts; aborting.");
         }
-        continue;   // back to top of the loop
+        continue;
       }
 
-      // No “Wrong code.” message => assume success
       break;
     }
   }
