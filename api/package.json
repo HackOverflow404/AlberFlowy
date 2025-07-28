@@ -21,7 +21,7 @@
     "open": "^10.2.0",
     "otplib": "^12.0.1",
     "prompt-sync": "^4.2.0",
-    "puppeteer": "^24.13.0"
+    "puppeteer": "^24.15.0"
   },
   "devDependencies": {
     "pkg": "^5.8.1"

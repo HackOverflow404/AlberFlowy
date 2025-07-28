@@ -37,6 +37,7 @@ sudo cp "${BUILD_DIR}/${TARGET_FILE}" "${TARGET_PATH}"
 
 echo "[✓] Plugin installed to ${TARGET_PATH}"
 
+echo
 echo "{}" > api/.wfconfig.json
 workflowy auth
 
