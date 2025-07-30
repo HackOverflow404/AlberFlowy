@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# set -Eeuo pipefail
+# trap 'echo "❌  Error on line $LINENO: $BASH_COMMAND"; exit 1' ERR
+# set -o xtrace   # comment out when it’s stable
 
 PLUGIN_NAME="AlberFlowy"
 BUILD_DIR="build"
@@ -9,37 +11,32 @@ DEST_DIR="/usr/lib/x86_64-linux-gnu/albert"
 DEST_DEPENDENCIES_DIR="${DEST_DIR}/${PLUGIN_NAME}"
 TARGET_FILE="${PLUGIN_NAME}.so"
 TARGET_PATH="${DEST_DIR}/${TARGET_FILE}"
-
-for cmd in cmake make npm albert; do
-  command -v "$cmd" >/dev/null || { echo "ERROR: '$cmd' not found in PATH"; exit 1; }
-done
-
-echo "[*] Cleaning previous build…"
-umask 022
-rm -rf "${BUILD_DIR}"
-mkdir -p -m 755 "${BUILD_DIR}"
-cd "${BUILD_DIR}"
-
-echo "[*] Running CMake…"
-cmake ..
-
-echo "[*] Building plugin…"
-make -j"$(nproc)"
-cd ..
+CONFIG_FILE="${API_DIR}/.wfconfig.json"
 
 echo "[*] Installing plugin dependencies…"
 sudo mkdir -p "${DEST_DEPENDENCIES_DIR}"
-cd "${API_DIR}" && npm i && npm install -g . && cd - > /dev/null
+cd "${API_DIR}" && sudo npm i && sudo npm install -g .
+cd - > /dev/null
 
 echo "[*] Copying assets and .so…"
 sudo cp "${ASSET_DIR}"/* "${DEST_DEPENDENCIES_DIR}/"
-sudo cp "${BUILD_DIR}/${TARGET_FILE}" "${TARGET_PATH}"
 
-echo "[✓] Plugin installed to ${TARGET_PATH}"
+echo "[*] Cleaning previous build…"
+rm -rf "${BUILD_DIR}"
+echo "[*] Running CMake…"
+cmake -B "${BUILD_DIR}" -DCMAKE_BUILD_TYPE=Release
+echo "[*] Building plugin…"
+cmake --build "${BUILD_DIR}" --parallel
+echo "[*] Installing plugin…"
+sudo cmake --install "${BUILD_DIR}"
 
-echo
-echo "{}" > api/.wfconfig.json
-workflowy auth
+if [[ ! -f "${CONFIG_FILE}" ]]; then
+  echo "[*] Initialising Workflowy config and running auth…"
+  echo "{}" | tee "${CONFIG_FILE}" >/dev/null
+  workflowy auth
+else
+  echo "[*] Existing .wfconfig.json found – skipping auth."
+fi
 
-echo "[*] Launching Albert with QML debugger…"
-albert --qmljsdebugger port:5555,block
+echo "[*] Launching Albert"
+albert
