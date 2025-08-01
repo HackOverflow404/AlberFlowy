@@ -48,6 +48,7 @@ tmp=$(mktemp "${ENV_FILE}".XXXX)
 } > "$tmp"
 mv "$tmp" "$ENV_FILE"
 echo "[✓] Created $ENV_FILE with 600 perms."
+umask 022
 
 # echo "[*] Installing npm dependencies…"
 # cd api
