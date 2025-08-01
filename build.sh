@@ -15,7 +15,7 @@ CONFIG_FILE="${API_DIR}/.wfconfig.json"
 
 echo "[*] Installing plugin dependencies…"
 sudo mkdir -p "${DEST_DEPENDENCIES_DIR}"
-cd "${API_DIR}" && sudo npm i && sudo npm install -g .
+cd "${API_DIR}" && npm i && sudo npm install -g .
 cd - > /dev/null
 
 echo "[*] Copying assets and .so…"

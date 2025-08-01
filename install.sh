@@ -29,15 +29,15 @@ prompt_secret() {
 }
 
 prompt_secret WORKFLOWY_API_KEY     "WORKFLOWY_API_KEY (can be created at https://workflowy.com/api-key/)"
-prompt_secret CLIENT_EMAIL          "CLIENT_EMAIL (your WorkFlowy account email)"
 prompt_secret WORKFLOWY_TOTP_SECRET "WORKFLOWY_TOTP_SECRET (the secret key entered into TOTP apps)"
+prompt_secret CLIENT_EMAIL          "CLIENT_EMAIL (your WorkFlowy account email)"
 
 umask 177
 tmp=$(mktemp "${ENV_FILE}".XXXX)
 {
   printf 'WORKFLOWY_API_KEY=%s\n'   "$WORKFLOWY_API_KEY"
-  printf 'CLIENT_EMAIL=%s\n'        "$CLIENT_EMAIL"
   printf 'WORKFLOWY_TOTP_SECRET=%s\n' "$WORKFLOWY_TOTP_SECRET"
+  printf 'CLIENT_EMAIL=%s\n'        "$CLIENT_EMAIL"
 } > "$tmp"
 mv "$tmp" "$ENV_FILE"
 echo "[✓] Created $ENV_FILE with 600 perms."
