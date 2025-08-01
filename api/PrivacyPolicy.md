@@ -4,7 +4,7 @@ _Last updated: 2025-08-01_
 ## Summary
 This command-line utility runs entirely on the user’s local machine. It requests the Gmail read-only scope solely to fetch one specific login e-mail from WorkFlowy so the user can automate sign-in; no Google data ever leaves the user’s device, and nothing is sent to any server I control. The tool complies with Google’s OAuth 2.0 Policies, the API Services User Data Policy (including the Limited Use requirements), and all other applicable terms. 
 
-## 1. Who I are
+## 1. Who I am
 My name is **Medhansh Garg** and I developed this tool independently.  
 Contact: **medhansh2005@gmail.com**
 

@@ -1,14 +1,18 @@
 import { authenticate } from "@google-cloud/local-auth";
 import { authenticator } from "otplib";
+import { join, dirname } from "path";
+import { fileURLToPath } from 'url';
 import { google } from "googleapis"; 
 import puppeteer from "puppeteer";
 import process  from "process";
 import dotenv from "dotenv";
-import { join } from "path";
 import fs from "fs";
 
-dotenv.config({ path: join(process.cwd(), '.env'), quiet: true });
-const CONFIG_PATH = join(process.cwd(), '.wfconfig.json');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+dotenv.config({ path: join(__dirname, '.env'), quiet: true });
+const CONFIG_PATH = join(__dirname, ".wfconfig.json");
 
 const login_url = "https://workflowy.com/login/";
 const auth_success_page = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Authorization Successful</title><style>body {margin: 0;padding: 0;background: #f0f4f8;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;color: #333;display: flex;align-items: center;justify-content: center;height: 100vh;}.card {background: #fff;padding: 2rem 3rem;border-radius: 8px;box-shadow: 0 4px 12px rgba(0,0,0,0.1);text-align: center;max-width: 400px;}.card h1 {margin: 0 0 1rem;font-size: 1.75rem;color: #2e7d32;}.card p {margin: 0;font-size: 1rem;line-height: 1.5;}.emoji {font-size: 2.5rem;margin-bottom: 0.5rem;}</style></head><body><div class="card"><h1>Authorization Successful</h1><p>You may now close this tab and return to the application.</p></div></body></html>`;
@@ -38,7 +42,7 @@ async function getGoogleCredentials() {
   const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
   let client;
   
-  const CREDENTIALS_PATH = join(process.cwd(), 'google_credentials.json');
+  const CREDENTIALS_PATH = join(__dirname, 'google_credentials.json');
   if (!fs.existsSync(CREDENTIALS_PATH)) {
     throw new Error(`Google credentials file not found at ${CREDENTIALS_PATH}. Please ensure it exists.`);
   }
