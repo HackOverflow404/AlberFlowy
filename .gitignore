@@ -8,3 +8,4 @@ CMakeFiles/
 # Secrets
 api/.env
 api/.wfconfig.json
+api/client_secret_1003865632555-7g1it76leg4uni89lb555cinc627dsjr.apps.googleusercontent.com.json
