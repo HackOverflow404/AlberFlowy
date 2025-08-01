@@ -31,8 +31,6 @@ prompt_secret() {
 prompt_secret WORKFLOWY_API_KEY     "WORKFLOWY_API_KEY (can be created at https://workflowy.com/api-key/)"
 prompt_secret CLIENT_EMAIL          "CLIENT_EMAIL (your WorkFlowy account email)"
 prompt_secret WORKFLOWY_TOTP_SECRET "WORKFLOWY_TOTP_SECRET (the secret key entered into TOTP apps)"
-GOOGLE_CLIENT_ID="1003865632555-qjjj6evqckvssv8ba3mnokgsbi34e3ll.apps.googleusercontent.com"
-GOOGLE_CLIENT_SECRET="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"
 
 umask 177
 tmp=$(mktemp "${ENV_FILE}".XXXX)
@@ -40,8 +38,6 @@ tmp=$(mktemp "${ENV_FILE}".XXXX)
   printf 'WORKFLOWY_API_KEY=%s\n'   "$WORKFLOWY_API_KEY"
   printf 'CLIENT_EMAIL=%s\n'        "$CLIENT_EMAIL"
   printf 'WORKFLOWY_TOTP_SECRET=%s\n' "$WORKFLOWY_TOTP_SECRET"
-  printf 'GOOGLE_CLIENT_ID=%s\n'    "$GOOGLE_CLIENT_ID"
-  printf 'GOOGLE_CLIENT_SECRET=%s\n' "$GOOGLE_CLIENT_SECRET"
 } > "$tmp"
 mv "$tmp" "$ENV_FILE"
 echo "[✓] Created $ENV_FILE with 600 perms."
