@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# ---- SAFETY GUARD ----------------------------------------------------------
+if [[ "$EUID" -eq 0 ]]; then
+  echo "❌  Do NOT run build.sh with sudo. The script uses sudo only for the few lines that need it."
+  exit 1
+fi
+# ---------------------------------------------------------------------------
+
 # echo "[*] Updating package list…"
 # sudo apt-get update
 
@@ -55,6 +62,6 @@ fi
 
 chmod +x build.sh
 echo "[*] Running build.sh…"
-bash build.sh
+./build.sh
 
 echo "[✓] Setup complete."
