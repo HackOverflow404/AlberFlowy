@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { WorkFlowyClient } from './workflowy.js';
-import { loginWorkFlowy, updateWfConfig } from './workflowy-auth.js';
+import { loginWorkFlowy } from './workflowy-auth.js';
 import process from 'process';
 import fs from 'fs';
 import path from 'path';
