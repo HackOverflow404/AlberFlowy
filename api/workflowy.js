@@ -235,6 +235,4 @@ export class WorkFlowyClient {
 
     return this.pushAndPoll(operation);
   }
-
-  // TODO: add deleteNode, completeNode, etc.
 }

@@ -2,16 +2,13 @@
 
 import { WorkFlowyClient } from './workflowy.js';
 import { loginWorkFlowy } from './workflowy-auth.js';
-import process from 'process';
-import fs from 'fs';
-import path from 'path';
 import { fileURLToPath } from 'url';
+import process from 'process';
+import path from 'path';
 
 // ESM doesn’t supply __dirname by default:
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-const configPath = path.join(__dirname, '.wfconfig.json');
 
 function usage() {
   console.error(`

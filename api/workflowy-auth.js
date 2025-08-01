@@ -1,12 +1,11 @@
-import { authenticator } from "otplib";
-import { ImapFlow } from "imapflow";
-import puppeteer from "puppeteer";
-import dotenv from "dotenv";
-import fs from "fs";
-import { join } from "path";
-import { google } from "googleapis"; 
 import { authenticate } from "@google-cloud/local-auth";
+import { authenticator } from "otplib";
+import { google } from "googleapis"; 
+import puppeteer from "puppeteer";
 import process  from "process";
+import dotenv from "dotenv";
+import { join } from "path";
+import fs from "fs";
 
 dotenv.config({ path: join(process.cwd(), '.env'), quiet: true });
 const CONFIG_PATH = join(process.cwd(), '.wfconfig.json');
