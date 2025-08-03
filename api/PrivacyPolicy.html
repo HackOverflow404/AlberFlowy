@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | AlberFlowy CLI</title>
+  <style>
+    :root {
+      --accent: #007acc;
+      --accent-light: #e6f3ff;
+      --accent-dark: #005999;
+      --bg-light: #ffffff;
+      --bg-page: #f8fafc;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --radius: 12px;
+      --success: #10b981;
+      --warning: #f59e0b;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --accent: #60a5fa;
+        --accent-light: #1e3a8a;
+        --accent-dark: #93c5fd;
+        --bg-light: #1e293b;
+        --bg-page: #0f172a;
+        --text-main: #f1f5f9;
+        --text-muted: #cbd5e1;
+        --text-light: #94a3b8;
+        --border: #334155;
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.7;
+      background: var(--bg-page);
+      color: var(--text-main);
+      font-size: 16px;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: white;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+      opacity: 0.6;
+    }
+
+    header .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: 2.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.025em;
+    }
+
+    header p {
+      font-size: 1.125rem;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+
+    /* Navigation */
+    .nav-container {
+      background: var(--bg-light);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      font-size: 0.875rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    /* Main Content */
+    main {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    /* Summary Card */
+    .summary-card {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: white;
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      margin-bottom: 3rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .summary-card::before {
+      content: '🔒';
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-size: 3rem;
+      opacity: 0.3;
+    }
+
+    .summary-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .summary-card p {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    /* Section Cards */
+    .section {
+      background: var(--bg-light);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid var(--border);
+      scroll-margin-top: 100px;
+    }
+
+    .section:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .section h2 {
+      color: var(--accent);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-icon {
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-light);
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    /* Enhanced Table */
+    .table-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    th {
+      background: var(--accent);
+      color: white;
+      padding: 1rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+    }
+
+    th:first-child {
+      border-top-left-radius: var(--radius);
+    }
+
+    th:last-child {
+      border-top-right-radius: var(--radius);
+    }
+
+    td {
+      padding: 1rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) {
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    /* Code styling */
+    code {
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+      font-size: 0.875em;
+      font-weight: 500;
+    }
+
+    /* Lists */
+    ul {
+      margin: 1rem 0;
+      padding-left: 0;
+    }
+
+    li {
+      list-style: none;
+      position: relative;
+      padding: 0.5rem 0 0.5rem 2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    /* Links */
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--accent-dark);
+      text-decoration: underline;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+      color: white;
+    }
+
+    .contact-section h2 {
+      color: white;
+    }
+
+    .contact-section a {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .contact-section a:hover {
+      opacity: 0.8;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem 2rem;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+      background: var(--bg-light);
+    }
+
+    /* Status badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--success);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin: 1rem 0;
+    }
+
+    .status-badge::before {
+      content: '🛡️';
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        padding: 3rem 1rem 2rem;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      nav {
+        padding: 1rem;
+      }
+
+      main {
+        padding: 0 1rem;
+        margin: 2rem auto;
+      }
+
+      .section {
+        padding: 2rem 1.5rem;
+      }
+
+      .summary-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .nav-links a {
+        padding: 0.5rem 0.75rem;
+      }
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Animation for sections */
+    .section {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="content">
+      <h1>Privacy Policy</h1>
+      <p>Last updated: August 1, 2025</p>
+    </div>
+  </header>
+
+  <div class="nav-container">
+    <nav>
+      <div class="nav-links">
+        <a href="#summary">Summary</a>
+        <a href="#who">Developer</a>
+        <a href="#data-access">Data Access</a>
+        <a href="#usage">Usage</a>
+        <a href="#storage">Security</a>
+        <a href="#sharing">Sharing</a>
+        <a href="#limited-use">Google Policy</a>
+        <a href="#controls">User Controls</a>
+        <a href="#children">Children</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <div class="summary-card" id="summary">
+      <h2>🔒 Privacy-First Approach</h2>
+      <p>
+        This command-line utility runs entirely on your local machine. It requests Gmail read-only access solely to fetch WorkFlowy login emails for automation. No Google data ever leaves your device, and nothing is sent to any external server. The tool fully complies with Google's OAuth 2.0 Policies and API Services User Data Policy.
+      </p>
+      <div class="status-badge">
+        Fully Local Processing
+      </div>
+    </div>
+
+    <section class="section" id="who">
+      <h2>
+        <span class="section-icon">👨‍💻</span>
+        Developer Information
+      </h2>
+      <p>
+        My name is <strong>Medhansh Garg</strong> and I developed this tool independently as an open-source project.
+      </p>
+      <p>
+        <strong>Contact:</strong> <a href="mailto:medhansh2005@gmail.com">medhansh2005@gmail.com</a>
+      </p>
+    </section>
+
+    <section class="section" id="data-access">
+      <h2>
+        <span class="section-icon">📊</span>
+        Google Data Access
+      </h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Data Type</th>
+              <th>Source</th>
+              <th>Purpose</th>
+              <th>Storage</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Gmail messages from <code>help@email.workflowy.com</code> with subject "Login code for Workflowy"
+              </td>
+              <td>
+                Gmail API<br />
+                <code>gmail.readonly</code> scope
+              </td>
+              <td>Extract 12-digit one-time login code</td>
+              <td>❌ Not stored</td>
+              <td>Memory only (temporary)</td>
+            </tr>
+            <tr>
+              <td>OAuth 2.0 Refresh Token</td>
+              <td>Google OAuth</td>
+              <td>Maintain user credentials to avoid re-authorization</td>
+              <td>✅ Locally stored</td>
+              <td>
+                <code>.wfconfig.json</code> file with <code>0600</code> permissions
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Important:</strong> I do not access, read, or store any other emails, attachments, labels, or metadata from your Gmail account.</p>
+    </section>
+
+    <section class="section" id="usage">
+      <h2>
+        <span class="section-icon">⚙️</span>
+        How Information is Used
+      </h2>
+      <ul>
+        <li>Reads the latest WorkFlowy login email from your Gmail</li>
+        <li>Extracts the one-time authentication code from the email</li>
+        <li>Automatically fills the code into WorkFlowy's login form</li>
+        <li>Discards the email content and code from memory immediately after use</li>
+        <li>Stores the refresh token locally for future authentication</li>
+        <li>No data transmission to external servers or third parties</li>
+      </ul>
+      <div class="status-badge">
+        Zero Analytics • Zero Tracking • Zero Data Collection
+      </div>
+    </section>
+
+    <section class="section" id="storage">
+      <h2>
+        <span class="section-icon">🔐</span>
+        Storage & Security
+      </h2>
+      <ul>
+        <li>All tokens stored locally with UNIX file permissions <code>0600</code> (owner read/write only)</li>
+        <li>Configuration file never leaves your device unless you manually back it up</li>
+        <li>HTTPS-only communication with <code>googleapis.com</code> and <code>workflowy.com</code></li>
+        <li>No external servers, telemetry, or data transmission</li>
+        <li>Delete <code>.wfconfig.json</code> anytime to revoke local credentials</li>
+      </ul>
+    </section>
+
+    <section class="section" id="sharing">
+      <h2>
+        <span class="section-icon">🚫</span>
+        Data Sharing Policy
+      </h2>
+      <p style="font-size: 1.25rem; font-weight: 600; color: var(--success);">
+        No data is shared, sold, or transferred to third parties. Period.
+      </p>
+      <p>Your Gmail data remains entirely on your local machine and is never transmitted to any external service.</p>
+    </section>
+
+    <section class="section" id="limited-use">
+      <h2>
+        <span class="section-icon">📋</span>
+        Google Limited Use Compliance
+      </h2>
+      <p style="font-style: italic; padding: 1.5rem; background: var(--accent-light); border-radius: 8px; border-left: 4px solid var(--accent);">
+        "The use of information received from Gmail APIs will adhere to the Google API Services User Data Policy, including the Limited Use requirements."
+      </p>
+    </section>
+
+    <section class="section" id="controls">
+      <h2>
+        <span class="section-icon">🎛️</span>
+        User Controls
+      </h2>
+      <ul>
+        <li><strong>Revoke Google Access:</strong> Visit <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">Google Account Permissions</a></li>
+        <li><strong>Delete Local Data:</strong> Remove the <code>.wfconfig.json</code> file</li>
+        <li><strong>Inspect Source Code:</strong> The tool is completely open-source on GitHub</li>
+        <li><strong>Control Permissions:</strong> Only the Gmail readonly scope is requested</li>
+      </ul>
+    </section>
+
+    <section class="section" id="children">
+      <h2>
+        <span class="section-icon">👶</span>
+        Children's Privacy
+      </h2>
+      <p>
+        This tool is not directed toward children under 13 years of age and does not knowingly collect personal information from children under 13.
+      </p>
+    </section>
+
+    <section class="section" id="changes">
+      <h2>
+        <span class="section-icon">📝</span>
+        Policy Updates
+      </h2>
+      <p>
+        I may update this privacy policy to reflect changes in functionality or legal requirements. Material changes will be announced in the project's release notes, and the updated policy will display a revised "Last updated" date. Continued use after changes constitutes acceptance of the revised policy.
+      </p>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <h2>
+        <span class="section-icon">📧</span>
+        Contact & Support
+      </h2>
+      <p>
+        Have privacy questions or concerns? I'm here to help:
+      </p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:medhansh2005@gmail.com">medhansh2005@gmail.com</a></li>
+        <li><strong>GitHub Issues:</strong> <a href="https://github.com/HackOverflow404/AlberFlowy/issues" target="_blank" rel="noopener noreferrer">Report an Issue</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Medhansh Garg. All rights reserved.</p>
+    <p>Built with privacy and transparency in mind.</p>
+  </footer>
+</body>
+</html>
