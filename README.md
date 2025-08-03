@@ -20,5 +20,6 @@ This is a custom [Albert Launcher](https://albertlauncher.github.io/) plugin tha
 - Comes with complete global CLI interface to control and manage WorkFlowy
 
 ---
+
 ## Privacy Policy
 See [privacy policy](api/PrivacyPolicy.html)
