@@ -18,3 +18,7 @@ This is a custom [Albert Launcher](https://albertlauncher.github.io/) plugin tha
 - Uses HTML-to-text parsing for node names
 - Uses optimistic cache refreshing for seamless UX
 - Comes with complete global CLI interface to control and manage WorkFlowy
+
+---
+## Privacy Policy
+See [privacy policy](api/PrivacyPolicy.html)
