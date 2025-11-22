@@ -8,4 +8,4 @@ CMakeFiles/
 # Secrets
 api/.env
 api/.wfconfig.json
-# api/google_credentials.json
+api/google_credentials.json

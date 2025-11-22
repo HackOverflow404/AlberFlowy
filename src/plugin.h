@@ -11,6 +11,7 @@
 #include <albert/indexqueryhandler.h>
 #include <albert/albert.h>
 #include <albert/standarditem.h>
+#include <albert/iconutil.h>
 
 #include <fstream>
 #include <iostream>
@@ -47,7 +48,7 @@ class Plugin : public util::ExtensionPlugin, public TriggerQueryHandler {
         void handleTriggerQuery(Query &query) override;
 
     private:
-        inline static const QStringList IconUrls = {QStringLiteral("/usr/lib/x86_64-linux-gnu/albert/AlberFlowy/icon.png")};
+        inline static const QString IconUrl = QStringLiteral("/usr/lib/x86_64-linux-gnu/albert/AlberFlowy/icon.png");
         enum class NodeAction {
             Create,
             Edit,
