@@ -235,7 +235,7 @@ export async function loginWorkFlowy() {
   console.log(`Session ID updated successfully in ${CONFIG_PATH}`);
 }
 
-// loginWorkFlowy().then(updateWfConfig).catch(err => {
+// loginWorkFlowy().catch(err => {
 //     console.error("Login failed:", err);
 //     process.exit(1);
 //   }
