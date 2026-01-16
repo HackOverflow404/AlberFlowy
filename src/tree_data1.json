@@ -1,0 +1,1739 @@
+[
+  {
+    "id": "38b0d6dc-9801-486e-8cad-a52b1739ea92",
+    "nm": "Test Node",
+    "ct": 92559200,
+    "pr": 3,
+    "prnt": null,
+    "metadata": {
+      "layoutMode": "bullets"
+    },
+    "lm": 92559200,
+    "children": []
+  },
+  {
+    "id": "be0325bb-a014-94af-45ad-00365e23757c",
+    "nm": "Sigpwny",
+    "ct": 65137267,
+    "pr": 400,
+    "prnt": null,
+    "metadata": {},
+    "lm": 75794460,
+    "children": [
+      {
+        "id": "e86aa54e-2372-f656-ee93-4be50becc392",
+        "nm": "<a href=\"https://docs.google.com/document/d/1IIotEuaDTfJ4qbosY63g-vZovibmh53xHoWD4ZJGUJ8/edit?tab=t.0\">Work on UI</a> <time startYear=\"2025\" startMonth=\"3\" startDay=\"7\">Fri, Mar 7, 2025</time>,",
+        "ct": 65137271,
+        "pr": 100,
+        "prnt": "be0325bb-a014-94af-45ad-00365e23757c",
+        "metadata": {},
+        "lm": 75969932,
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "ccc746f9-3544-6eb6-a1f1-ebe02b0a0360",
+    "nm": "Cyber Security Course",
+    "ct": 65137594,
+    "pr": 800,
+    "prnt": null,
+    "metadata": {},
+    "lm": 65140007,
+    "children": []
+  },
+  {
+    "id": "fd359d6e-f000-b077-da51-2add461fe28b",
+    "nm": "Projects",
+    "ct": 65137300,
+    "pr": 700,
+    "prnt": null,
+    "metadata": {},
+    "lm": 66437199,
+    "children": [
+      {
+        "id": "7d0a05f5-2ca9-4640-3ac1-6da221938373",
+        "nm": "Make ESP32 into a matter device",
+        "ct": 65137750,
+        "pr": 300,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 65137769,
+        "children": []
+      },
+      {
+        "id": "aebf888a-091f-a412-be82-683dd5165764",
+        "nm": "Integrate the speakers from the laptop into the Pi",
+        "ct": 65137796,
+        "pr": 600,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 66064293,
+        "children": []
+      },
+      {
+        "id": "9d22881b-3892-6b39-2cca-9775c1a55c06",
+        "nm": "Make Raspberry Pi into a matter hub",
+        "ct": 65137769,
+        "pr": 400,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 65137779,
+        "children": []
+      },
+      {
+        "id": "3d3d966e-d9f9-2c7a-f06a-505760237465",
+        "nm": "Learn Yocto Project and make a Linux Distro for Raspberry Pi",
+        "ct": 65137734,
+        "pr": 200,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 65138490,
+        "children": [
+          {
+            "id": "b86cf7e4-527c-27e6-fd78-7f413f477056",
+            "nm": "<a href=\"https://www.youtube.com/playlist?list=PLEBQazB0HUyTpoJoZecRK6PpDG31Y7RPB\">https://www.youtube.com/playlist?list=PLEBQazB0HUyTpoJoZecRK6PpDG31Y7RPB</a>",
+            "ct": 65138490,
+            "pr": 100,
+            "prnt": "3d3d966e-d9f9-2c7a-f06a-505760237465",
+            "metadata": {},
+            "lm": 65138499,
+            "children": []
+          },
+          {
+            "id": "bb98bfec-5402-e0f6-5276-4a7f21871e2a",
+            "nm": "Playlist",
+            "ct": 65138493,
+            "pr": 200,
+            "prnt": "3d3d966e-d9f9-2c7a-f06a-505760237465",
+            "metadata": {},
+            "lm": 65138538,
+            "children": [
+              {
+                "id": "419287e6-d169-fd15-8a44-dbba7e0be0b4",
+                "nm": "<a href=\"https://www.youtube.com/watch?v=yuE7my3KOpo&t=10s\">https://www.youtube.com/watch?v=yuE7my3KOpo&amp;t=10s</a>",
+                "ct": 65138545,
+                "pr": 200,
+                "prnt": "bb98bfec-5402-e0f6-5276-4a7f21871e2a",
+                "metadata": {},
+                "lm": 65138550,
+                "children": []
+              },
+              {
+                "id": "92ab6d5e-2438-a237-d2a0-0fc55ebc0283",
+                "nm": "<a href=\"https://www.youtube.com/watch?v=zNLYanJAQ3s&t=1s\">https://www.youtube.com/watch?v=zNLYanJAQ3s&amp;t=1s</a>",
+                "ct": 65138538,
+                "pr": 100,
+                "prnt": "bb98bfec-5402-e0f6-5276-4a7f21871e2a",
+                "metadata": {},
+                "lm": 65138539,
+                "children": []
+              },
+              {
+                "id": "80504bdc-971d-5e80-60d8-843afd5bfded",
+                "nm": "<a href=\"https://www.youtube.com/watch?v=R__wCdZ2VXY&t=4s\">https://www.youtube.com/watch?v=R__wCdZ2VXY&amp;t=4s</a>",
+                "ct": 65138551,
+                "pr": 300,
+                "prnt": "bb98bfec-5402-e0f6-5276-4a7f21871e2a",
+                "metadata": {},
+                "lm": 65139832,
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "e5f5ce4b-a7ff-f3fa-e347-efe0f76952d7",
+            "nm": "<a href=\"https://medium.com/@hungryspider/building-custom-linux-for-raspberry-pi-using-buildroot-f81efc7aa817\">Buildroot</a>",
+            "ct": 65369551,
+            "pr": 300,
+            "prnt": "3d3d966e-d9f9-2c7a-f06a-505760237465",
+            "metadata": {},
+            "lm": 65369562,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "8adf93a8-e38a-5756-9686-6edef9401c58",
+        "nm": "Make an AI system for Raspberry Pi",
+        "ct": 65137779,
+        "pr": 500,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 65139839,
+        "children": [
+          {
+            "id": "8d94755d-7696-9697-1eb8-3d62dcbf342f",
+            "nm": "Use DeepSeek or something for the main AI",
+            "ct": 65139849,
+            "pr": 200,
+            "prnt": "8adf93a8-e38a-5756-9686-6edef9401c58",
+            "metadata": {},
+            "lm": 65139880,
+            "children": []
+          },
+          {
+            "id": "efcca369-68c2-a09a-58c2-31d878080ede",
+            "nm": "Make a wake word model",
+            "ct": 65139839,
+            "pr": 100,
+            "prnt": "8adf93a8-e38a-5756-9686-6edef9401c58",
+            "metadata": {},
+            "lm": 65139849,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "d86a1c81-7ef8-18bf-aa97-fe933c406540",
+        "nm": "Design 3D printed housing case for Raspberry Pi for fan inclusion",
+        "ct": 65138189,
+        "pr": 700,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 66064295,
+        "children": []
+      },
+      {
+        "id": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+        "nm": "<a href=\"https://chatgpt.com/c/67d882d9-4064-8011-b9eb-2a60f7cfb0b8\">Goals for Raspberry Pi</a>",
+        "ct": 66241031,
+        "pr": 800,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 66250322,
+        "children": [
+          {
+            "id": "27a5c656-1d5a-8dba-3a7b-95c064f4ee2b",
+            "nm": "Run a Matter controller",
+            "ct": 66241061,
+            "pr": 300,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66241066,
+            "children": []
+          },
+          {
+            "id": "2faeb7e3-855f-8d84-32c1-36a4e6d9c41b",
+            "nm": "Consider getting an Orange Pi",
+            "ct": 66241130,
+            "pr": 700,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66244065,
+            "children": []
+          },
+          {
+            "id": "2d9d1725-bba6-e111-8a7e-bb093853bf01",
+            "nm": "Connect via SSH and later Twingate",
+            "ct": 66241036,
+            "pr": 100,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66241052,
+            "children": []
+          },
+          {
+            "id": "bc72d3c1-c8ca-bd6f-f620-60cc4ab97b74",
+            "nm": "Connect to an LCD screen and a 2TB hard drive for storage and running programs off of",
+            "ct": 66241066,
+            "pr": 400,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66241080,
+            "children": []
+          },
+          {
+            "id": "2215365e-1340-9f95-b3f9-600036b6f88e",
+            "nm": "Connect over the internet to act as a NAS to store data into the 2TB hard drive",
+            "ct": 66241080,
+            "pr": 500,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66241086,
+            "children": []
+          },
+          {
+            "id": "c3db2d97-c2fc-e78b-25bd-834f5cdbb244",
+            "nm": "Use as router",
+            "ct": 66241086,
+            "pr": 600,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66241094,
+            "children": []
+          },
+          {
+            "id": "aaee7edc-2753-cb0a-7800-406adc481e75",
+            "nm": "Run AI models, specifically Browser-use and a locally running llm as a voice assistant",
+            "ct": 66241052,
+            "pr": 200,
+            "prnt": "c63afeed-442d-ce18-6221-b1e25da17ea0",
+            "metadata": {},
+            "lm": 66241328,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "7b87b375-cc45-783d-b206-d298989d6027",
+        "nm": "<a href=\"https://drive.google.com/file/d/1CJ2_p1KULbrHoSOeby0CWWlB5TNK1tWZ/view\">Computer Re-purpose</a>",
+        "ct": 65137305,
+        "pr": 100,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "lm": 81810582,
+        "children": [
+          {
+            "id": "0a198e01-480d-27de-4eb3-6b87db9544eb",
+            "nm": "<a href=\"file:///home/d4rkc10ud/Downloads/510832249-B140XW01-V-0.pdf\">LCD Screen</a>",
+            "ct": 65137314,
+            "pr": 100,
+            "prnt": "7b87b375-cc45-783d-b206-d298989d6027",
+            "metadata": {},
+            "lm": 65137368,
+            "children": [
+              {
+                "id": "ff930bb4-f63f-736a-7e6e-6ecd827c477d",
+                "nm": "Look into LVDS",
+                "ct": 65137319,
+                "pr": 100,
+                "prnt": "0a198e01-480d-27de-4eb3-6b87db9544eb",
+                "metadata": {},
+                "lm": 65137330,
+                "children": []
+              },
+              {
+                "id": "b8bedbf7-810c-1df7-40c9-db2bb8e85978",
+                "nm": "<a href=\"https://www.aliexpress.us/item/3256807531551258.html\">Controller Board</a>",
+                "ct": 65137330,
+                "pr": 200,
+                "prnt": "0a198e01-480d-27de-4eb3-6b87db9544eb",
+                "metadata": {},
+                "lm": 65141578,
+                "children": [
+                  {
+                    "id": "bf6e686a-aaa8-aaf8-b07c-1834242c1ee5",
+                    "nm": "",
+                    "ct": 65141825,
+                    "pr": 100,
+                    "prnt": "b8bedbf7-810c-1df7-40c9-db2bb8e85978",
+                    "metadata": {
+                      "layoutMode": "cmnt-c"
+                    },
+                    "lm": 65141825,
+                    "children": [
+                      {
+                        "id": "638dacc0-ca1a-0279-fdcd-ef79f3f5d8b7",
+                        "nm": "@",
+                        "ct": 65141825,
+                        "pr": 100,
+                        "prnt": "bf6e686a-aaa8-aaf8-b07c-1834242c1ee5",
+                        "metadata": {
+                          "draft": "1_3525750",
+                          "layoutMode": "cmnt"
+                        },
+                        "lm": 65141825,
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+            "nm": "<a href=\"https://www.pchub.com/acer-aspire-4935g-series-sub-various-board-ls-4494p-fingerprint-bd-p82395\">Fingerprint Reader</a>",
+            "ct": 65137344,
+            "pr": 200,
+            "prnt": "7b87b375-cc45-783d-b206-d298989d6027",
+            "metadata": {
+              "s3File": {
+                "objectFolder": "gAAAAABnx6rZ2EX_1lTyRMBkMFcn4_WhTj1Zs8BwOfiW31NH1BAb5jzPCIHm-aM-bwTKSZHMbpljIciLZRkmWq0_ceblJpgV_-vEOQTFLKJU_9pWIyoxWLn77MEou1_Mfw7wvx9cCmdD5i1zk9GJ_ZeuZedPXvAqeTWbKCdQMeY7iCOe3oMGhKtrdBpo6cbvU-LxQNdUIzS8OjaoPuR2kC6-sbAMycsEJXPtFW9tBfS5SDaNBgCfLdI="
+              }
+            },
+            "lm": 65138141,
+            "children": [
+              {
+                "id": "1cde3a51-3f7e-28c1-fbfc-e3930fdb8328",
+                "nm": "",
+                "ct": 65137414,
+                "pr": 6,
+                "prnt": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+                "metadata": {
+                  "s3File": {
+                    "isFile": true,
+                    "fileName": "image.png",
+                    "fileType": "image/png",
+                    "objectFolder": "gAAAAABnx6rajW4yCkzB5sHQ3X0vz4St1OTIaSzz0sSo9wqnojVBOtmvv1tzgVA6GIL3ShTBAVZqBVuPlhisv121OF7yRKYTjjtU6gI9BKx6YV-7BKAGe9Vu_rSoarr267AHlXBZ38ZG3y6_ttOkFzI4IteMjwcY3wepeSQ-ssdmooVQY5LQiumH3BWGsm2efazS8vI2e447pGk_p_9Ce9A0SCNPNdsBNTMbTSXhR_GH4uPF-tqJuQw=",
+                    "isAnimatedGIF": false,
+                    "imageOriginalWidth": 1265,
+                    "imageOriginalHeight": 551,
+                    "imageOriginalPixels": 1
+                  },
+                  "layoutMode": "p"
+                },
+                "lm": 65137554,
+                "children": []
+              },
+              {
+                "id": "ce94ba23-1a74-224c-82e4-645eb0170332",
+                "nm": "Ideas",
+                "ct": 65137548,
+                "pr": 12,
+                "prnt": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+                "metadata": {},
+                "lm": 65137572,
+                "children": [
+                  {
+                    "id": "0caeaef7-79cb-142d-82d0-f3c5658959e6",
+                    "nm": "Use with Arduino Nano to provide 3.3 V power and somehow interface with USB signals",
+                    "ct": 65137572,
+                    "pr": 100,
+                    "prnt": "ce94ba23-1a74-224c-82e4-645eb0170332",
+                    "metadata": {},
+                    "lm": 65137594,
+                    "children": []
+                  },
+                  {
+                    "id": "6ba06f7a-372b-ea68-2e69-79b0a498d15f",
+                    "nm": "Connect it to a USB cable",
+                    "ct": 81016437,
+                    "pr": 200,
+                    "prnt": "ce94ba23-1a74-224c-82e4-645eb0170332",
+                    "metadata": {},
+                    "lm": 81016455,
+                    "children": [
+                      {
+                        "id": "65d860c7-8395-0fae-38e5-b24af0ef3ac7",
+                        "nm": "Connect GND, D+, and D- to USB cable",
+                        "ct": 81016451,
+                        "pr": 100,
+                        "prnt": "6ba06f7a-372b-ea68-2e69-79b0a498d15f",
+                        "metadata": {},
+                        "lm": 81016468,
+                        "children": []
+                      },
+                      {
+                        "id": "aa4ab997-ba09-2f38-1431-caaf2b114b82",
+                        "nm": "Step down 5V power to 3.3V using 1000 ohm x 3 resistors",
+                        "ct": 81016468,
+                        "pr": 200,
+                        "prnt": "6ba06f7a-372b-ea68-2e69-79b0a498d15f",
+                        "metadata": {},
+                        "lm": 81017770,
+                        "children": [
+                          {
+                            "id": "e4db2db9-7564-6d4a-6180-9df586b4988c",
+                            "nm": "R2 -&gt; One 1000 ohm resistor",
+                            "ct": 81016525,
+                            "pr": 200,
+                            "prnt": "aa4ab997-ba09-2f38-1431-caaf2b114b82",
+                            "metadata": {},
+                            "lm": 81016534,
+                            "children": []
+                          },
+                          {
+                            "id": "427b6f43-539f-8a0f-dcc3-50a55a09e315",
+                            "nm": "",
+                            "ct": 81016541,
+                            "pr": 400,
+                            "prnt": "aa4ab997-ba09-2f38-1431-caaf2b114b82",
+                            "metadata": {
+                              "s3File": {
+                                "isFile": true,
+                                "fileName": "image.png",
+                                "fileType": "image/png",
+                                "objectFolder": "gAAAAABoufZp8L4ZheaYDUrZorleYkUX9R9IrIXNdytwyVw1vRlyHPkbFFzYcCcOssczEIUi2SvBQ4SNb74tAHDwNhlu2d8G3sieR-p30kFPeL8GsUfgDA-dQSWzRuc9bY_7UzvNCUWfknQwb6LlGasG_ZinLMxUMmtMEebzPS6Sfktth6FcivrlEkJCNRice7bMqciPXtB9AvYkZ3WV4VodCLmQDmZiO0ikdxYEucgjokwqQUxgznc=",
+                                "isAnimatedGIF": false,
+                                "imageOriginalWidth": 344,
+                                "imageOriginalHeight": 297,
+                                "imageOriginalPixels": 1
+                              }
+                            },
+                            "lm": 81016544,
+                            "children": []
+                          },
+                          {
+                            "id": "4acc651c-f7f7-d790-a2ea-cb0556e8ef62",
+                            "nm": "R1 -&gt; Two 1000 ohm resistors in parallel",
+                            "ct": 81016486,
+                            "pr": 100,
+                            "prnt": "aa4ab997-ba09-2f38-1431-caaf2b114b82",
+                            "metadata": {},
+                            "lm": 81016525,
+                            "children": []
+                          },
+                          {
+                            "id": "2708f686-6795-d92d-4383-de1121d378a6",
+                            "nm": "Voltage divider circuit",
+                            "ct": 81016534,
+                            "pr": 300,
+                            "prnt": "aa4ab997-ba09-2f38-1431-caaf2b114b82",
+                            "metadata": {},
+                            "lm": 81016541,
+                            "children": []
+                          },
+                          {
+                            "id": "d134f762-1f55-b006-3ee1-d3e59e71d26b",
+                            "nm": "ChatGPT does not recommend a voltage divider circuit",
+                            "ct": 81017719,
+                            "pr": 500,
+                            "prnt": "aa4ab997-ba09-2f38-1431-caaf2b114b82",
+                            "metadata": {},
+                            "lm": 81017732,
+                            "children": []
+                          },
+                          {
+                            "id": "08ccd0a2-b241-d6c5-412f-82b9391aa751",
+                            "nm": "Recommends a regulator",
+                            "ct": 81017732,
+                            "pr": 600,
+                            "prnt": "aa4ab997-ba09-2f38-1431-caaf2b114b82",
+                            "metadata": {},
+                            "lm": 81017736,
+                            "children": []
+                          },
+                          {
+                            "id": "175d3971-5f43-52a4-efb5-9fb22ebcf7c8",
+                            "nm": "What you need",
+                            "ct": 81017736,
+                            "pr": 700,
+                            "prnt": "aa4ab997-ba09-2f38-1431-caaf2b114b82",
+                            "metadata": {},
+                            "lm": 81017772,
+                            "children": [
+                              {
+                                "id": "07876eb9-a39a-951a-e494-e280afd87728",
+                                "nm": "Multimeter, short lengths of fine wire, flux.",
+                                "ct": 81017770,
+                                "pr": 400,
+                                "prnt": "175d3971-5f43-52a4-efb5-9fb22ebcf7c8",
+                                "metadata": {},
+                                "lm": 81017770,
+                                "children": []
+                              },
+                              {
+                                "id": "5357d127-1628-6054-5aaa-31c6ba26bd85",
+                                "nm": "A small 3.3 V regulator module (AP2112-3.3, MCP1700-3.3, MIC5504-3.3, etc.; 150–300 mA is plenty). AMS1117-3.3 also works but runs warm.",
+                                "ct": 81017750,
+                                "pr": 200,
+                                "prnt": "175d3971-5f43-52a4-efb5-9fb22ebcf7c8",
+                                "metadata": {},
+                                "lm": 81017765,
+                                "children": []
+                              },
+                              {
+                                "id": "ae607f32-3716-2e1f-e407-59536f50068c",
+                                "nm": "Two capacitors as per your regulator’s datasheet (typ. 10 µF on IN and OUT, plus 0.1 µF ceramics close to the module).",
+                                "ct": 81017750,
+                                "pr": 300,
+                                "prnt": "175d3971-5f43-52a4-efb5-9fb22ebcf7c8",
+                                "metadata": {},
+                                "lm": 81017765,
+                                "children": []
+                              },
+                              {
+                                "id": "be6f2c8c-be6d-3a08-8081-b86339361c9d",
+                                "nm": "Do not feed 5 V straight into the board. You’ll use the USB red wire only to power the 3.3 V regulator.",
+                                "ct": 81017750,
+                                "pr": 500,
+                                "prnt": "175d3971-5f43-52a4-efb5-9fb22ebcf7c8",
+                                "metadata": {},
+                                "lm": 81017772,
+                                "children": []
+                              },
+                              {
+                                "id": "bffddd46-76e6-8c89-21ad-1079d8639c67",
+                                "nm": "A spare USB-A cable you can cut (wires: red=+5 V, white=D–, green=D+, black=GND, plus shield).",
+                                "ct": 81017750,
+                                "pr": 100,
+                                "prnt": "175d3971-5f43-52a4-efb5-9fb22ebcf7c8",
+                                "metadata": {},
+                                "cp": 81018267,
+                                "lm": 81018267,
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "id": "14886541-f3bb-fba0-d6b0-90e74727f882",
+                            "nm": "Identify the four pads on the module",
+                            "ct": 81017750,
+                            "pr": 1300,
+                            "prnt": "aa4ab997-ba09-2f38-1431-caaf2b114b82",
+                            "metadata": {},
+                            "lm": 81017785,
+                            "children": [
+                              {
+                                "id": "37afc07a-4aad-c689-0175-9553ed5abb44",
+                                "nm": "A very common order (from one side to the other) is: GND – D– – D+ – 3V3.",
+                                "ct": 81017750,
+                                "pr": 500,
+                                "prnt": "14886541-f3bb-fba0-d6b0-90e74727f882",
+                                "metadata": {},
+                                "lm": 81017785,
+                                "children": []
+                              },
+                              {
+                                "id": "d664a5e9-a379-568e-cbb6-378d9d284f36",
+                                "nm": "If they aren’t labeled, confirm with a meter:",
+                                "ct": 81017750,
+                                "pr": 100,
+                                "prnt": "14886541-f3bb-fba0-d6b0-90e74727f882",
+                                "metadata": {},
+                                "lm": 81017790,
+                                "children": [
+                                  {
+                                    "id": "dd032a17-2af1-4450-0c17-ede5fd2557cf",
+                                    "nm": "GND: continuity to big ground copper/shield, and to the USB shield can.",
+                                    "ct": 81017750,
+                                    "pr": 100,
+                                    "prnt": "d664a5e9-a379-568e-cbb6-378d9d284f36",
+                                    "metadata": {},
+                                    "lm": 81017790,
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "0e38dce3-9189-cb80-3268-6c5b25bcece1",
+                                    "nm": "+3.3 V: goes to decoupling caps to ground (you’ll see/measure a cap there).",
+                                    "ct": 81017750,
+                                    "pr": 200,
+                                    "prnt": "d664a5e9-a379-568e-cbb6-378d9d284f36",
+                                    "metadata": {},
+                                    "lm": 81017790,
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "ee969e50-b539-e315-238d-c8273dc79572",
+                                    "nm": "The remaining two are D–/D+; they run into a tiny ESD diode part near the connector. If unsure which is which, you can swap later—no damage will occur.",
+                                    "ct": 81017750,
+                                    "pr": 300,
+                                    "prnt": "d664a5e9-a379-568e-cbb6-378d9d284f36",
+                                    "metadata": {},
+                                    "lm": 81017790,
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "717c1dca-bac9-961e-57c6-da9a5c33fa17",
+                            "nm": "Build the cable/regulator",
+                            "ct": 81017750,
+                            "pr": 1900,
+                            "prnt": "aa4ab997-ba09-2f38-1431-caaf2b114b82",
+                            "metadata": {},
+                            "lm": 81017823,
+                            "children": [
+                              {
+                                "id": "fd5f7e8a-b740-1906-1b89-a78419440603",
+                                "nm": "Mount the regulator on a tiny perfboard:",
+                                "ct": 81017750,
+                                "pr": 200,
+                                "prnt": "717c1dca-bac9-961e-57c6-da9a5c33fa17",
+                                "metadata": {},
+                                "lm": 81017823,
+                                "children": [
+                                  {
+                                    "id": "8ae4dfdf-2df2-abca-9907-0fb5c20f5e07",
+                                    "nm": "USB red (5 V) → VIN of the regulator.",
+                                    "ct": 81017750,
+                                    "pr": 0,
+                                    "prnt": "fd5f7e8a-b740-1906-1b89-a78419440603",
+                                    "metadata": {},
+                                    "lm": 81017750,
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "6fdef52d-cbd0-4316-1733-0e5235701fed",
+                                    "nm": "USB black (GND) → regulator GND.",
+                                    "ct": 81017750,
+                                    "pr": 1,
+                                    "prnt": "fd5f7e8a-b740-1906-1b89-a78419440603",
+                                    "metadata": {},
+                                    "lm": 81017750,
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "dfa690c5-e1a1-e3d4-9118-f22f1155b95b",
+                                    "nm": "Add the input/output caps right at the pins.",
+                                    "ct": 81017750,
+                                    "pr": 2,
+                                    "prnt": "fd5f7e8a-b740-1906-1b89-a78419440603",
+                                    "metadata": {},
+                                    "lm": 81017750,
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "45c96593-1008-e70b-cdfc-3524b2e9e427",
+                                    "nm": "Regulator VOUT (3.3 V) will go to the module’s 3V3 pad.",
+                                    "ct": 81017750,
+                                    "pr": 3,
+                                    "prnt": "fd5f7e8a-b740-1906-1b89-a78419440603",
+                                    "metadata": {},
+                                    "lm": 81017750,
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              {
+                                "id": "87458196-a465-853d-1e7f-3d98685c32aa",
+                                "nm": "Wire the module:",
+                                "ct": 81017750,
+                                "pr": 300,
+                                "prnt": "717c1dca-bac9-961e-57c6-da9a5c33fa17",
+                                "metadata": {},
+                                "lm": 81017823,
+                                "children": [
+                                  {
+                                    "id": "b1e5bb2d-3503-555a-4f43-f7f80423f0dd",
+                                    "nm": "Module GND → USB black (and regulator GND).",
+                                    "ct": 81017750,
+                                    "pr": 0,
+                                    "prnt": "87458196-a465-853d-1e7f-3d98685c32aa",
+                                    "metadata": {},
+                                    "lm": 81017750,
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "ae3cfb92-80f8-99e0-f984-0c34ed98c2e9",
+                                    "nm": "Module 3V3 → regulator VOUT 3.3 V.",
+                                    "ct": 81017750,
+                                    "pr": 1,
+                                    "prnt": "87458196-a465-853d-1e7f-3d98685c32aa",
+                                    "metadata": {},
+                                    "lm": 81017750,
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "f2d52d3a-478e-a98e-0bb4-e3213686b6d3",
+                                    "nm": "Module D– → USB white.",
+                                    "ct": 81017750,
+                                    "pr": 2,
+                                    "prnt": "87458196-a465-853d-1e7f-3d98685c32aa",
+                                    "metadata": {},
+                                    "lm": 81017750,
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "574b164a-c59c-c8ff-cf47-5bfed652d20f",
+                                    "nm": "Module D+ → USB green.",
+                                    "ct": 81017750,
+                                    "pr": 3,
+                                    "prnt": "87458196-a465-853d-1e7f-3d98685c32aa",
+                                    "metadata": {},
+                                    "lm": 81017750,
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "e68967be-0493-9f47-c2da-91ca69a88a98",
+                                    "nm": "Leave USB red isolated from the module (it only feeds the regulator).",
+                                    "ct": 81017750,
+                                    "pr": 4,
+                                    "prnt": "87458196-a465-853d-1e7f-3d98685c32aa",
+                                    "metadata": {},
+                                    "lm": 81017750,
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "b60ebe2e-33cc-63a9-5ae8-1e81902c53fc",
+                                    "nm": "If there’s a cable shield/drain, tie it to GND near the connector (optional but nice).",
+                                    "ct": 81017750,
+                                    "pr": 5,
+                                    "prnt": "87458196-a465-853d-1e7f-3d98685c32aa",
+                                    "metadata": {},
+                                    "lm": 81017750,
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              {
+                                "id": "9ff64d22-baf7-2418-3e0d-2de8c8abd480",
+                                "nm": "Prepare the USB cable. Cut, strip, and tin the four wires. Keep white/green twisted for as long as possible.",
+                                "ct": 81017750,
+                                "pr": 100,
+                                "prnt": "717c1dca-bac9-961e-57c6-da9a5c33fa17",
+                                "metadata": {},
+                                "lm": 81017823,
+                                "children": []
+                              },
+                              {
+                                "id": "6f592231-efdc-e6ae-b781-28c45315ceb7",
+                                "nm": "Strain relief and insulate (heat-shrink/hot glue) so nothing can short.",
+                                "ct": 81017750,
+                                "pr": 400,
+                                "prnt": "717c1dca-bac9-961e-57c6-da9a5c33fa17",
+                                "metadata": {},
+                                "lm": 81017823,
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "id": "fb5a4d34-d815-a49a-91fd-711fea7a0574",
+                            "nm": "Power-up &amp; test (Windows)",
+                            "ct": 81017750,
+                            "pr": 2400,
+                            "prnt": "aa4ab997-ba09-2f38-1431-caaf2b114b82",
+                            "metadata": {},
+                            "lm": 81017831,
+                            "children": [
+                              {
+                                "id": "4784362d-2dc3-341f-cee0-7998d788db7c",
+                                "nm": "Install an AuthenTec AES1610 OEM driver so it appears under Biometric devices. Then enroll via Windows (or use OEM utility).",
+                                "ct": 81017750,
+                                "pr": 400,
+                                "prnt": "fb5a4d34-d815-a49a-91fd-711fea7a0574",
+                                "metadata": {},
+                                "lm": 81017831,
+                                "children": [
+                                  {
+                                    "id": "a85b9eda-9717-3ae1-780f-b3232bde183d",
+                                    "nm": "If it shows “Unknown device” and you’re certain the 3.3 V is stable: swap D+ and D– and try again.",
+                                    "ct": 81017750,
+                                    "pr": 0,
+                                    "prnt": "4784362d-2dc3-341f-cee0-7998d788db7c",
+                                    "metadata": {},
+                                    "lm": 81017750,
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              {
+                                "id": "0310ea14-3a31-0953-232c-3bd1be68a4ed",
+                                "nm": "Bench-check first: With USB unplugged, verify no shorts between 3.3 V and GND.",
+                                "ct": 81017750,
+                                "pr": 100,
+                                "prnt": "fb5a4d34-d815-a49a-91fd-711fea7a0574",
+                                "metadata": {},
+                                "lm": 81017831,
+                                "children": []
+                              },
+                              {
+                                "id": "51f36281-ac9a-47c8-eeee-e4d2f16760f0",
+                                "nm": "Plug into a USB port → measure the regulator: you should see ~3.30 V at the module.",
+                                "ct": 81017750,
+                                "pr": 200,
+                                "prnt": "fb5a4d34-d815-a49a-91fd-711fea7a0574",
+                                "metadata": {},
+                                "lm": 81017831,
+                                "children": []
+                              },
+                              {
+                                "id": "dfdf8d4d-24fe-1554-075e-06fe5be5334a",
+                                "nm": "Windows Device Manager should enumerate an AuthenTec device (or “Unknown” if drivers are missing).",
+                                "ct": 81017750,
+                                "pr": 300,
+                                "prnt": "fb5a4d34-d815-a49a-91fd-711fea7a0574",
+                                "metadata": {},
+                                "lm": 81017831,
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "id": "77d2925e-105f-8c6e-1aeb-e8f477678ce1",
+                            "nm": "Notes &amp; tips",
+                            "ct": 81017750,
+                            "pr": 2900,
+                            "prnt": "aa4ab997-ba09-2f38-1431-caaf2b114b82",
+                            "metadata": {},
+                            "lm": 81017847,
+                            "children": [
+                              {
+                                "id": "f21f0b98-793c-95f7-97c2-b5338af57702",
+                                "nm": "Keep the D+/D– pair short (&lt;15 cm of free wire) and twisted the whole way.",
+                                "ct": 81017750,
+                                "pr": 100,
+                                "prnt": "77d2925e-105f-8c6e-1aeb-e8f477678ce1",
+                                "metadata": {},
+                                "lm": 81017847,
+                                "children": []
+                              },
+                              {
+                                "id": "dfd88bcd-c1f2-03a3-d258-c58309d0ca6e",
+                                "nm": "Current draw is typically &lt;100 mA, but pick a regulator with comfortable headroom.",
+                                "ct": 81017750,
+                                "pr": 200,
+                                "prnt": "77d2925e-105f-8c6e-1aeb-e8f477678ce1",
+                                "metadata": {},
+                                "lm": 81017847,
+                                "children": []
+                              },
+                              {
+                                "id": "1e89a6cd-cdf1-9715-4d62-2097b28345a3",
+                                "nm": "If your module originally had two power pads (+3V and +3VS), the 4-pin version usually ties them; if you ever see two separate 3.3-V pads, bridge them and feed both.",
+                                "ct": 81017750,
+                                "pr": 300,
+                                "prnt": "77d2925e-105f-8c6e-1aeb-e8f477678ce1",
+                                "metadata": {},
+                                "lm": 81017847,
+                                "children": []
+                              },
+                              {
+                                "id": "9de97bdc-feb8-4c8b-5e75-2938b30a9e73",
+                                "nm": "Don’t connect the module until you’ve verified the regulator outputs 3.3 V with the cable plugged into USB.",
+                                "ct": 81017750,
+                                "pr": 400,
+                                "prnt": "77d2925e-105f-8c6e-1aeb-e8f477678ce1",
+                                "metadata": {},
+                                "lm": 81017847,
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "472acc88-804e-44ed-8952-c8e0c8c66293",
+                "nm": "<a href=\"https://chatgpt.com/c/67c7690c-eef8-8011-9e71-f442c581f20a\">ChatGPT Thread</a>",
+                "ct": 65138141,
+                "pr": 200,
+                "prnt": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+                "metadata": {},
+                "lm": 65138147,
+                "children": []
+              },
+              {
+                "id": "20f7900d-aaac-e971-6575-d0d9e26d8107",
+                "nm": "<a href=\"https://openlab.ece.illinois.edu/\">UIUC OpenLab</a>",
+                "ct": 65197833,
+                "pr": 300,
+                "prnt": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+                "metadata": {},
+                "lm": 65197847,
+                "children": []
+              },
+              {
+                "id": "acf78f03-9859-d4bc-0026-2cc3a0257cee",
+                "nm": "<a href=\"https://cucfablab.web.illinois.edu/programs-and-services/open-hours-appointments/\">UIUC FabLab</a>",
+                "ct": 65197837,
+                "pr": 400,
+                "prnt": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+                "metadata": {},
+                "lm": 65197852,
+                "children": []
+              },
+              {
+                "id": "c3133b0e-f213-432e-4ad8-7ca7352c2ca7",
+                "nm": "",
+                "ct": 81016430,
+                "pr": 500,
+                "prnt": "8b16c3f0-055a-068c-1fcd-9228f2cda470",
+                "metadata": {},
+                "lm": 81016430,
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "73218e9c-1bfc-9d05-6e37-d5e4e0cbce82",
+            "nm": "Keyboard",
+            "ct": 65369520,
+            "pr": 300,
+            "prnt": "7b87b375-cc45-783d-b206-d298989d6027",
+            "metadata": {},
+            "lm": 65369529,
+            "children": [
+              {
+                "id": "93c1727b-37b2-7972-9e9d-a02849863597",
+                "nm": "FFC",
+                "ct": 66437208,
+                "pr": 100,
+                "prnt": "73218e9c-1bfc-9d05-6e37-d5e4e0cbce82",
+                "metadata": {},
+                "lm": 66437231,
+                "children": []
+              },
+              {
+                "id": "4f0ec7fa-ed01-4e5b-b08d-e65b78b2b8b2",
+                "nm": "<a href=\"https://www.google.com/search?q=FFC+Breakout+Board&oq=FFC+Breakout+Board&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEHNDg1ajBqMagCALACAA&sourceid=chrome&ie=UTF-8\">FFC Breakout Board</a>",
+                "ct": 66437217,
+                "pr": 200,
+                "prnt": "73218e9c-1bfc-9d05-6e37-d5e4e0cbce82",
+                "metadata": {},
+                "lm": 66437233,
+                "children": []
+              },
+              {
+                "id": "da2d960e-9fc9-77ad-3a27-a351cfcd297b",
+                "nm": "<a href=\"https://oshwlab.com/amirgonnen/ztl_01\">https://oshwlab.com/amirgonnen/ztl_01</a>",
+                "ct": 66437233,
+                "pr": 300,
+                "prnt": "73218e9c-1bfc-9d05-6e37-d5e4e0cbce82",
+                "metadata": {},
+                "lm": 66437273,
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "b5585317-83a9-dd2f-2523-8bdb6200bf5d",
+            "nm": "<a href=\"https://www.scribd.com/document/54938093/aspire-4935-4935g\">Service Guide</a>",
+            "ct": 80945436,
+            "pr": 400,
+            "prnt": "7b87b375-cc45-783d-b206-d298989d6027",
+            "metadata": {},
+            "lm": 80945441,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "fab33e28-0ae5-4127-9db4-51963000714c",
+        "nm": "Spotify Controller",
+        "ct": 81379748,
+        "pr": 50,
+        "prnt": "fd359d6e-f000-b077-da51-2add461fe28b",
+        "metadata": {},
+        "cp": 83862043,
+        "lm": 83862043,
+        "children": [
+          {
+            "id": "2dda7a32-eff0-41c5-bef8-edbb8cc44adc",
+            "nm": "Use ESP + LCD Screen + Potentiometer (Volume control) + 3 buttons (Forward + Back + Play/Pause) to view and control spotify",
+            "ct": 81379838,
+            "pr": 100,
+            "prnt": "fab33e28-0ae5-4127-9db4-51963000714c",
+            "metadata": {},
+            "lm": 81379838,
+            "children": []
+          },
+          {
+            "id": "574a99eb-5dc4-4b65-b5dc-5c10b9154730",
+            "nm": "3D Print Case",
+            "ct": 81379973,
+            "pr": 50,
+            "prnt": "fab33e28-0ae5-4127-9db4-51963000714c",
+            "metadata": {},
+            "lm": 81379973,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "744b9249-b570-1630-6273-a3fe3e4ff644",
+    "nm": "<a href=\"https://github.com/practical-tutorials/project-based-learning?tab=readme-ov-file#cc\">Other Projects</a>",
+    "ct": 65140080,
+    "pr": 900,
+    "prnt": null,
+    "metadata": {},
+    "lm": 77855559,
+    "children": [
+      {
+        "id": "c52e22f3-6aff-58ef-586b-eb2c7ac10b57",
+        "nm": "<a href=\"https://arjunsreedharan.org/post/148675821737/memory-allocators-101-write-a-simple-memory\">Memory Allocator</a>",
+        "ct": 65140090,
+        "pr": 100,
+        "prnt": "744b9249-b570-1630-6273-a3fe3e4ff644",
+        "metadata": {},
+        "lm": 65140098,
+        "children": []
+      },
+      {
+        "id": "a669432e-779f-5061-dfde-3887fb574d31",
+        "nm": "<a href=\"https://www.craftinginterpreters.com/introduction.html\">Interpreter</a>",
+        "ct": 65140098,
+        "pr": 200,
+        "prnt": "744b9249-b570-1630-6273-a3fe3e4ff644",
+        "metadata": {},
+        "lm": 65140107,
+        "children": []
+      },
+      {
+        "id": "c66770fb-8297-0789-696e-a0694287ee59",
+        "nm": "<a href=\"https://github.com/tuhdo/os01/blob/master/Operating_Systems_From_0_to_1.pdf\">Operating System</a>",
+        "ct": 65140104,
+        "pr": 300,
+        "prnt": "744b9249-b570-1630-6273-a3fe3e4ff644",
+        "metadata": {},
+        "lm": 65140114,
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "fd989b74-40ce-098c-42ba-d371f093ea48",
+    "nm": "CS 124H",
+    "ct": 81441767,
+    "pr": 25,
+    "prnt": null,
+    "metadata": {},
+    "lm": 81441771,
+    "children": [
+      {
+        "id": "e5a170de-b559-43b7-ab00-0c5a2b62f56b",
+        "nm": "Work on website and add cards for each staff and make separate page for old staff and current staff",
+        "ct": 82747150,
+        "pr": 25,
+        "prnt": "fd989b74-40ce-098c-42ba-d371f093ea48",
+        "metadata": {},
+        "lm": 82747150,
+        "children": []
+      },
+      {
+        "id": "a8b3c217-0e0c-4ee2-a2f0-019074a19fd3",
+        "nm": "Clone repo and add it to CS124H organization",
+        "ct": 82747169,
+        "pr": 12,
+        "prnt": "fd989b74-40ce-098c-42ba-d371f093ea48",
+        "metadata": {},
+        "lm": 82747169,
+        "children": []
+      },
+      {
+        "id": "b168eada-0f31-8046-d8e0-19004a27fb7e",
+        "nm": "Fill out the interest form when it gets released",
+        "ct": 81441893,
+        "pr": 100,
+        "prnt": "fd989b74-40ce-098c-42ba-d371f093ea48",
+        "metadata": {},
+        "cp": 82217763,
+        "lm": 82217763,
+        "children": []
+      },
+      {
+        "id": "a70a3b7f-3027-40d3-a2de-737041aac76e",
+        "nm": "Get access to the website github",
+        "ct": 82217772,
+        "pr": 50,
+        "prnt": "fd989b74-40ce-098c-42ba-d371f093ea48",
+        "metadata": {},
+        "cp": 82747132,
+        "lm": 82747132,
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "b841dd9c-0318-6ceb-137d-19519c7eef74",
+    "nm": "MicroTech",
+    "ct": 81441868,
+    "pr": 12,
+    "prnt": null,
+    "metadata": {},
+    "lm": 92552551,
+    "children": [
+      {
+        "id": "196a15ea-a93d-4b9f-861e-299220c725d7",
+        "nm": "",
+        "ct": 92524930,
+        "pr": 100,
+        "prnt": "b841dd9c-0318-6ceb-137d-19519c7eef74",
+        "metadata": {},
+        "lm": 92524930,
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+    "nm": "ToDo",
+    "ct": 75550229,
+    "pr": 100,
+    "prnt": null,
+    "metadata": {},
+    "lm": 77890721,
+    "children": [
+      {
+        "id": "dd7359f5-beb3-4ea9-991e-f092b3d53d93",
+        "nm": "Update LinkedIn",
+        "ct": 77771923,
+        "pr": 50,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 77771923,
+        "children": []
+      },
+      {
+        "id": "ca7b08b6-3c00-45f5-94b4-c62853504c85",
+        "nm": "RSnipe",
+        "ct": 77438665,
+        "pr": 400,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 77438665,
+        "children": [
+          {
+            "id": "f1217070-c5fa-4db3-a10a-5201c6105f23",
+            "nm": "Look into this site <a href=\"https://crates.io/crates/xcap\">https://crates.io/crates/xcap</a>",
+            "ct": 77439139,
+            "pr": 1,
+            "prnt": "ca7b08b6-3c00-45f5-94b4-c62853504c85",
+            "metadata": {},
+            "lm": 77441060,
+            "children": []
+          },
+          {
+            "id": "c9314e5a-461c-4a76-8a6e-bff5628b2fff",
+            "nm": "Learn RUST",
+            "ct": 77438898,
+            "pr": 100,
+            "prnt": "ca7b08b6-3c00-45f5-94b4-c62853504c85",
+            "metadata": {},
+            "lm": 77438898,
+            "children": [
+              {
+                "id": "fdc9ce41-be0f-4f8b-a20f-8327a9127d25",
+                "nm": "https://www.youtube.com/watch?v=BpPEoZW5IiY",
+                "ct": 77441514,
+                "pr": 100,
+                "prnt": "c9314e5a-461c-4a76-8a6e-bff5628b2fff",
+                "metadata": {},
+                "lm": 77441514,
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "096fe57b-a2df-4353-985c-e13ffa8a0f18",
+            "nm": "Create UI Flow",
+            "ct": 77438903,
+            "pr": 50,
+            "prnt": "ca7b08b6-3c00-45f5-94b4-c62853504c85",
+            "metadata": {},
+            "lm": 77438903,
+            "children": []
+          },
+          {
+            "id": "703e7761-3e95-45f4-b2de-37ad81f3169d",
+            "nm": "Create UI Mockups",
+            "ct": 77438907,
+            "pr": 25,
+            "prnt": "ca7b08b6-3c00-45f5-94b4-c62853504c85",
+            "metadata": {},
+            "lm": 77438907,
+            "children": []
+          },
+          {
+            "id": "40a95a71-5b0a-46a2-9358-0dc547ed38cf",
+            "nm": "Learn RUST UI",
+            "ct": 77438923,
+            "pr": 12,
+            "prnt": "ca7b08b6-3c00-45f5-94b4-c62853504c85",
+            "metadata": {},
+            "lm": 77438923,
+            "children": []
+          },
+          {
+            "id": "c9cdc8d6-ce19-48c5-a57f-66a754845944",
+            "nm": "Make all Flameshot features",
+            "ct": 77438943,
+            "pr": 6,
+            "prnt": "ca7b08b6-3c00-45f5-94b4-c62853504c85",
+            "metadata": {},
+            "lm": 77438943,
+            "children": []
+          },
+          {
+            "id": "caf3fae1-ac48-4626-9d1e-02281294648c",
+            "nm": "Add in WGPU for hardware accelerated rendering",
+            "ct": 77438961,
+            "pr": 3,
+            "prnt": "ca7b08b6-3c00-45f5-94b4-c62853504c85",
+            "metadata": {},
+            "lm": 77438961,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "4ac2e091-8854-43ce-ba6f-2518d22eaf5a",
+        "nm": "SmartSplit",
+        "ct": 77952452,
+        "pr": 3,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 77952452,
+        "children": [
+          {
+            "id": "080becfd-6b50-4a9b-a6ea-c755c267a259",
+            "nm": "Figure out Receipt Scanning",
+            "ct": 77952468,
+            "pr": 100,
+            "prnt": "4ac2e091-8854-43ce-ba6f-2518d22eaf5a",
+            "metadata": {},
+            "lm": 77952468,
+            "children": [
+              {
+                "id": "2e6943b7-3c12-4fea-9c86-159ce29d42e2",
+                "nm": "Use Veryfi",
+                "ct": 77958752,
+                "pr": 100,
+                "prnt": "080becfd-6b50-4a9b-a6ea-c755c267a259",
+                "metadata": {},
+                "lm": 77958752,
+                "children": []
+              },
+              {
+                "id": "690d7494-5c4d-44ff-97c4-743f3c6637f1",
+                "nm": "Use Klippa",
+                "ct": 77958760,
+                "pr": 50,
+                "prnt": "080becfd-6b50-4a9b-a6ea-c755c267a259",
+                "metadata": {},
+                "lm": 77958760,
+                "children": []
+              },
+              {
+                "id": "44710924-79d0-43d6-afa2-3d56493ea8e2",
+                "nm": "Test Veryfi and Klippa",
+                "ct": 77958767,
+                "pr": 25,
+                "prnt": "080becfd-6b50-4a9b-a6ea-c755c267a259",
+                "metadata": {},
+                "lm": 77958767,
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "039622c2-ad56-4182-ad2b-044ec691cc53",
+            "nm": "Create Balances Page",
+            "ct": 77952487,
+            "pr": 25,
+            "prnt": "4ac2e091-8854-43ce-ba6f-2518d22eaf5a",
+            "metadata": {},
+            "lm": 77952487,
+            "children": []
+          },
+          {
+            "id": "5d0072d7-123c-4e54-8823-3097a09b9bb7",
+            "nm": "Create Scan Page",
+            "ct": 77952476,
+            "pr": 50,
+            "prnt": "4ac2e091-8854-43ce-ba6f-2518d22eaf5a",
+            "metadata": {},
+            "lm": 77952476,
+            "children": []
+          },
+          {
+            "id": "0ee6d1e6-f06c-49d5-ab95-feef68486ad7",
+            "nm": "Come up with backend design",
+            "ct": 77952499,
+            "pr": 12,
+            "prnt": "4ac2e091-8854-43ce-ba6f-2518d22eaf5a",
+            "metadata": {},
+            "lm": 77959186,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "46b1cc58-c1cd-f590-51fd-6e5dc5622994",
+        "nm": "OSCP",
+        "ct": 72950334,
+        "pr": 1500,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75624976,
+        "children": []
+      },
+      {
+        "id": "473386b2-6d0e-e643-032b-71f28bd72d7e",
+        "nm": "Change addresses",
+        "ct": 72596278,
+        "pr": 1400,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75624976,
+        "children": [
+          {
+            "id": "a7e16dca-ed1b-dda7-6443-79b3e3374e6c",
+            "nm": "PNC Bank",
+            "ct": 72596281,
+            "pr": 100,
+            "prnt": "473386b2-6d0e-e643-032b-71f28bd72d7e",
+            "metadata": {},
+            "lm": 75624976,
+            "children": []
+          },
+          {
+            "id": "29aa861e-c0ce-99fa-19a2-38ddbb056f6e",
+            "nm": "UIUC Health plan",
+            "ct": 72596295,
+            "pr": 400,
+            "prnt": "473386b2-6d0e-e643-032b-71f28bd72d7e",
+            "metadata": {},
+            "lm": 75624976,
+            "children": []
+          },
+          {
+            "id": "db7c1f1b-5e22-50ba-f3f2-50e8388b3900",
+            "nm": "Phone number",
+            "ct": 72596290,
+            "pr": 300,
+            "prnt": "473386b2-6d0e-e643-032b-71f28bd72d7e",
+            "metadata": {},
+            "cp": 77956269,
+            "lm": 77956269,
+            "children": []
+          },
+          {
+            "id": "fa5aad9b-f9b2-ab4d-bd18-4e3fb9cf227a",
+            "nm": "Amazon",
+            "ct": 72596289,
+            "pr": 200,
+            "prnt": "473386b2-6d0e-e643-032b-71f28bd72d7e",
+            "metadata": {},
+            "cp": 77955906,
+            "lm": 77955906,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "f6d80b6b-2bbb-c973-821c-802d06a26fe7",
+        "nm": "WebRTC Project",
+        "ct": 75554948,
+        "pr": 700,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 75623972,
+        "children": [
+          {
+            "id": "90c87b37-3b8a-c1b0-4321-33d58f3acb08",
+            "nm": "Figure out issue with WebRTC",
+            "ct": 75624001,
+            "pr": 100,
+            "prnt": "f6d80b6b-2bbb-c973-821c-802d06a26fe7",
+            "metadata": {},
+            "lm": 75624007,
+            "children": []
+          },
+          {
+            "id": "b1d92783-bfd1-9123-ddc3-b3543af768ec",
+            "nm": "Look at forum and course",
+            "ct": 75624007,
+            "pr": 200,
+            "prnt": "f6d80b6b-2bbb-c973-821c-802d06a26fe7",
+            "metadata": {},
+            "lm": 75624012,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "8eaa02e0-1c32-4ae1-834a-fcde99a3fc5c",
+        "nm": "AlberFlowy",
+        "ct": 77855514,
+        "pr": 12,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 77855514,
+        "children": [
+          {
+            "id": "ba831f86-e296-45e0-862f-bec7824cdae8",
+            "nm": "Get Google Approval",
+            "ct": 77870892,
+            "pr": 25,
+            "prnt": "8eaa02e0-1c32-4ae1-834a-fcde99a3fc5c",
+            "metadata": {},
+            "lm": 77870892,
+            "children": []
+          },
+          {
+            "id": "aa0e3408-7ed3-417c-bdd2-6a93a10df17f",
+            "nm": "Do security testing of auth flow",
+            "ct": 77959503,
+            "pr": 12,
+            "prnt": "8eaa02e0-1c32-4ae1-834a-fcde99a3fc5c",
+            "metadata": {},
+            "cp": 78039197,
+            "lm": 78039197,
+            "children": []
+          },
+          {
+            "id": "5df33177-9c16-46b6-903d-1ee0cbbee81c",
+            "nm": "Fix install and build flow completely",
+            "ct": 78039210,
+            "pr": 6,
+            "prnt": "8eaa02e0-1c32-4ae1-834a-fcde99a3fc5c",
+            "metadata": {},
+            "cp": 78039217,
+            "lm": 78039217,
+            "children": []
+          },
+          {
+            "id": "abdc4c29-088b-4123-84da-3eb779994c49",
+            "nm": "Add subnotes feature",
+            "ct": 77855548,
+            "pr": 50,
+            "prnt": "8eaa02e0-1c32-4ae1-834a-fcde99a3fc5c",
+            "metadata": {},
+            "lm": 77855548,
+            "children": []
+          },
+          {
+            "id": "8d271e26-7fe4-456c-93fb-b9b2616ea75e",
+            "nm": "Add due date feature",
+            "ct": 77855533,
+            "pr": 100,
+            "prnt": "8eaa02e0-1c32-4ae1-834a-fcde99a3fc5c",
+            "metadata": {},
+            "lm": 77855533,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "51c8007e-ee7f-b633-a3c4-caecd6aaaa13",
+        "nm": "Look for classes",
+        "ct": 80315660,
+        "pr": 1700,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 80315662,
+        "children": []
+      },
+      {
+        "id": "417a959c-2e2f-0277-3e19-a66dc7f353d8",
+        "nm": "Apply for internships",
+        "ct": 80315651,
+        "pr": 1600,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 80315660,
+        "children": []
+      },
+      {
+        "id": "9d84b6df-1ffc-cca9-15b6-b347db5a2117",
+        "nm": "Update Splitwise",
+        "ct": 80315662,
+        "pr": 1800,
+        "prnt": "f644c65b-51ec-45ad-b3d5-7cd3b318585b",
+        "metadata": {},
+        "lm": 80315682,
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "aec28100-03d9-4994-b3b4-4842cf13735b",
+    "nm": "Shopping",
+    "ct": 79785661,
+    "pr": 50,
+    "prnt": null,
+    "metadata": {},
+    "lm": 79785661,
+    "children": [
+      {
+        "id": "1b8853f0-1059-40a8-93e9-e55f817dd7bd",
+        "nm": "Protein Powder",
+        "ct": 79785926,
+        "pr": 50,
+        "prnt": "aec28100-03d9-4994-b3b4-4842cf13735b",
+        "metadata": {},
+        "cp": 81442203,
+        "lm": 81442203,
+        "children": []
+      },
+      {
+        "id": "bf3c7897-884b-46a9-9e07-a2dfdf4148a4",
+        "nm": "Chickpeas",
+        "ct": 79785852,
+        "pr": 200,
+        "prnt": "aec28100-03d9-4994-b3b4-4842cf13735b",
+        "metadata": {},
+        "cp": 81442205,
+        "lm": 81442205,
+        "children": []
+      },
+      {
+        "id": "b999f0f7-7f76-4580-994b-f747b3966f48",
+        "nm": "Greek Yogurt",
+        "ct": 79785728,
+        "pr": 600,
+        "prnt": "aec28100-03d9-4994-b3b4-4842cf13735b",
+        "metadata": {},
+        "lm": 79785728,
+        "children": []
+      },
+      {
+        "id": "23753e61-7a6c-457c-b5f1-f93aa51902df",
+        "nm": "Fruits",
+        "ct": 79785792,
+        "pr": 400,
+        "prnt": "aec28100-03d9-4994-b3b4-4842cf13735b",
+        "metadata": {},
+        "lm": 79785792,
+        "children": [
+          {
+            "id": "bd318093-111c-4bb6-bd25-ba9a6c84eb73",
+            "nm": "Frozen Fruits",
+            "ct": 79785890,
+            "pr": 100,
+            "prnt": "23753e61-7a6c-457c-b5f1-f93aa51902df",
+            "metadata": {},
+            "lm": 79785890,
+            "children": []
+          },
+          {
+            "id": "21cfad6c-c297-4005-a4c1-33a81b66a2df",
+            "nm": "Bananas",
+            "ct": 79785894,
+            "pr": 50,
+            "prnt": "23753e61-7a6c-457c-b5f1-f93aa51902df",
+            "metadata": {},
+            "lm": 79785894,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "d1fc78db-c234-4c89-af01-f1aec0dbc81c",
+        "nm": "Rice",
+        "ct": 79785690,
+        "pr": 800,
+        "prnt": "aec28100-03d9-4994-b3b4-4842cf13735b",
+        "metadata": {},
+        "cp": 81442211,
+        "lm": 81442211,
+        "children": []
+      },
+      {
+        "id": "a7961e50-50b1-47cc-af05-27d2d8e75b3e",
+        "nm": "Ice Cream",
+        "ct": 79785715,
+        "pr": 700,
+        "prnt": "aec28100-03d9-4994-b3b4-4842cf13735b",
+        "metadata": {},
+        "cp": 81442214,
+        "lm": 81442214,
+        "children": []
+      },
+      {
+        "id": "1f492504-d2d0-424a-9a3c-9f0d8be9a84a",
+        "nm": "Vegetables",
+        "ct": 79785682,
+        "pr": 900,
+        "prnt": "aec28100-03d9-4994-b3b4-4842cf13735b",
+        "metadata": {},
+        "cp": 81442212,
+        "lm": 81442212,
+        "children": [
+          {
+            "id": "b5d18d89-74b6-4040-9af5-6d2c94c04ba2",
+            "nm": "Costco Mix Veg",
+            "ct": 79785703,
+            "pr": 100,
+            "prnt": "1f492504-d2d0-424a-9a3c-9f0d8be9a84a",
+            "metadata": {},
+            "lm": 79785703,
+            "children": []
+          },
+          {
+            "id": "3c287954-8837-4c7a-965b-ba420d1fdfeb",
+            "nm": "Tomatoes",
+            "ct": 79785745,
+            "pr": 25,
+            "prnt": "1f492504-d2d0-424a-9a3c-9f0d8be9a84a",
+            "metadata": {},
+            "lm": 79785745,
+            "children": []
+          },
+          {
+            "id": "130774eb-2a75-4d0c-91b9-ecf977c82533",
+            "nm": "Bell Pepper",
+            "ct": 79785785,
+            "pr": 12,
+            "prnt": "1f492504-d2d0-424a-9a3c-9f0d8be9a84a",
+            "metadata": {},
+            "lm": 79785785,
+            "children": []
+          },
+          {
+            "id": "6a929276-1305-424a-bcdd-2cf0f3335d1b",
+            "nm": "Onions",
+            "ct": 79785741,
+            "pr": 50,
+            "prnt": "1f492504-d2d0-424a-9a3c-9f0d8be9a84a",
+            "metadata": {},
+            "lm": 79785741,
+            "children": []
+          },
+          {
+            "id": "7172f296-87e5-49e0-98d3-42ca5f2bed2f",
+            "nm": "Brocolli",
+            "ct": 79785805,
+            "pr": 6,
+            "prnt": "1f492504-d2d0-424a-9a3c-9f0d8be9a84a",
+            "metadata": {},
+            "lm": 79785805,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "b4f474a0-8733-4f0f-b2b8-7a676cb6a60b",
+        "nm": "Protein Bars",
+        "ct": 79785733,
+        "pr": 500,
+        "prnt": "aec28100-03d9-4994-b3b4-4842cf13735b",
+        "metadata": {},
+        "lm": 79785733,
+        "children": []
+      },
+      {
+        "id": "429ac9ad-7fcb-46e0-8a9e-2e57cdc95279",
+        "nm": "Canned Black Beans",
+        "ct": 79785833,
+        "pr": 300,
+        "prnt": "aec28100-03d9-4994-b3b4-4842cf13735b",
+        "metadata": {},
+        "lm": 79785833,
+        "children": []
+      },
+      {
+        "id": "02719558-b237-4253-8271-ff4855152329",
+        "nm": "Mixed Nuts",
+        "ct": 79785904,
+        "pr": 100,
+        "prnt": "aec28100-03d9-4994-b3b4-4842cf13735b",
+        "metadata": {},
+        "lm": 79785904,
+        "children": []
+      },
+      {
+        "id": "3f63d114-14a8-4d58-9e7e-0ea1134bd274",
+        "nm": "Creatine",
+        "ct": 79785929,
+        "pr": 25,
+        "prnt": "aec28100-03d9-4994-b3b4-4842cf13735b",
+        "metadata": {},
+        "lm": 79785929,
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "b0317031-f81e-48c8-ba34-f7308f8fe083",
+    "nm": "EOH",
+    "ct": 87840417,
+    "pr": 6,
+    "prnt": null,
+    "metadata": {},
+    "lm": 87840417,
+    "children": [
+      {
+        "id": "cf188e59-eea1-4760-9634-822291b3c2e6",
+        "nm": "Come up with materials list",
+        "ct": 87840426,
+        "pr": 100,
+        "prnt": "b0317031-f81e-48c8-ba34-f7308f8fe083",
+        "metadata": {},
+        "lm": 87840426,
+        "children": []
+      }
+    ]
+  }
+]
