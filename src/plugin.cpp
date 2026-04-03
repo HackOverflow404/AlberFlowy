@@ -12,6 +12,17 @@
 
 #include "plugin.h"
 
+using namespace std;
+
+// Helper: build the icon factory lambda used in every StandardItem
+static auto makeIconFactory(const QString &iconUrl)
+{
+    return [iconUrl]() -> std::unique_ptr<albert::Icon>
+    {
+        return albert::Icon::iconFromUrl(iconUrl);
+    };
+}
+
 // Constructor
 Plugin::Plugin()
 {
@@ -28,94 +39,95 @@ Plugin::Plugin()
     refreshCachedTree();
 }
 
-// Query handler logic
-void Plugin::handleTriggerQuery(Query &query)
+// Query handler logic — coroutine-based generator (new API)
+albert::ItemGenerator Plugin::items(albert::QueryContext &context)
 {
     // If the tree is null, wait for it to refresh
     if (cachedTree.is_null())
     {
         qWarning("Workflowy cache is empty, cannot handle query.");
-        auto item = make_shared<StandardItem>(
+        std::vector<std::shared_ptr<Item>> batch;
+        batch.push_back(StandardItem::make(
             QStringLiteral("Refreshing"),
             QStringLiteral("Loading Workflowy tree..."),
             QString(),
-            []
-            {
-                return albert::iconFromUrl(IconUrl);
-            },
-            vector<Action>{});
-        query.add(item);
-        return;
+            makeIconFactory(IconUrl)));
+        co_yield batch;
+        co_return;
     }
 
-    // If the query is auth, initialize the auth process
-    if (query == QStringLiteral("auth"))
+    // If the query is "auth", show the re-auth action
+    if (context.query() == QStringLiteral("auth"))
     {
         qWarning("Press enter to reauthenticate");
-        auto item = make_shared<StandardItem>(
+        std::vector<std::shared_ptr<Item>> batch;
+        batch.push_back(StandardItem::make(
             QStringLiteral("reauth"),
             QStringLiteral("Press enter to reauthenticate"),
             QString(),
-            []
-            {
-                return albert::iconFromUrl(IconUrl);
-            },
-            vector<Action>{
+            makeIconFactory(IconUrl),
+            std::vector<Action>{
                 Action(
                     QStringLiteral("reauth"),
                     QStringLiteral("Re-Auth"),
                     [this]()
                     {
-                        runWorkflowyCommand({QStringLiteral("auth")}, [this](bool success, const string &output)
+                        runWorkflowyCommand({QStringLiteral("auth")}, [this](bool success, const json &output)
                                             {
                             if (!success) {
                                 qWarning() << "CLI failed to execute.";
                                 refreshCachedTree();
                                 return;
                             }
-                            
-                            // Debug purposes
-                            qDebug() << "reauth output:\n" << QString::fromStdString(output);
-                            
+
+                            string rawOutput;
+                            if (output.is_string()) {
+                                rawOutput = output.get<string>();
+                            } else {
+                                rawOutput = output.dump();
+                            }
+                            qDebug() << "reauth output:\n" << QString::fromStdString(rawOutput);
+
                             const string prefix = "Found sessionid: ";
-                            if (output.find(prefix) == string::npos) {
+                            if (rawOutput.find(prefix) == string::npos) {
                                 qWarning("SessionID grab failed");
                                 return;
                             }
 
                             string sessionID;
-
-                            size_t pos = output.find(prefix);
+                            size_t pos = rawOutput.find(prefix);
                             pos += prefix.length();
-                            
+
                             size_t end = pos;
-                            while (end < output.length() && 
-                                isalnum(output[end])) {
+                            while (end < rawOutput.length() && isalnum(rawOutput[end])) {
                                 end++;
                             }
-                            
+
                             if (end > pos) {
-                                sessionID = output.substr(pos, end - pos);
+                                sessionID = rawOutput.substr(pos, end - pos);
                             }
-                            
+
                             cout << "Reauthenticated with Session ID: " << sessionID << endl; });
-                    })});
-        query.add(item);
-        return;
+                    })}));
+        co_yield batch;
+        co_return;
     }
 
-    // List nodes in Albert Items
-    QStringList parts = query.string().split(QLatin1Char('>'), Qt::SkipEmptyParts);
-    query.add(listNodes(parts, cachedTree));
+    // List nodes — split on '>' for sub-node navigation
+    QStringList parts = context.query().split(QLatin1Char('>'), Qt::SkipEmptyParts);
+    auto result = listNodes(parts, cachedTree);
+    if (!result.empty())
+        co_yield result;
 }
 
 // List the nodes as Items
-vector<shared_ptr<Item>> Plugin::listNodes(QStringList route, const json &root_nodes)
+std::vector<std::shared_ptr<Item>> Plugin::listNodes(QStringList route, const json &root_nodes)
 {
-    vector<shared_ptr<Item>> items;
+    std::vector<std::shared_ptr<Item>> items;
 
     // Get child nodes or display root based on the route
     json current_nodes = route.isEmpty() ? root_nodes : getChildNodes(root_nodes, route);
+
     // Lambda function to create QString representation of route
     auto makePath = [](const QStringList &segments)
     {
@@ -134,24 +146,14 @@ vector<shared_ptr<Item>> Plugin::listNodes(QStringList route, const json &root_n
                 const bool a_cp = a.contains("cp");
                 const bool b_cp = b.contains("cp");
 
-                if (a_cp && !b_cp) { // If a is checked and b is unchecked, b comes before a
-                    return false;
-                }
+                if (a_cp && !b_cp) return false;
+                if (!a_cp && b_cp) return true;
+                if (a_cp && b_cp)  return false;
 
-                if (!a_cp && b_cp) { // If a is unchecked and b is checked, a comes before b
-                    return true;
-                }
-
-                if (a_cp && b_cp) { // If a is checked and b is checked, preserve order
-                    return false;
-                }
-
-                // Sort by priority if both contain priority attributes
                 if (a.contains("pr") && b.contains("pr") && a["pr"].is_number() && b["pr"].is_number()) {
                     return a["pr"].get<int>() < b["pr"].get<int>();
                 }
 
-                // Else preserve order
                 return false; });
 
             // Append the items to the list
@@ -171,16 +173,12 @@ vector<shared_ptr<Item>> Plugin::listNodes(QStringList route, const json &root_n
                 newRoute.append(name);
                 QString path = makePath(newRoute);
 
-                auto item = make_shared<StandardItem>(
-                    path,          // id
-                    QString(name), // text
-                    path,          // subtext
-                    []
-                    {
-                        return albert::iconFromUrl(IconUrl);
-                    }, // icons
-                    vector<Action>{
-                        // actions
+                auto item = StandardItem::make(
+                    path,           // id
+                    name,           // text
+                    path,           // subtext
+                    makeIconFactory(IconUrl),
+                    std::vector<Action>{
                         Action(
                             QStringLiteral("tcomplete"),
                             completeLabel,
@@ -194,29 +192,28 @@ vector<shared_ptr<Item>> Plugin::listNodes(QStringList route, const json &root_n
                         Action(
                             QStringLiteral("remove"),
                             QStringLiteral("Remove"),
-                            [this, node, newRoute, root_nodes]() mutable
+                            [this, node, newRoute]() mutable
                             { qInfo("Removing node..."); removeNode(node, newRoute); }),
                     },
-                    path + QLatin1Char('>') // action text
+                    path + QLatin1Char('>')  // input action text (Tab completion)
                 );
 
                 items.push_back(item);
             }
         }
-        else if (current_nodes.is_object() && html_to_text(current_nodes["err"].get<string>()) == "Not Found")
-        { // If the node doesn't exist
+        else if (current_nodes.is_object() &&
+                 current_nodes.contains("err") &&
+                 html_to_text(current_nodes["err"].get<string>()) == "Not Found")
+        {
             // Create node option
             auto path = makePath(route);
 
-            auto item = make_shared<StandardItem>(
+            auto item = StandardItem::make(
                 path,
                 QStringLiteral("Create New Node"),
                 QStringLiteral("New node at ").append(path),
-                []
-                {
-                    return albert::iconFromUrl(IconUrl);
-                },
-                vector<Action>{
+                makeIconFactory(IconUrl),
+                std::vector<Action>{
                     Action(
                         QStringLiteral("create"),
                         QStringLiteral("Create Node"),
@@ -243,7 +240,9 @@ void Plugin::createNode(QStringList route, const json &nodes)
     QString name = route.takeLast();          // Retrieve new node name
     json parentNode = findNode(nodes, route); // get the parent node object from the json nodes
 
-    QString parentID = (parentNode.is_object() && parentNode.contains("id") && !parentNode["id"].is_null()) ? QString::fromStdString(parentNode["id"].get<string>()) : QStringLiteral("None"); // Get the parent ID if the parent exists, otherwise place it at root
+    QString parentID = (parentNode.is_object() && parentNode.contains("id") && !parentNode["id"].is_null())
+                           ? QString::fromStdString(parentNode["id"].get<string>())
+                           : QStringLiteral("None");
 
     qDebug() << "Create:" << name << " at route:" << route.join(u'>') << " with parentID:" << parentID;
 
@@ -412,11 +411,11 @@ void Plugin::toggleCompleteNode(const json &node, const QStringList route)
                                 const json txn_json = json::parse(output["server_run_operation_transaction_json"].get<string>());
                                 const auto &ops = txn_json.at("ops");
                                 const string id = ops.at(0).at("data").at("projectid");
-                                cout << "Node deleted with ID:" << id << endl;
+                                cout << "Node toggled-complete with ID:" << id << endl;
                             }
                             catch (const exception &e)
                             {
-                                qWarning() << "Error parsing deletion result:" << e.what();
+                                qWarning() << "Error parsing complete result:" << e.what();
                             }
 
                             refreshCachedTree();
@@ -458,6 +457,7 @@ json Plugin::findNode(const json &nodes, const QStringList &route)
 
 void Plugin::findPath(const json &nodes, const json &node)
 {
+    // Not yet implemented
 }
 
 json Plugin::getChildNodes(const json &nodes, const QStringList &route)
@@ -520,7 +520,7 @@ string Plugin::findCLI()
         return "";
     }
 
-    vector<string> nodePaths;
+    std::vector<string> nodePaths;
 
     string nvmDir = homeDir + "/.nvm";
     if (QDir(QString::fromStdString(nvmDir)).exists())
@@ -591,7 +591,7 @@ string Plugin::findCLI()
         }
     }
 
-    vector<string> npmCommands = {
+    std::vector<string> npmCommands = {
         "npm root -g",
         "npm config get prefix"};
 
@@ -609,7 +609,7 @@ string Plugin::findCLI()
                     result.pop_back();
                 }
 
-                vector<string> testPaths = {
+                std::vector<string> testPaths = {
                     result + "/workflowy/bin/workflowy",
                     result + "/bin/workflowy"};
 
@@ -628,7 +628,6 @@ string Plugin::findCLI()
     }
 
     string expandedPath = "/usr/local/bin:/usr/bin:/bin";
-
     for (const string &path : nodePaths)
     {
         expandedPath += ":" + path;
@@ -649,7 +648,6 @@ string Plugin::findCLI()
             pclose(pipe);
             if (isExecutable(result))
             {
-                pclose(pipe);
                 qDebug() << "Found workflowy via which at:" << QString::fromStdString(result);
                 return result;
             }
@@ -684,7 +682,7 @@ string Plugin::html_to_text(const string &in)
     GumboOutput *g = gumbo_parse(in.c_str());
     string out;
 
-    function<void(GumboNode *)> walk = [&](GumboNode *n)
+    std::function<void(GumboNode *)> walk = [&](GumboNode *n)
     {
         switch (n->type)
         {
@@ -717,7 +715,7 @@ QString Plugin::applyStrikethrough(const QString &text)
     return result;
 }
 
-void Plugin::runWorkflowyCommand(const QStringList &args, function<void(bool, const json &)> callback)
+void Plugin::runWorkflowyCommand(const QStringList &args, std::function<void(bool, const json &)> callback)
 {
     QProcess *process = new QProcess(this);
 
@@ -750,7 +748,6 @@ void Plugin::runWorkflowyCommand(const QStringList &args, function<void(bool, co
         }
     }
     env.insert(QStringLiteral("PATH"), currentPath);
-
     process->setProcessEnvironment(env);
 
     QString executable;
@@ -760,11 +757,6 @@ void Plugin::runWorkflowyCommand(const QStringList &args, function<void(bool, co
     {
         executable = CLIPath;
         processArgs = QStringList{QStringLiteral("workflowy")} + args;
-    }
-    else if (CLIPath.endsWith(QStringLiteral("/workflowy")))
-    {
-        executable = QStringLiteral("node");
-        processArgs = QStringList{CLIPath} + args;
     }
     else if (!CLIPath.isEmpty())
     {
@@ -779,48 +771,57 @@ void Plugin::runWorkflowyCommand(const QStringList &args, function<void(bool, co
         return;
     }
 
-    QObject::connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, [=](int exitCode, QProcess::ExitStatus exitStatus)
+    QObject::connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
+                     [=](int exitCode, QProcess::ExitStatus exitStatus)
                      {
-        (void) exitCode;
-        (void) exitStatus;
+        (void)exitCode;
+        (void)exitStatus;
+
         QByteArray stdoutData = process->readAllStandardOutput();
         QByteArray stderrData = process->readAllStandardError();
 
         qDebug() << "[workflowy-cli stdout]" << stdoutData;
-        qDebug() << "[workflowy-cli stderr]" << stderrData;
-
-        string output = stdoutData.toStdString();
-        json jsonOutput;
-        bool success = false;
-        bool isJSON;
 
         if (!stderrData.isEmpty())
             qWarning() << "[workflowy-cli stderr]" << stderrData;
 
+        string output = stdoutData.toStdString();
+        json jsonOutput;
+        bool success = false;
+        bool isJSON = false;
+
         try {
-            jsonOutput = json::parse(stdoutData.toStdString());
+            jsonOutput = json::parse(output);
             isJSON = true;
             success = true;
         } catch (const exception &e) {
-            if (output.find("Found sessionid: ") == string::npos) {
-                qWarning() << "[WorkFlowy CLI Error]" << e.what();
-            } else {
+            if (output.find("Found sessionid: ") != string::npos) {
+                // Non-JSON auth output is OK
                 isJSON = false;
                 success = true;
+            } else {
+                qWarning() << "[WorkFlowy CLI Error]" << e.what();
             }
         }
 
         process->deleteLater();
-        isJSON ? callback(success, jsonOutput) : callback(success, output); });
+
+        if (isJSON) {
+            callback(success, jsonOutput);
+        } else {
+            // Pass raw string output as a JSON string value so the
+            // callback signature stays uniform (always json&).
+            callback(success, json(output));
+        } });
 
     qDebug() << "Running command:" << executable << processArgs.join(QStringLiteral(" "));
     process->start(executable, processArgs);
 }
 
-void Plugin::updateCachedTree(NodeAction action, const json &NodeInfo, function<void(bool)> callback)
+void Plugin::updateCachedTree(NodeAction action, const json &NodeInfo, std::function<void(bool)> callback)
 {
     // Helper to find a node by ID and return a pointer to it
-    function<json *(json &, const string &)> findNodeById = [&](json &nodes, const string &id) -> json *
+    std::function<json *(json &, const string &)> findNodeById = [&](json &nodes, const string &id) -> json *
     {
         if (!nodes.is_array())
             return nullptr;
@@ -845,7 +846,6 @@ void Plugin::updateCachedTree(NodeAction action, const json &NodeInfo, function<
     {
     case NodeAction::Create:
     {
-        // NodeInfo must include "nm" and optional "parentId"
         string name = NodeInfo.value("nm", "");
         string parentId = NodeInfo.value("parentID", "");
         json *targetArr = &cachedTree;
@@ -862,7 +862,6 @@ void Plugin::updateCachedTree(NodeAction action, const json &NodeInfo, function<
             }
         }
 
-        // Create temporary placeholder
         string tempId = "temp-" + to_string(
                                       chrono::steady_clock::now().time_since_epoch().count());
         json newNode;
@@ -873,15 +872,13 @@ void Plugin::updateCachedTree(NodeAction action, const json &NodeInfo, function<
         targetArr->push_back(newNode);
 
         cout << "Create node in cache named " << NodeInfo["nm"].get<string>() << " with status " << true << endl;
-
         callback(true);
         break;
     }
     case NodeAction::Remove:
     {
-        // NodeInfo includes full "id"
         string targetId = NodeInfo.value("id", "");
-        function<bool(json &)> removeRec = [&](json &nodes)
+        std::function<bool(json &)> removeRec = [&](json &nodes)
         {
             if (!nodes.is_array())
                 return false;
@@ -903,15 +900,14 @@ void Plugin::updateCachedTree(NodeAction action, const json &NodeInfo, function<
             return false;
         };
         bool status = removeRec(cachedTree);
-        cout << "Remote node in cache named " << NodeInfo["nm"].get<string>() << " with status " << status << endl;
+        cout << "Remove node in cache named " << NodeInfo["nm"].get<string>() << " with status " << status << endl;
         callback(status);
         break;
     }
     case NodeAction::Complete:
     {
-        // NodeInfo includes full "id"
         string targetId = NodeInfo.value("id", "");
-        function<bool(json &)> toggleRec = [&](json &nodes)
+        std::function<bool(json &)> toggleRec = [&](json &nodes)
         {
             if (!nodes.is_array())
                 return false;
@@ -939,10 +935,9 @@ void Plugin::updateCachedTree(NodeAction action, const json &NodeInfo, function<
     }
     case NodeAction::Edit:
     {
-        // NodeInfo includes full "id" and new "nm"
         string targetId = NodeInfo.value("id", "");
         string newName = NodeInfo.value("nm", "");
-        function<bool(json &)> editNode = [&](json &nodes)
+        std::function<bool(json &)> editNodeFn = [&](json &nodes)
         {
             if (!nodes.is_array())
                 return false;
@@ -953,17 +948,15 @@ void Plugin::updateCachedTree(NodeAction action, const json &NodeInfo, function<
                     node["nm"] = newName;
                     return true;
                 }
-                if (node.contains("children") && editNode(node["children"]))
+                if (node.contains("children") && editNodeFn(node["children"]))
                 {
                     return true;
                 }
             }
             return false;
         };
-        bool status = editNode(cachedTree);
-
+        bool status = editNodeFn(cachedTree);
         cout << "Edit node in cache named " << NodeInfo["nm"].get<string>() << " with status " << status << endl;
-
         callback(status);
         break;
     }

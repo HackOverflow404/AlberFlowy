@@ -8,10 +8,11 @@
 
 #pragma once
 #include <albert/extensionplugin.h>
-#include <albert/indexqueryhandler.h>
-#include <albert/albert.h>
+#include <albert/generatorqueryhandler.h>
 #include <albert/standarditem.h>
-#include <albert/iconutil.h>
+#include <albert/icon.h>
+#include <albert/plugin.h>
+#include <qcorogenerator.h>
 
 #include <fstream>
 #include <iostream>
@@ -35,29 +36,30 @@
 #include <QSettings>
 
 using namespace albert;
-using namespace std;
 using json = nlohmann::json;
 using albert::Action;
-using util::StandardItem;
+using albert::StandardItem;
+using albert::Icon;
 
-class Plugin : public util::ExtensionPlugin, public TriggerQueryHandler {
+class Plugin : public albert::ExtensionPlugin, public albert::GeneratorQueryHandler {
     ALBERT_PLUGIN
 
     public:
         Plugin();
-        void handleTriggerQuery(Query &query) override;
+        albert::ItemGenerator items(albert::QueryContext &context) override;
 
     private:
         inline static const QString IconUrl = QStringLiteral("/usr/lib/x86_64-linux-gnu/albert/AlberFlowy/icon.png");
+
         enum class NodeAction {
             Create,
             Edit,
             Remove,
             Complete
         };
-        
-        vector<shared_ptr<Item>> listNodes(QStringList route, const json &root_nodes);
-        
+
+        std::vector<std::shared_ptr<Item>> listNodes(QStringList route, const json &root_nodes);
+
         void createNode(QStringList route, const json &nodes);
         void editNode(const json &node, const QStringList route);
         void removeNode(const json &node, const QStringList route);
@@ -71,11 +73,11 @@ class Plugin : public util::ExtensionPlugin, public TriggerQueryHandler {
         json cachedTree;
         std::chrono::steady_clock::time_point lastFetched;
         void refreshCachedTree();
-        void updateCachedTree(NodeAction action, const json &NodeInfo, function<void(bool)> callback);
-        
+        void updateCachedTree(NodeAction action, const json &NodeInfo, std::function<void(bool)> callback);
+
         QString CLIPath;
-        string findCLI();
-        string html_to_text(const string& in);
+        std::string findCLI();
+        std::string html_to_text(const std::string &in);
         QString applyStrikethrough(const QString &text);
-        void runWorkflowyCommand(const QStringList &args, function<void(bool success, const json &result)> callback);
+        void runWorkflowyCommand(const QStringList &args, std::function<void(bool success, const json &result)> callback);
 };
