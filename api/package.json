@@ -12,7 +12,9 @@
   "scripts": {
     "build:albert": "pkg workflowy-cli.js --targets node18-linux-x64 --compress GZip --output build/workflowy",
     "prepublishOnly": "npm run build:albert",
-    "test": "echo \"(no tests)\""
+    "test": "echo \"(no tests)\"",
+    "bench": "node bench/benchmark.js",
+    "bench:local": "node bench/benchmark-local.js"
   },
   "dependencies": {
     "@google-cloud/local-auth": "^2.1.0",

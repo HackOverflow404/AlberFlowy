@@ -26,6 +26,10 @@ static auto makeIconFactory(const QString &iconUrl)
 // Constructor
 Plugin::Plugin()
 {
+    benchLoggingEnabled = qEnvironmentVariableIsSet("ALBERFLOWY_BENCH_LOG");
+    if (benchLoggingEnabled)
+        qInfo("[ALBERFLOWY_BENCH] query timing/cache logging enabled (ALBERFLOWY_BENCH_LOG set)");
+
     // Initialize plugin and timers
     setFuzzyMatching(false);
     refreshTimer = new QTimer(this);
@@ -42,6 +46,9 @@ Plugin::Plugin()
 // Query handler logic — coroutine-based generator (new API)
 albert::ItemGenerator Plugin::items(albert::QueryContext &context)
 {
+    const auto queryStart = std::chrono::steady_clock::now();
+    const bool cacheHit = !cachedTree.is_null();
+
     // If the tree is null, wait for it to refresh
     if (cachedTree.is_null())
     {
@@ -52,6 +59,7 @@ albert::ItemGenerator Plugin::items(albert::QueryContext &context)
             QStringLiteral("Loading Workflowy tree..."),
             QString(),
             makeIconFactory(IconUrl)));
+        logQueryBench(context, cacheHit, queryStart, "refreshing");
         co_yield batch;
         co_return;
     }
@@ -109,6 +117,7 @@ albert::ItemGenerator Plugin::items(albert::QueryContext &context)
 
                             cout << "Reauthenticated with Session ID: " << sessionID << endl; });
                     })}));
+        logQueryBench(context, cacheHit, queryStart, "auth");
         co_yield batch;
         co_return;
     }
@@ -116,8 +125,29 @@ albert::ItemGenerator Plugin::items(albert::QueryContext &context)
     // List nodes — split on '>' for sub-node navigation
     QStringList parts = context.query().split(QLatin1Char('>'), Qt::SkipEmptyParts);
     auto result = listNodes(parts, cachedTree);
+    logQueryBench(context, cacheHit, queryStart, "listed");
     if (!result.empty())
         co_yield result;
+}
+
+// Logs "[ALBERFLOWY_BENCH] query=... cache=hit|miss outcome=... latency_ms=..." when
+// ALBERFLOWY_BENCH_LOG is set. cacheHit reflects whether cachedTree was already populated when
+// this query started (the C++ analogue of the TTL cache used in bench/benchmark.js).
+void Plugin::logQueryBench(const albert::QueryContext &context, bool cacheHit,
+                            std::chrono::steady_clock::time_point start, const char *outcome) const
+{
+    if (!benchLoggingEnabled)
+        return;
+
+    const double latencyMs = std::chrono::duration<double, std::milli>(
+                                  std::chrono::steady_clock::now() - start)
+                                  .count();
+
+    qInfo().noquote() << QStringLiteral("[ALBERFLOWY_BENCH] query=\"%1\" cache=%2 outcome=%3 latency_ms=%4")
+                              .arg(context.query())
+                              .arg(cacheHit ? QStringLiteral("hit") : QStringLiteral("miss"))
+                              .arg(QString::fromLatin1(outcome))
+                              .arg(QString::number(latencyMs, 'f', 3));
 }
 
 // List the nodes as Items
