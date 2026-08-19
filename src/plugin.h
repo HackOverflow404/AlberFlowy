@@ -14,6 +14,7 @@
 #include <albert/plugin.h>
 #include <qcorogenerator.h>
 
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -73,6 +74,11 @@ class Plugin : public albert::ExtensionPlugin, public albert::GeneratorQueryHand
         json cachedTree;
         std::chrono::steady_clock::time_point lastFetched;
         void refreshCachedTree();
+
+        // Set from ALBERFLOWY_BENCH_LOG at construction; gates per-query timing/cache logging in items().
+        bool benchLoggingEnabled = false;
+        void logQueryBench(const albert::QueryContext &context, bool cacheHit,
+                            std::chrono::steady_clock::time_point start, const char *outcome) const;
         void updateCachedTree(NodeAction action, const json &NodeInfo, std::function<void(bool)> callback);
 
         QString CLIPath;

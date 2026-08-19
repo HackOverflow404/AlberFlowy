@@ -9,3 +9,7 @@ CMakeFiles/
 api/.env
 api/.wfconfig.json
 api/google_credentials.json
+
+# Benchmark output (contains real WorkFlowy content)
+api/bench/results.json
+api/bench/results-local.json
